@@ -144,3 +144,36 @@ problemi riscontrati e non risolti.</li>
 </ul>
 <p>L'archivio non deve contenere l'eseguibile, perché il sorgente sarà compilato in fase di
 correzione. Il sistema CMake deve compilare con le opzioni di ottimizzazione attivate (-O2).</p>
+
+<h2><strong>FAQ</strong></h2>
+<h3><strong>Q1. Cosa succede alla griglia d'attacco se una nave si muove?</strong></h3>
+<p>A1. Il movimento delle navi rende la griglia d'attacco non più aggiornata. Questo vale sia per i
+colpi andati a segno che per quelli a vuoto. In fase di visualizzazione, potete decidere di
+implementare dei comandi aggiuntivi per il reset della griglia d'attacco. Ad esempio, digitando il
+comando BB BB possono essere cancellati tutti i caratteri relativi a colpi andati a segno (X),
+oppure con il comando CC CC si possono cancellare tutti i colpi a vuoto (O). Lasciamo a voi
+decidere come gestire questi comandi aggiuntivi.</p>
+<h3><strong>Q2. Se una nave è colpita si può muovere? Se si muove, cosa succede sulla mappa di chi
+ha colpito?</strong></h3>
+<p>A2. Sì, una nave colpita si può muovere. In questo caso, la griglia d'attacco di chi ha sferrato il
+colpo non è più aggiornata (vedi sopra). La griglia può essere aggiornata con nuove rilevazioni
+radar.</p>
+<h3><strong>Q3. Due navi di supporto che si curano l'un l'altra creano uno stallo che va all'infinito.</strong></h3>
+<p>A3. Sì, può succedere. Per questo è previsto un numero massimo di turni dopo il quale la
+partita è patta.</p>
+<h3><strong>Q4. Nel caso una nave sia affondata, un'altra può passare sopra?</strong></h3>
+<p>A4. Sì: una nave affondata è rimossa completamente dalla griglia di difesa.</p>
+<h3><strong>Q5. La partita è da considerarsi vinta quando tutte le corazzate dell'avversario sono state
+distrutte? Perché in caso contrario il giocatore senza corazzate non potrebbe più
+sparare, ne curarsi le corazzate affondate.</strong></h3>
+<p>A5. Sì, la partita è da considerarsi vinta quando tutte le unità dell'avversario sono state
+affondate. Quindi la partita continua anche nel caso in cui un giocatore rimane senza corazzate.</p>
+<h3><strong>Q6. Nel caso di partita giocatore vs computer, come teniamo il conto di cosa il computer
+ci colpisce? Ad esempio come facciamo a sapere che una corazzata è stata distrutta?</strong></h3>
+<p>A6. Potete tener conto dei colpi ricevuti sulle vostre unità, utilizzando i caratteri minuscoli.
+Quindi una corazzata identificata da [c c C C C] ha due caselle colpite e tre sane (corazza=3).
+Quando una nave viene affondata deve essere rimossa dalla griglia difensiva del giocatore.</p>
+<h3><strong>Q7. Nello stampare la griglia, dobbiamo mettere dei caratteri di separazione tra una cella
+e l'altra (ad esempio '|' ) o solo degli spazi o niente?</strong></h3>
+<p>A7. Lasciamo a voi decidere come gestire i caratteri di separazione fra una cella e l'altra.</p>
+
