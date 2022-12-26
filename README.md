@@ -145,7 +145,7 @@ problemi riscontrati e non risolti.</li>
 <p>L'archivio non deve contenere l'eseguibile, perché il sorgente sarà compilato in fase di
 correzione. Il sistema CMake deve compilare con le opzioni di ottimizzazione attivate (-O2).</p>
 
-<h2><strong>FAQ</strong></h2>
+<br><h1><strong>FAQ</strong></h1>
 <h3><strong>Q1. Cosa succede alla griglia d'attacco se una nave si muove?</strong></h3>
 <p>A1. Il movimento delle navi rende la griglia d'attacco non più aggiornata. Questo vale sia per i
 colpi andati a segno che per quelli a vuoto. In fase di visualizzazione, potete decidere di
