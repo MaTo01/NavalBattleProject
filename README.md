@@ -4,11 +4,12 @@ Progettare e implementare un programma in C++ che implementi una versione avanza
 gioco "Battaglia Navale". Le regole non sono quelle classiche, perciò prestare attenzione alla descrizione del gioco
 
 <h2><strong>Regole del gioco</strong></h2>
-Ogni giocatore possiede due griglie di gioco composte da 12x12 caselle. Una <strong>griglia di difesa</strong>
+<p>Ogni giocatore possiede due griglie di gioco composte da 12x12 caselle. Una <strong>griglia di difesa</strong>
 che serve per posizionare le proprie unità navali, e una <strong>griglia di attacco</strong> che serve per tenere
 traccia dei colpi alle unità avversarie andati a segno (X) o meno (O). Inoltre ogni giocatore
 possiede 8 unità di tre tipologie diverse. I tre tipi di unità sono: corazzata (C), nave di supporto
-(S), sottomarino di esplorazione (E).
+(S), sottomarino di esplorazione (E).</p>
+<p align = center ><img src = "https://i.postimg.cc/rmXSTjfC/Immagine-2022-12-26-131133.jpg"></p>
 
 <h2><strong>Unità navali</strong></h2>
 <p>Tutte le unità navali possono compiere un'<strong>azione</strong> che però si differenzia a seconda del tipo di
@@ -16,6 +17,7 @@ unità. Inoltre ogni unità ha una <strong>dimensione specifica</strong> che equ
 iniziale. Quando tutte le caselle che un’unità occupa vengono colpite, l’unità è da considerarsi
 affondata. Corazza e dimensione sono inizialmente equivalenti. Man mano che l’unità viene
 colpita la corazza diminuisce mentre la dimensione rimane la stessa.</p>
+<p align = center ><img src = "https://i.postimg.cc/wv1TWYXw/Immagine-2022-12-26-131207.jpg"></p>
 
 <p>Le <strong>azioni</strong> che le diverse unità navali possono eseguire sono riportate di seguito:
 <ul>
@@ -81,6 +83,8 @@ delle griglie di difesa e di attacco usando un comando speciale:</p>
 
 <p>La visualizzazione avviene stampando un carattere per ciascuna unità navale nella griglia di
 difesa e per ciascun colpo effettuato e per le rilevazioni sonar nella griglia di attacco.</p>
+
+<p align = center ><img src = "https://i.postimg.cc/NjC3d9dw/Immagine-2022-12-26-131231.jpg"></p>
 
 <p>Se non è presente nessuna unità o nessuno colpo effettuato o nessuna rilevazione, è stampato
 uno spazio. Le caselle corrispondenti a parti di unità colpite sono segnate con lettera minuscola.</p>
