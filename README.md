@@ -1,7 +1,7 @@
 # NavalBattleProject
 
 Progettare e implementare un programma in C++ che implementi una versione avanzata del
-gioco `Battaglia Navale`. Le regole non sono quelle classiche, perciò prestare attenzione alla descrizione del gioco
+gioco "Battaglia Navale". Le regole non sono quelle classiche, perciò prestare attenzione alla descrizione del gioco
 
 <h2><strong>Regole del gioco</strong></h2>
 Ogni giocatore possiede due griglie di gioco composte da 12x12 caselle. Una <strong>griglia di difesa</strong>
