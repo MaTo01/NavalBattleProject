@@ -176,4 +176,27 @@ Quando una nave viene affondata deve essere rimossa dalla griglia difensiva del 
 <h3><strong>Q7. Nello stampare la griglia, dobbiamo mettere dei caratteri di separazione tra una cella
 e l'altra (ad esempio '|' ) o solo degli spazi o niente?</strong></h3>
 <p>A7. Lasciamo a voi decidere come gestire i caratteri di separazione fra una cella e l'altra.</p>
-
+<h3><strong>Q8. Durante il turno del computer, scelta un'unità casualmente, anche l'azione della
+suddetta unità deve essere random? Per esempio qualora il computer avesse un
+avvistamento (Y) nella posizione (X,Y), e potesse attaccare con la corazzata, dovrebbe
+preferire come punto da colpire il punto (X,Y)?</strong></h3>
+<p>A8. La consegna non richiede di implementare algoritmi intelligenti che gestiscano il
+comportamento del computer. Tuttavia se volete potete farlo.</p>
+<h3><strong>Q9. Quando si colpisce un'unità nemica, il turno cambia o come nella normale battaglia
+navale esso rimane del giocatore che ha attaccato?</strong></h3>
+<p>A9. Anche se si colpisce un’unità nemica, il turno passa all’altro giocatore.</p>
+<h3><strong>Q10. Quando si colpisce un'unità nemica, nella griglia di attacco viene messo il carattere
+"X" nella posizione colpita; qualora la nave nemica si sposti, il carattere "X" deve
+rimanere (e quindi può essere tolto con un sommergibile) o deve diventare " "?</strong></h3>
+<p>A10. La griglia d’attacco può essere aggiornata solo tramite il rilevamento sonar del sottomarino
+o può essere resettata completamente dal giocatore tramite un comando speciale che potete
+implementare (ad esempio digitando BB BB). Vedi risposta A1.</p>
+<h3><strong>Q11. Il numero massimo di turni vale anche per partite giocatore vs. computer?</strong></h3>
+<p>A11. Sì, potete decidere di definire un numero massimo di turni anche nel caso di partita
+giocatore vs. computer.</p>
+<h3><strong>Q12. I comandi non validi (ad esempio perché la sintassi è sbagliata) e i comandi speciali
+(XX XX, AA AA, BB BB, CC CC) devono essere inclusi nel log?</strong></h3>
+<p>A12. No, solo i comandi validi (esclusi quelli speciali) devono essere inclusi nel log.</p>
+<h3><strong>Q13. Il replay è realizzato stampando le due griglie di gioco per ogni turno. Si intendono
+le griglie di difesa di ciascuno dei due giocatori?</strong></h3>
+<p>A13. No, si intende la griglia di difesa e di attacco del giocatore attivo in ciascun turno.</p>
