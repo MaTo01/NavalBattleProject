@@ -12,6 +12,4 @@ public:
     void action() override;
 };
 
-#include "Battleship.hpp"
-
 #endif
