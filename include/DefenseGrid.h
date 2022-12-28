@@ -11,4 +11,6 @@ public:
     ~DefenseGrid() override = default;
 };
 
+#include "DefenseGrid.hpp"
+
 #endif

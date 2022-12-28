@@ -11,4 +11,6 @@ public:
     ~AttackGrid() override = default;
 };
 
+#include "AttackGrid.hpp"
+
 #endif
