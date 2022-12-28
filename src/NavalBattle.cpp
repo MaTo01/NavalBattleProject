@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "AttackGrid.h"
 #include "DefenseGrid.h"
 #include "Battleship.h"
