@@ -1,11 +1,17 @@
+// Ho Van Sang
 #ifndef GRID_H
 #define GRID_H
 
-class Grid{
-    Grid(); 
-    virtual ~Grid() = 0;
-};
+#include <iostream>
 
-Grid::~Grid(){}
+class Grid{
+private:
+
+public:
+    Grid(); 
+    ~Grid();
+
+    virtual void printGrid(std::ostream& os) = 0;
+};
 
 #endif

@@ -1,3 +1,4 @@
+// Ho Van Sang
 #ifndef DEFENSEGRID_H
 #define DEFENSEGRID_H
 
@@ -8,7 +9,9 @@ private:
 
 public:
     DefenseGrid();
-    ~DefenseGrid() override = default;
+    ~DefenseGrid();
+
+    void printGrid(std::ostream& os) override;
 };
 
 #include "DefenseGrid.hpp"

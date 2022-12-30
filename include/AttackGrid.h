@@ -1,3 +1,4 @@
+// Ho Van Sang
 #ifndef ATTACKGRID_H
 #define ATTACKGRID_H
 
@@ -8,7 +9,9 @@ private:
 
 public:
     AttackGrid();
-    ~AttackGrid() override = default;
+    ~AttackGrid();
+
+    void printGrid(std::ostream& os) override;
 };
 
 #include "AttackGrid.hpp"
