@@ -1,3 +1,4 @@
+//2043414 Marco Toffoletto
 #ifndef BATTLESHIP_H
 #define BATTLESHIP_H
 
@@ -7,9 +8,12 @@ class Battleship : public Ship{
 private:
 
 public:
-    Battleship();
+    //Constructor
+    Battleship(): Ship(5,5){}
+    //Destructor
     ~Battleship() override = default;
-    void action() override;
+    
+    void action(Position pos, vector<Ship*>& enemyShip) override;
 };
 
 #include "Battleship.hpp"

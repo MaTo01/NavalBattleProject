@@ -1,3 +1,4 @@
+//2043414 Marco Toffoletto
 #ifndef SUBMARINE_H
 #define SUBMARINE_H
 
@@ -7,8 +8,11 @@ class Submarine : public Ship{
 private:
 
 public:
-    Submarine();
+    //Constructor 
+    Submarine(): Ship(1,1){}
+    //Destructor
     ~Submarine() override = default;
+
     void action() override;
 };
 

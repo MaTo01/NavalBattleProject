@@ -1,3 +1,4 @@
+//2043414 Marco Toffoletto
 #ifndef SUPPORTSHIP_H
 #define SUPPORTSHIP_H
 
@@ -7,8 +8,11 @@ class SupportShip : public Ship{
 private:
 
 public:
-    SupporShip();
+    //Constructor
+    SupporShip(): Ship(3,3){}
+    //Destructor
     ~SupportShip() override = default;
+
     void action() override;
 };
 
