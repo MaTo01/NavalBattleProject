@@ -1,13 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "AttackGrid.h"
-#include "DefenseGrid.h"
+#include "Grid.h"
 
 class Player {
 private:
-    AttackGrid atkGrid;
-    DefenseGrid defGrid;
+    Grid attackGrid;
+    Grid defenseGrid;
 
 public:
 
