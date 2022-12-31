@@ -38,7 +38,6 @@ public:
     bool isSunk() const {return sunk_;}
 
     //Set functions for the variables size_ and armor_
-    void setSize(int size) {size_ = size;}
     void setArmor(int armor) {
         armor_ = armor;
         if(armor_ <= 0) {sunk_ = true;}
