@@ -10,7 +10,7 @@ position that is already occupied.
 After moving, the submarine shows a matrix of 5*5 
 around it, so the player can see if into that window
 there are any enemy's ships.
-If so, the enemy's ship will be signed into the grid as Y, 
+If so, the enemy's ships will be signed into the grid as Y, 
 but the player won't know which type of ship it is
 */
 void Submarine::action(Position pos){
