@@ -1,4 +1,4 @@
-//Ho Van Sang
+//2032460 Van Sang Ho
 #ifndef GRID_HPP
 #define GRID_HPP
 
