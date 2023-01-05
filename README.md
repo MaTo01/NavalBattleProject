@@ -200,3 +200,10 @@ giocatore vs. computer.</p>
 <h3><strong>Q13. Il replay è realizzato stampando le due griglie di gioco per ogni turno. Si intendono
 le griglie di difesa di ciascuno dei due giocatori?</strong></h3>
 <p>A13. No, si intende la griglia di difesa e di attacco del giocatore attivo in ciascun turno.</p>
+<h3><strong>Q14. Nel caso una nave con un segmento già colpito si muova e venga rilevata da un
+sonar nella nuova posizione, il segmento colpito, nel campo d'attacco del giocatore che
+ha lanciato il sonar, viene visualizzato con una 'X' (facendo capire quindi che la nave
+rilevata era quella colpita in precedenza) o viene visualizzato con una 'Y' (come se fosse
+una normale rilevazione del sonar)?</strong></h3>
+<p>A14. In questo caso la nave rilevata dal sonar verrà visualizzata con il segmento colpito. In altre
+parole, il sonar ritorna la posizione e lo stato corrente delle nave.</p>
