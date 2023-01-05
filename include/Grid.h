@@ -3,15 +3,17 @@
 #define GRID_H
 
 #include <iostream>
+#include <vector>
 #include "Position.h"
 #include "Ship.h"
 
 class Grid{
 private:
-    char tiles[12][12];
+    std::vector<std::vector<char>> tiles;
 
 public:
     Grid();
+    Grid(unsigned int rows, unsigned int cols);
     ~Grid() {}
 
     char getTile(unsigned int x, unsigned int y) const { return tiles[x][y]; }

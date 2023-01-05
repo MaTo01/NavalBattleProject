@@ -5,38 +5,57 @@
 #include <iostream>
 #include "Grid.h"
 
-Grid::Grid() {
-    for(int i=0; i<12; i++)
-        for(int j=0; j<12; j++)
-            tiles[i][j] = ' ';
+Grid::Grid(unsigned int rows, unsigned int cols) {
+    std::vector<char> aux;
+    for(int i=0; i<rows; i++) {
+        aux.clear();
+        for(int j=0; j<cols; j++)
+            aux.push_back(' ');
+        tiles.push_back(aux);
+    }
+    
 }
 
 void Grid::printGrid(std::ostream& os) {
-    os<<cornerLU;
-    for(int i=0; i<11; i++){
-        os<<lineH<<connectD;
+    
+    os<<"\t   ";
+    for(int i=1; i<=tiles.size(); i++) {
+        os<<" "<<i;
+        if(i<=9)
+            os<<" ";
+        os<<" ";
     }
-    os<<lineH<<cornerRU<<"\n";
+    os<<"\n";
 
-    for(int i=0; i<12; i++) {
-        for(int j=0; j<12; j++){
-            os<<lineV<<tiles[i][j];
+    os<<"\t  "<<cornerLU;
+    for(int i=0; i<tiles.size()-1; i++){
+        os<<lineH<<lineH<<lineH<<connectD;
+    }
+    os<<lineH<<lineH<<lineH<<cornerRU<<"\n";
+
+    //table body
+    for(int i=0; i<tiles.size(); i++) {
+        os<<"\t"<<((i<9)?char(65+i):char(65+i+2))<<" ";
+
+        for(int j=0; j<tiles[i].size(); j++){
+            os<<lineV<<" "<<tiles[i][j]<<" ";
         }
         os<<lineV<<"\n";
-        if(i<11) {
-            os<<connectR;
-            for(int j=0; j<11; j++){
-                os<<lineH<<connectLR;
+
+        if(i<tiles.size()-1) {
+            os<<"\t  "<<connectR;
+            for(int j=0; j<tiles[i].size()-1; j++){
+                os<<lineH<<lineH<<lineH<<connectLR;
             }
-            os<<lineH<<connectL<<"\n";
+            os<<lineH<<lineH<<lineH<<connectL<<"\n";
         }
     }
 
-    os<<cornerLD;
-    for(int i=0; i<11; i++){
-        os<<lineH<<connectU;
+    os<<"\t  "<<cornerLD;
+    for(int i=0; i<tiles.size()-1; i++){
+        os<<lineH<<lineH<<lineH<<connectU;
     }
-    os<<lineH<<cornerRD<<"\n";
+    os<<lineH<<lineH<<lineH<<cornerRD<<"\n";
 }
 
 #endif
