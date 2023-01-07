@@ -1,4 +1,3 @@
-//2043414 Marco Toffoletto
 #ifndef SUPPORTSHIP_HPP
 #define SUPPORTSHIP_HPP
 
