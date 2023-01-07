@@ -14,7 +14,7 @@ position using "shipMissedAt(Position pos)"
 */
 void Battleship::action(Position pos){
     if(grid_->isShipAt(pos)){
-        grid_->shipHittedAt(pos);
+        grid_->shipHitAt(pos);
         Ship *ship = grid_->getShipAt(pos);
         ship->setArmor(ship->getArmor()-1);
         if(ship->isSunk()){
