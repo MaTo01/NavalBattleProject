@@ -15,7 +15,7 @@ public:
     ~SupportShip() override = default;
 
     //Override of the virtual function of Ship
-    void action(Position pos) override;
+    void action(Position pos, Grid *defenseGrid) override;
 };
 
 #include "SupportShip.hpp"
