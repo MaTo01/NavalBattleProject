@@ -7,8 +7,8 @@
 #include "Position.h"
 #include "Ship.h"
 
-class Grid{
-private:
+class Grid {
+protected:
     std::vector<std::vector<char>> tiles;
 
 public:
@@ -18,10 +18,6 @@ public:
 
     char getTile(unsigned int x, unsigned int y) const { return tiles[x][y]; }
     void setTile(unsigned int x, unsigned int y, char c) { tiles[x][y] = c; }
-
-    bool placeShip(Ship& s, Position p);
-    bool moveShip(Ship& s, Position p);
-
 
     void printGrid(std::ostream& os);
 };
