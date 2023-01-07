@@ -12,8 +12,15 @@ Grid::Grid(unsigned int rows, unsigned int cols) {
         for(int j=0; j<cols; j++)
             aux.push_back(' ');
         tiles.push_back(aux);
-    }
-    
+    } 
+}
+
+bool Grid::isPosValid(Position p) {
+    if(p.getX()<0 || p.getY()<0)
+        return false;
+    if(p.getX()>=tiles.size() || p.getY()>=tiles[0].size())
+        return false;
+    return true;
 }
 
 void Grid::printGrid(std::ostream& os) {

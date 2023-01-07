@@ -11,6 +11,8 @@ class Grid {
 protected:
     std::vector<std::vector<char>> tiles;
 
+    bool isPosValid(Position p);
+
 public:
     Grid();
     Grid(unsigned int rows, unsigned int cols);
