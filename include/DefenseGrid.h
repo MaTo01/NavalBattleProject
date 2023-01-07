@@ -17,4 +17,6 @@ public:
     bool moveShip(Ship& s, Position p);
 };
 
+#include "DefenseGrid.hpp"
+
 #endif
