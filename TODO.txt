@@ -1,3 +1,4 @@
 - classe Game 
-- separare griglie
-- 
+- separare Grid in AttackGrid e DefenseGrid
+- Player: addShip per i tipi di navi
+- Grid: 
