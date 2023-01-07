@@ -11,9 +11,11 @@ public:
     AttackGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
     ~AttackGrid() {}
 
-    void markHit(Position p) { tiles[p.getX()][p.getY()] = 'X'; }
-    void markMiss(Position p) { tiles[p.getX()][p.getY()] = 'O'; }
-    void markScan(Position p) { tiles[p.getX()][p.getY()] = 'Y'; }
+    void markHit(Position p);
+    void markMiss(Position p);
+    void markScan(Position p);
 };
+
+#include "AttackGrid.hpp"
 
 #endif
