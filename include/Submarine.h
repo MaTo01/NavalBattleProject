@@ -6,16 +6,17 @@
 
 class Submarine : public Ship{
 private:
-    Grid *grid_;
+    AttackGrid *attackGrid_;
+    DefenseGrid *defenseGrid_;
 public:
     //Constructor 
-    Submarine(Position bow, Position stern, Grid *grid)
-        : Ship(1, 1, bow, stern), grid_{grid}{}
+    Submarine(Position bow, Position stern, attackGrid *attackGrid, defenseGrid *defenseGrid)
+        : Ship(1, 1, bow, stern), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
     //Destructor
     ~Submarine() override = default;
 
     //Override of the virtual function of Ship
-    void action(Position pos) override;
+    void action(Position pos, DefenseGrid *defenseGrid = NULL) override;
 };
 
 #include "Submarine.hpp"

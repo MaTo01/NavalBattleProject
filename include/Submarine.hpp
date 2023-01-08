@@ -1,3 +1,4 @@
+//2043414 Marco Toffoletto
 #ifndef SUBMARINE_HPP
 #define SUBMARINE_HPP
 
@@ -13,16 +14,17 @@ there are any enemy's ships.
 If so, the enemy's ship will be signed into the grid as Y, 
 but the player won't know which type of ship it is
 */
-void Submarine::action(Position pos){
-    if(grid_->isShipAt(pos)){
-        break; //can't move there
+void Submarine::action(Position pos, DefenseGrid *enemyDefenseGrid = NULL){
+    //TODO: DefenseGrid function to check if there is a ship at that position 
+    if(defenseGrid_->isShip(pos)){
+        break; //can't move there, stop the action
     }else{
-        //TODO: grid member function to update ship position
+        defenseGrid_->moveShip(pos); //TODO: DefenseGrid member function to update ship position
         for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
             for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) {
-                Ship *ship = grid_->getShipAt(pos);
+                Ship *ship = enemyDefenseGrid->getShip(pos); //TODO: DefenseGrid function to get the type of ship at that position 
                 if (ship) {
-                    grid_->shipFoundAt(pos)
+                    attackGrid_->markScan(Position(i,j));
                 }
             }
         }

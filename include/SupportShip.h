@@ -6,16 +6,17 @@
 
 class SupportShip : public Ship{
 private:
-    Grid *grid_;
+    AttackGrid *attackGrid_;
+    DefenseGrid *defenseGrid_;
 public:
     //Constructor
-    SupportShip(Position bow, Position stern, Grid *grid)
-        : Ship(3, 3, bow, stern), grid_{grid}{}
+    SupportShip(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
+        : Ship(3, 3, bow, stern), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
     //Destructor
     ~SupportShip() override = default;
 
     //Override of the virtual function of Ship
-    void action(Position pos) override;
+    void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) override;
 };
 
 #include "SupportShip.hpp"

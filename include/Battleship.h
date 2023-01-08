@@ -6,16 +6,17 @@
 
 class Battleship : public Ship{
 private:
-    Grid *grid_;
+    AttackGrid *attackGrid_;
+    DefenseGrid *defenseGrid_;
 public:
     //Constructor
-    Battleship(Position bow, Position stern, Grid *grid)
-        : Ship(5, 5, bow, stern), grid_{grid}{}
+    Battleship(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
+        : Ship(5, 5, bow, stern), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
     //Destructor
     ~Battleship() override = default;
     
     //Override of the virtual function of Ship
-    void action(Position pos) override;  
+    void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) override;  
 };
 
 #include "Battleship.hpp"
