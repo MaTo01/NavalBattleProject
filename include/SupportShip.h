@@ -10,13 +10,13 @@ private:
     DefenseGrid *defenseGrid_;
 public:
     //Constructor
-    SupportShip(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
+    SupportShip(Position bow, Position stern, DefenseGrid *defenseGrid)
         : Ship(3, bow, stern, 'S'), defenseGrid_{defenseGrid} {}
     //Destructor
     ~SupportShip() override = default;
 
     //Override of the virtual function of Ship
-    void action(Position pos, Grid *enemyDefenseGrid = NULL) override;
+    void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) override;
 };
 
 #include "SupportShip.hpp"
