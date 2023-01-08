@@ -17,6 +17,16 @@ Ship* DefenseGrid::getShipAtPosition(Position p) {
     return nullptr;
 }
 
+std::vector<Position> DefenseGrid::getShipTiles(Ship* s, Position p) {
+    int shiftSize = s->getSize() / 2;
+
+    if(s->getOrientation() == 'H') {
+
+    } else {
+        
+    }
+}
+
 void DefenseGrid::placeShip(Ship* s, Position p) {
     int shiftSize = s->getSize() / 2;
     if(s->getOrientation() == 'H') {
@@ -35,6 +45,14 @@ void DefenseGrid::placeShip(Ship* s, Position p) {
         for(int x=p.getX()-shiftSize; x<p.getX()+shiftSize; x++) 
             tiles[x][p.getY()] = s->getGridCharacter();
         ships.push_back(s);
+    }
+}
+
+void DefenseGrid::markShipAsHit(Position p) {
+    if(!isShipAtPosition(p)){
+        std::cout<<"mona";
+    } else {
+        tolower(tiles[p.getX()][p.getY()]);
     }
 }
 
