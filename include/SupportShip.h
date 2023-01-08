@@ -3,7 +3,6 @@
 #define SUPPORTSHIP_H
 
 #include "Ship.h"
-#include "DefenseGrid.h"
 
 class SupportShip : public Ship{
 private:
@@ -16,7 +15,7 @@ public:
     ~SupportShip() override = default;
 
     //Override of the virtual function of Ship
-    void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) override;
+    void action(Position pos, DefenseGrid * enemyDefenseGrid = nullptr) override; 
 };
 
 #include "SupportShip.hpp"
