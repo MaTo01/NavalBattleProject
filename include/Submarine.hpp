@@ -14,7 +14,7 @@ there are any enemy's ships.
 If so, the enemy's ship will be signed into the grid as Y, 
 but the player won't know which type of ship it is
 */
-void Submarine::action(Position pos, Grid *enemyDefenseGrid){
+void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
     //TODO: DefenseGrid function to check if there is a ship at that position 
     if(defenseGrid_->isShip(pos)){
         break; //can't move there, stop the action
