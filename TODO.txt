@@ -2,9 +2,10 @@
 - separare Grid in AttackGrid e DefenseGrid
 - Player: addShip per i tipi di navi
 - Grid: 
-- DefenseGrid: una funzione per controllare se c'è una barca in una posizione 
+- DefenseGrid: funzione per controllare se c'è una barca in una posizione 
                funzione per ottenere il tipo di baarca presente in una posizione
                funzione per eliminare una barca affondata dalla griglia
+               funzione per aggiornare la posizione delle barche che possono spostarsi
 - AttackGrid: funzione per verificare se una posizione è già stata colpita
 
 - Forward declaration tra Grid e Ship:
