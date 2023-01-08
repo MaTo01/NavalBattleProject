@@ -1,1 +1,2 @@
 - Stefano you're dead to me
+- circular dependency hell concerning the Ship and DefenseGrid classes forced us to use non-standard linking methods
