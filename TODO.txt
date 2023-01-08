@@ -6,3 +6,35 @@
                funzione per ottenere il tipo di baarca presente in una posizione
                funzione per eliminare una barca affondata dalla griglia
 - AttackGrid: funzione per verificare se una posizione è già stata colpita
+
+- Forward declaration tra Grid e Ship:
+    // HeaderA.h file
+    #ifndef H_A_H
+    #define H_A_H
+    #include "HeaderB.h"
+    class A {
+
+    private:
+      int b;
+    public:
+      void function() {
+      // using methods of B
+      B b;
+      b.function();
+      }
+    };
+    #endif
+
+    // HeaderB.h file
+    #ifndef H_B_H
+    #define H_B_H
+
+    class A;
+
+    class B {
+    private:
+      int a;
+    public:
+      void function();
+    };
+    #endif
