@@ -10,7 +10,7 @@ class Grid {
 protected:
     std::vector<std::vector<char>> tiles;
 
-    bool isPosValid(Position p);
+    virtual bool isPosValid(Position p);
 
 public:
     Grid();

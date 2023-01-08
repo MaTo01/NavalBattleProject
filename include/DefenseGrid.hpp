@@ -3,6 +3,10 @@
 
 #include "DefenseGrid.h"
 
+bool DefenseGrid::isPosValid(Position p) {
+    return Grid::isPosValid(p);
+}
+
 bool DefenseGrid::isShipAtPosition(Position p) {
     if(isPosValid(p)) {
         return (tiles[p.getX()][p.getY()] != ' '); 

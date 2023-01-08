@@ -3,6 +3,10 @@
 
 #include "AttackGrid.h"
 
+bool AttackGrid::isPosValid(Position p) {
+    return Grid::isPosValid(p);
+}
+
 void AttackGrid::markHit(Position p) { 
     if(isPosValid(p)) {
         tiles[p.getX()][p.getY()] = 'X'; 
