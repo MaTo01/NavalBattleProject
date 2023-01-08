@@ -3,18 +3,25 @@
 
 #include <iostream>
 #include <vector>
-#include <memory>
 #include "Grid.h"
+#include "Ship.h"
 
 class DefenseGrid : public Grid {
+private:
+    std::vector<Ship*> ships;
+
 public:
     DefenseGrid();
     DefenseGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
     ~DefenseGrid() {}
 
     //placeholders
-    bool placeShip(std::unique_ptr<Ship> s, Position p);
-    bool moveShip(Ship& s, Position p);
+    void placeShip(Ship* s, Position p);
+    void moveShip(Ship* s, Position p);
+    void removeShip(Ship* s);
+
+    Ship* getShipAtPosition(Position p);
+    bool isShipAtPosition(Position p);
 };
 
 #include "DefenseGrid.hpp"
