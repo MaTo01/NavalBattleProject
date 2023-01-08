@@ -12,7 +12,7 @@ already occupied (it can't go over any other ship).
 After moving, the support ship repairs the damaged ships 
 in a matrix of 3*3 around it.
 */
-void SupportShip::action(Position pos, DefenseGrid *enemyDefenseGrid = NULL){
+void SupportShip::action(Position pos, Grid *enemyDefenseGrid){
     //TODO: DefenseGrid function to check if there is a ship at that position 
     if(defenseGrid_->isShip(pos)){
         break; //can't move there, stop the action

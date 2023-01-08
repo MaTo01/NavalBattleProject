@@ -3,6 +3,8 @@
 #define SUBMARINE_H
 
 #include "Ship.h"
+#include "AttackGrid.h"
+#include "DefenseGrid.h"
 
 class Submarine : public Ship{
 private:
@@ -10,13 +12,14 @@ private:
     DefenseGrid *defenseGrid_;
 public:
     //Constructor 
-    Submarine(Position bow, Position stern, attackGrid *attackGrid, defenseGrid *defenseGrid)
-        : Ship(1, 1, bow, stern), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
+    Submarine();
+    Submarine(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
+        : Ship(1, bow, stern, 'S'), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
     //Destructor
     ~Submarine() override = default;
 
     //Override of the virtual function of Ship
-    void action(Position pos, DefenseGrid *defenseGrid = NULL) override;
+    void action(Position pos, Grid *enemyDefenseGrid = NULL) override;
 };
 
 #include "Submarine.hpp"
