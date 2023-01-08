@@ -11,13 +11,13 @@ private:
     AttackGrid *attackGrid_;
 public:
     //Constructor
-    Battleship(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
+    Battleship(Position bow, Position stern, AttackGrid *attackGrid)
         : Ship(5, bow, stern, 'B'), attackGrid_{attackGrid} {}
     //Destructor
     ~Battleship() override = default;
     
     //Override of the virtual function of Ship
-    void action(Position pos, Grid * enemyDefenseGrid = NULL) override;  
+    void action(Position pos, DefenseGrid* enemyDefenseGrid = NULL) override;  
 };
 
 #include "Battleship.hpp"
