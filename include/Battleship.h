@@ -17,7 +17,7 @@ public:
     ~Battleship() override = default;
     
     //Override of the virtual function of Ship
-    void action(Position pos, DefenseGrid* enemyDefenseGrid = NULL) override;  
+    void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) override;  
 };
 
 #include "Battleship.hpp"
