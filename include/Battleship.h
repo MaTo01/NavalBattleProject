@@ -7,7 +7,6 @@
 class Battleship : public Ship{
 private:
     AttackGrid *attackGrid_;
-    DefenseGrid *defenseGrid_;
 public:
     //Constructor
     Battleship(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)

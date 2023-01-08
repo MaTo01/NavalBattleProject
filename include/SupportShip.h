@@ -6,7 +6,6 @@
 
 class SupportShip : public Ship{
 private:
-    AttackGrid *attackGrid_;
     DefenseGrid *defenseGrid_;
 public:
     //Constructor
