@@ -14,6 +14,7 @@ public:
     void markHit(Position p);
     void markMiss(Position p);
     void markScan(Position p);
+    bool isAlreadyMarked(Position p);
 };
 
 #include "AttackGrid.hpp"
