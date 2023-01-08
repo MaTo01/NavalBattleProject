@@ -3,7 +3,7 @@
 #define SHIP_H
 
 #include "Position.h"
-#include "Grid.h"
+#include "DefenseGrid.h"
 
 //Parent class that will be inherited by the other three classes
 //that represent the three types of ship
@@ -50,12 +50,13 @@ public:
 
     //Pure virtual function that represent the action of a 
     //ship and will be overrided by the subclasses as needed
-    virtual void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) = 0;
+    virtual void action(Position pos, DefenseGrid *enemyDefenseGrid = nullptr) = 0;
 
     //Member function
     bool isSunk() const {return armor_ == 0;}
 };
 
 #include "Ship.hpp"
+#include "DefenseGrid.hpp"
 
 #endif
