@@ -5,7 +5,6 @@
 #include <iostream>
 #include <vector>
 #include "Position.h"
-#include "Ship.h"
 
 class Grid {
 protected:
@@ -17,9 +16,6 @@ public:
     Grid();
     Grid(unsigned int rows, unsigned int cols);
     ~Grid() {}
-
-    char getTile(unsigned int x, unsigned int y) const { return tiles[x][y]; }
-    void setTile(unsigned int x, unsigned int y, char c) { tiles[x][y] = c; }
 
     void printGrid(std::ostream& os);
 };
