@@ -10,8 +10,6 @@ class DefenseGrid : public Grid {
 private:
     std::vector<Ship*> ships;
 
-    bool isPosValid(Position p) override;
-
 public:
     DefenseGrid();
     DefenseGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}

@@ -16,7 +16,6 @@ but the player won't know which type of ship it is
 */
 void Submarine::action(Position pos, Grid *enemyDefenseGrid){
     //TODO: DefenseGrid function to check if there is a ship at that position 
-    DefenseGrid* grid = dynamic_cast<DefenseGrid*>(enemyDefenseGrid);
     if(defenseGrid_->isShip(pos)){
         break; //can't move there, stop the action
     }else{

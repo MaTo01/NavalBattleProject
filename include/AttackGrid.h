@@ -6,9 +6,6 @@
 #include "Grid.h"
 
 class AttackGrid : public Grid {
-private:
-    bool isPosValid(Position p) override;
-    
 public:
     AttackGrid();
     AttackGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
