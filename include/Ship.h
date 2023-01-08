@@ -50,7 +50,7 @@ public:
 
     //Pure virtual function that represent the action of a 
     //ship and will be overrided by the subclasses as needed
-    virtual void action(Position pos, Grid* enemyDefenseGrid = NULL) = 0;
+    virtual void action(Position pos, DefenseGrid* enemyDefenseGrid = NULL) = 0;
 
     //Member function
     bool isSunk() const {return armor_ == 0;}
