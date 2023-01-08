@@ -1,13 +1,13 @@
 - classe Game 
 - separare Grid in AttackGrid e DefenseGrid ✓
 - Player: addShip per i tipi di navi
-- DefenseGrid: funzione per controllare se c'è una barca in una posizione 
-               funzione per ottenere il tipo di barca presente in una posizione
+- DefenseGrid: funzione per controllare se c'è una barca in una posizione ✓
+               funzione per ottenere la barca presente in una posizione ✓
                funzione per eliminare una barca affondata dalla griglia
                funzione per aggiornare la posizione delle barche che possono spostarsi
 - AttackGrid: funzione per verificare se una posizione è già stata colpita ✓
 
-- Forward declaration tra Grid e Ship:
+- Forward declaration tra Grid e Ship:  ✓ (ti prego)
     // HeaderA.h file
     #ifndef H_A_H
     #define H_A_H
