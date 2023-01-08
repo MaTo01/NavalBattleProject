@@ -12,7 +12,7 @@ marked with a X at that position using "shipHitAt(Position pos)"
 Otherwise, the attack grid will be marked with a O at that
 position using "shipMissedAt(Position pos)"
 */
-void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){
+void Battleship::action(Position pos, DefenseGrid *enemyDefenseGrid){
     //TODO: DefenseGrid function to check if there is a ship at that position 
     if(enemyDefenseGrid->isShip(pos)){ 
         //TODO: AttackGrid function to check if the position had been already hit
