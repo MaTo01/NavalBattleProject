@@ -16,7 +16,7 @@ void Battleship::action(Position pos, DefenseGrid *enemyDefenseGrid = NULL){
     //TODO: DefenseGrid function to check if there is a ship at that position 
     if(enemyDefenseGrid->isShip(pos)){ 
         //TODO: AttackGrid function to check if the position had been already hit
-        if(attackGrid_->isPosHit(pos)){
+        if(attackGrid_->isAlreadyMarked(pos)){
             break; //Position already marked, stop the action
         }else{
             attackGrid_->markHit(pos);
