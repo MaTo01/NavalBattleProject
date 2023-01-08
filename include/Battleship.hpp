@@ -12,22 +12,24 @@ marked with a X at that position using "shipHitAt(Position pos)"
 Otherwise, the attack grid will be marked with a O at that
 position using "shipMissedAt(Position pos)"
 */
-void Battleship::action(Position pos, DefenseGrid *enemyDefenseGrid){
+void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){
     //TODO: DefenseGrid function to check if there is a ship at that position 
-    if(enemyDefenseGrid->isShip(pos)){ 
+    if(attackGrid_->isAlreadyMarked(pos)){ 
         //TODO: AttackGrid function to check if the position had been already hit
-        if(attackGrid_->isAlreadyMarked(pos)){
-            break; //Position already marked, stop the action
-        }else{
+        if(enemyDefenseGrid->isShipAtPosition(pos)){
             attackGrid_->markHit(pos);
-            Ship *ship = enemyDefenseGrid->getShip(pos); //TODO: DefenseGrid function to get the type of ship at that position 
+            Ship *ship = enemyDefenseGrid->getShipAtPosition(pos); //TODO: DefenseGrid function to get the type of ship at that position 
             ship->setArmor(ship->getArmor()-1);
             if(ship->isSunk()){
-                enemyDefenseGrid->removeShip(); //TODO: DefenseGrid function to erase the ship from the grid if sunk
+                enemyDefenseGrid->removeShip(ship); //TODO: DefenseGrid function to erase the ship from the grid if sunk
+            } else {
+                enemyDefenseGrid->markShipAsHit(pos);
             }
+        } else {
+            attackGrid_->markMiss(pos);
         }
     }else{
-        attackGrid_->markMiss(pos);
+        std::cout<<"no";
     }
 }
 
