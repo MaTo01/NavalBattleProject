@@ -3,6 +3,8 @@
 #define BATTLESHIP_H
 
 #include "Ship.h"
+#include "AttackGrid.h"
+#include "DefenseGrid.h"
 
 class Battleship : public Ship{
 private:
@@ -10,12 +12,12 @@ private:
 public:
     //Constructor
     Battleship(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
-        : Ship(5, 5, bow, stern), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
+        : Ship(5, bow, stern, 'B'), attackGrid_{attackGrid} {}
     //Destructor
     ~Battleship() override = default;
     
     //Override of the virtual function of Ship
-    void action(Position pos, DefenseGrid *enemyDefenseGrid = NULL) override;  
+    void action(Position pos, Grid * enemyDefenseGrid = NULL) override;  
 };
 
 #include "Battleship.hpp"
