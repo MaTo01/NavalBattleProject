@@ -15,7 +15,6 @@ class Player {
 private:
     AttackGrid attackGrid;
     DefenseGrid defenseGrid;
-    std::vector<std::unique_ptr<Ship>> ships;
 
 public:
     Player();
