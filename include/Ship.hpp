@@ -4,8 +4,8 @@
 
 #include "Ship.h"
 
-Ship::Ship(const int& size, Position bow, Position stern, char gridC)
-    : size_{size}, armor_{size}, bow_{bow}, stern_{stern}, gridCharacter{gridC} {
+Ship::Ship(const int& size, int armor, Position bow, Position stern)
+    : size_{size}, armor_{armor}, bow_{bow}, stern_{stern}{
         //If the x coordinates of bow and stern are the same, initialize the 
         //center of the ship and set the orientation to horizontal
         if(bow_.getX() == stern_.getX()) {
