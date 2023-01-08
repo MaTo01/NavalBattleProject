@@ -4,7 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "Grid.h"
+#include "AttackGrid.h"
+#include "DefenseGrid.h"
 #include "Ship.h"
 #include "Battleship.h"
 #include "SupportShip.h"
@@ -12,8 +13,8 @@
 
 class Player {
 private:
-    Grid attackGrid;
-    Grid defenseGrid;
+    AttackGrid attackGrid;
+    DefenseGrid defenseGrid;
     std::vector<std::unique_ptr<Ship>> ships;
 
 public:
