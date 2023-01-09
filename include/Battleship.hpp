@@ -8,20 +8,18 @@
 The battleship can fire in any position of the grid, 
 but it can't move. If the position of the grid where it 
 will fire is occupied, the attack grid will be 
-marked with a X at that position using "shipHitAt(Position pos)"
-Otherwise, the attack grid will be marked with a O at that
-position using "shipMissedAt(Position pos)"
+marked with X at that position.
+Otherwise, the attack grid will be marked with O at that
+position.
 */
-void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){
-    //TODO: DefenseGrid function to check if there is a ship at that position 
-    if(attackGrid_->isAlreadyMarked(pos)){ 
-        //TODO: AttackGrid function to check if the position had been already hit
+void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){ 
+    if(!attackGrid_->isAlreadyMarked(pos)){ 
         if(enemyDefenseGrid->isShipAtPosition(pos)){
             attackGrid_->markHit(pos);
-            Ship *ship = enemyDefenseGrid->getShipAtPosition(pos); //TODO: DefenseGrid function to get the type of ship at that position 
+            Ship *ship = enemyDefenseGrid->getShipAtPosition(pos);
             ship->setArmor(ship->getArmor()-1);
             if(ship->isSunk()){
-                enemyDefenseGrid->removeShip(ship); //TODO: DefenseGrid function to erase the ship from the grid if sunk
+                enemyDefenseGrid->removeShip(ship); 
             } else {
                 enemyDefenseGrid->markShipAsHit(pos);
             }
@@ -29,7 +27,7 @@ void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){
             attackGrid_->markMiss(pos);
         }
     }else{
-        std::cout<<"no";
+        throw std::invalid_argument("Cell already marked as hit!");
     }
 }
 

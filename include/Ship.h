@@ -24,11 +24,11 @@ protected:
     char orientation_;
 
     //Character used to represent the ship in the grid
-    char gridCharacter;
+    char gridCharacter_;
 
 public:
     //Constructor
-    Ship(const int& size, Position bow, Position stern, char gridC);
+    Ship(const int& size, Position bow, Position stern, char gridCharacter);
     //Virtual destructor
     virtual ~Ship(){}
 
@@ -39,7 +39,7 @@ public:
     Position getCenter() const {return center_;}
     Position getStern() const {return stern_;}
     char getOrientation() const{return orientation_;}
-    char getGridCharacter() const { return gridCharacter; }
+    char getGridCharacter() const { return gridCharacter_; }
 
     //Set functions
     void setArmor(int armor) {armor_ = armor;}

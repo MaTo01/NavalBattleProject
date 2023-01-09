@@ -6,7 +6,6 @@
 #include <memory>
 #include "AttackGrid.h"
 #include "DefenseGrid.h"
-#include "Ship.h"
 #include "Battleship.h"
 #include "SupportShip.h"
 #include "Submarine.h"

@@ -28,6 +28,4 @@ public:
     bool isShipAtPosition(Position p);
 };
 
-
-
 #endif

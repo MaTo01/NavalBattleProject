@@ -16,21 +16,19 @@ but the player won't know which type of ship it is
 */
 void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
     //TODO: DefenseGrid function to check if there is a ship at that position 
-    if(defenseGrid_->isShip(pos)){
-        break; //can't move there, stop the action
+    if(defenseGrid_->isShipAtPosition(pos)){
+        throw std::invalid_argument("Cell position already occupied!");
     }else{
-        defenseGrid_->moveShip(pos); //TODO: DefenseGrid member function to update ship position
+        Ship *ship = enemyDefenseGrid->getShipAtPosition(pos);
+        defenseGrid_->moveShip(ship, pos); //TODO: DefenseGrid member function to update ship position
         for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
-            for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) {
-                Ship *ship = enemyDefenseGrid->getShip(pos); //TODO: DefenseGrid function to get the type of ship at that position 
+            for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
                 if (ship) {
                     attackGrid_->markScan(Position(i,j));
                 }
             }
         }
     }
-
 }
-
 
 #endif
