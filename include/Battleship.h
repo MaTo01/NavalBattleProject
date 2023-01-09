@@ -11,7 +11,7 @@ private:
 public:
     //Constructor
     Battleship(Position bow, Position stern, AttackGrid *attackGrid)
-        : Ship(5, bow, stern, 'B'), attackGrid_{attackGrid} {}
+        : Ship(5, bow, stern, 'C'), attackGrid_{attackGrid} {}
     //Destructor
     ~Battleship() override = default;
     
