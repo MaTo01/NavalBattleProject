@@ -6,6 +6,9 @@
 class Game{
 private:
     int const maxTurns = 50;
+    int const maxBattleships = 3;
+    int const maxSupportShips = 3;
+    int const maxSubmarines = 2;
 public:
 };
 
