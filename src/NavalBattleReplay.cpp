@@ -1,9 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Grid.h"
-#include "Battleship.h"
-#include "SupportShip.h"
-#include "Submarine.h"
+#include "Game.h"
 
 int main()
 {
