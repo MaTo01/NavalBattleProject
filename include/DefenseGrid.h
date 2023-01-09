@@ -11,21 +11,21 @@ class DefenseGrid : public Grid {
 private:
     std::vector<Ship*> ships;
 
-    std::vector<Position> getShipTiles(Ship* s, Position p);
+    std::vector<Position> getTilesForPlacement(int size, char orientation, Position pos);
+    std::vector<Position> getTilesForShip(Ship* ship);
 
 public:
     DefenseGrid();
     DefenseGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
     ~DefenseGrid() {}
 
-    //placeholders
-    void placeShip(Ship* s, Position p);
-    void moveShip(Ship* s, Position p);
-    void markShipAsHit(Position p);
-    void removeShip(Ship* s);
+    void placeShip(Ship* ship);
+    void moveShip(Ship* ship, Position pos);
+    void markShipAsHit(Position pos);
+    void removeShip(Ship* ship);
 
-    Ship* getShipAtPosition(Position p);
-    bool isShipAtPosition(Position p);
+    Ship* getShipAtPosition(Position pos);
+    bool isShipAtPosition(Position pos);
 };
 
 #endif
