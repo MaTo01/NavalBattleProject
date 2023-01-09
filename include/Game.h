@@ -5,10 +5,10 @@
 
 class Game{
 private:
-    constexpr int maxTurns = 50;
-    constexpr int maxBattleships = 3;
-    constexpr int maxSupportShips = 3;
-    constexpr int maxSubmarines = 2;
+    static constexpr int maxTurns = 50;
+    static constexpr int maxBattleships = 3;
+    static constexpr int maxSupportShips = 3;
+    static constexpr int maxSubmarines = 2;
 public:
 };
 
