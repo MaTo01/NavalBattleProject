@@ -6,7 +6,7 @@
                funzione per eliminare una barca affondata dalla griglia
                funzione per aggiornare la posizione delle barche che possono spostarsi
 - AttackGrid: funzione per verificare se una posizione è già stata colpita ✓
-
+- spostare gestione nave colpita da action di Battleship a markShipAsHit di DefenseGrid
 - Forward declaration tra Grid e Ship:  ✓ (ti prego)
     // HeaderA.h file
     #ifndef H_A_H
