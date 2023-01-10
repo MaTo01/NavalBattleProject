@@ -9,9 +9,9 @@
 //that represent the three types of ship
 class Ship{
 protected:
-    //Two dimensions representing the size of the boat and the remaining armor.
-    //At the beginning of the game they will be the same, armor is the only one
-    //that can decrease
+    //Two dimensions representing the size of the ship and its remaining armor.
+    //At the beginning of the game they will be the same, 
+    //the armor will decrease if the ship is hit
     const int size_; 
     int armor_; 
 
@@ -42,8 +42,8 @@ public:
     void setCenter(Position center) { center_ = center; }
     void setOrientation(char orientation) { orientation_ = orientation; }
 
-    //Pure virtual function that represent the action of a 
-    //ship and will be overrided by the subclasses as needed
+    //Pure virtual function that represents the action of a 
+    //ship and will be overridden by the subclasses as needed
     virtual void action(Position pos, DefenseGrid *enemyDefenseGrid = nullptr) = 0;
 
     //Member function
