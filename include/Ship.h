@@ -15,10 +15,8 @@ protected:
     const int size_; 
     int armor_; 
 
-    //Three positions to identify the bow, the center and the stern of the ship
-    Position bow_;
+    //A position to identify the center of the ship
     Position center_;
-    Position stern_;
 
     //Flag to identify the orientation of the ship
     char orientation_;
@@ -35,17 +33,13 @@ public:
     //Get functions
     int getSize() const {return size_;}
     int getArmor() const {return armor_;}
-    Position getBow() const {return bow_;}    
     Position getCenter() const {return center_;}
-    Position getStern() const {return stern_;}
     char getOrientation() const{return orientation_;}
     char getGridCharacter() const { return gridCharacter_; }
 
     //Set functions
     void setArmor(int armor) {armor_ = armor;}
-    void setBow(Position bow) {bow_ = bow;}
     void setCenter(Position center) {center_ = center;}
-    void setStern(Position stern) {stern_ = stern;}
     void setOrientation(char orientation) {orientation_ = orientation;}
 
     //Pure virtual function that represent the action of a 
