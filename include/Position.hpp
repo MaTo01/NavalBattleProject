@@ -1,4 +1,4 @@
-//2032460 Van Sang Ho
+
 #ifndef POSITION_HPP
 #define POSITION_HPP
 

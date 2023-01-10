@@ -1,4 +1,4 @@
-//2032460 Van Sang Ho
+
 #ifndef POSITION_H
 #define POSITION_H
 #include <iostream>
