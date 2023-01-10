@@ -16,13 +16,7 @@ void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){
     if(!attackGrid_->isAlreadyMarked(pos)){ 
         if(enemyDefenseGrid->isShipAtPosition(pos)){
             attackGrid_->markHit(pos);
-            Ship *ship = enemyDefenseGrid->getShipAtPosition(pos);
-            ship->setArmor(ship->getArmor()-1);
-            if(ship->isSunk()){
-                enemyDefenseGrid->removeShip(ship); 
-            } else {
-                enemyDefenseGrid->markShipAsHit(pos);
-            }
+            enemyDefenseGrid->markShipAsHit(pos);
         } else {
             attackGrid_->markMiss(pos);
         }

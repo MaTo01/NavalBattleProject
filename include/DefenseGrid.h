@@ -12,7 +12,7 @@ private:
     std::vector<Ship*> ships;
 
     std::vector<Position> getTilesForPlacement(int size, char orientation, Position pos);
-    std::vector<Position> getTilesForShip(Ship* ship);
+    std::vector<Position> getTilesByShip(Ship* ship);
 
 public:
     DefenseGrid();
@@ -24,8 +24,9 @@ public:
     void markShipAsHit(Position pos);
     void removeShip(Ship* ship);
 
-    Ship* getShipAtPosition(Position pos);
     bool isShipAtPosition(Position pos);
+    Ship* getShipByCenter(Position pos);
+    Ship* getShipByPosition(Position pos);
 };
 
 #endif

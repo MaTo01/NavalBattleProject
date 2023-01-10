@@ -9,10 +9,26 @@ bool DefenseGrid::isShipAtPosition(Position pos) {
     }
 }
 
-Ship* DefenseGrid::getShipAtPosition(Position pos) {
-    for(auto s : ships) {
-        if(s->getCenter() == pos)
-            return s;
+Ship* DefenseGrid::getShipByCenter(Position pos) {
+    if(isPosValid(pos)) {
+        for(auto s : ships) {
+            if(s->getCenter() == pos)
+                return s;
+        }
+    }
+    return nullptr;
+}
+
+Ship* DefenseGrid::getShipByPosition(Position pos) {
+    if(isShipAtPosition(pos)) {
+        std::vector<Position> positions;
+        for(auto s : ships) {
+            positions = getTilesByShip(s);
+            for(auto p : positions) {
+                if(p == pos)
+                    return s;
+            }
+        }
     }
     return nullptr;
 }
@@ -30,7 +46,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
             } else {
                 return std::vector<Position>();
             }
-        }     
+        }
     } else {
         for(int x = pos.getX() - shiftSize; x < pos.getX() + shiftSize; x++) {
             aux = Position(x, pos.getY());
@@ -45,7 +61,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
     return positions;
 }
 
-std::vector<Position> DefenseGrid::getTilesForShip(Ship* ship) {
+std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
     if(!isShipAtPosition(ship->getCenter()))
         return std::vector<Position>();
     
@@ -79,7 +95,7 @@ void DefenseGrid::placeShip(Ship* ship) {
 }
 
 void DefenseGrid::moveShip(Ship* ship, Position pos) {
-    std::vector<Position> positions = getTilesForShip(ship);
+    std::vector<Position> positions = getTilesByShip(ship);
     if(positions.size() > 0) {
         for(auto p : positions) {
             tiles[p.getX()][p.getY()] = ' ';
@@ -100,7 +116,7 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
 }
 
 void DefenseGrid::removeShip(Ship* ship) {
-    std::vector<Position> positions = getTilesForShip(ship);
+    std::vector<Position> positions = getTilesByShip(ship);
     if(positions.size() > 0) {
         for(auto p : positions) {
             tiles[p.getX()][p.getY()] = ' ';
@@ -122,6 +138,12 @@ void DefenseGrid::markShipAsHit(Position pos) {
         throw std::invalid_argument("No ship in this position.");
     } else {
         tolower(tiles[pos.getX()][pos.getY()]);
+        if(Ship* ship = getShipByPosition(pos)) {
+            ship->setArmor(ship->getArmor() - 1);
+            if(ship->isSunk()) {
+                removeShip(ship);
+            }
+        }
     }
 }
 
