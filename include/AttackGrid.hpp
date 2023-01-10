@@ -24,7 +24,7 @@ void AttackGrid::markScan(Position p) {
 
 bool AttackGrid::isAlreadyMarked(Position p) {
     if(isPosValid(p)) {
-        return (tiles_[p.getX()][p.getY()] != ' '); 
+        return (tiles_[p.getX()][p.getY()] != ' ' && tiles_[p.getX()][p.getY()] != 'Y'); 
     }  
 }
 

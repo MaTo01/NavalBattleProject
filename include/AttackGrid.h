@@ -20,7 +20,8 @@ public:
     void markMiss(Position p);
     //Marks a Position in the grid as scanned 
     void markScan(Position p);
-    //Checks if the cell at the given Position has already been marked
+    //Checks if the cell at the given Position has already been marked as a hit/miss;
+    //Scanned cells are not considered marked for this purpose
     bool isAlreadyMarked(Position p);
 };
 
