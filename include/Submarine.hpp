@@ -19,7 +19,7 @@ void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
     if(defenseGrid_->isShipAtPosition(pos)){
         throw std::invalid_argument("Cell position already occupied!");
     }else{
-        Ship *ship = enemyDefenseGrid->getShipAtPosition(pos);
+        Ship *ship = enemyDefenseGrid->getShipByPosition(pos);
         defenseGrid_->moveShip(ship, pos); //TODO: DefenseGrid member function to update ship position
         for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
             for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
