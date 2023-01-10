@@ -97,22 +97,25 @@ void DefenseGrid::placeShip(Ship* ship) {
 }
 
 void DefenseGrid::moveShip(Ship* ship, Position pos) {
-    std::vector<Position> positions = getTilesByShip(ship);
-    if(positions.size() > 0) {
-        for(auto p : positions) {
+    std::vector<Position> oldPositions = getTilesByShip(ship);
+    if(oldPositions.size() > 0) {
+        for(auto p : oldPositions) {
             tiles_[p.getX()][p.getY()] = ' ';
         }
     } else {
         throw std::invalid_argument("No ship in this position.");
     }
 
-    positions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), pos);
-    if(positions.size() > 0) {
-        for(auto p : positions) {
+    std::vector<Position> newPositions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), pos);
+    if(newPositions.size() > 0) {
+        for(auto p : newPositions) {
             tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
         }
         ship->setCenter(pos);
     } else {
+        for(auto p : oldPositions) {
+            tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
+        }
         throw std::invalid_argument("Invalid ship placement.");
     }
 }
