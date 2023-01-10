@@ -6,16 +6,16 @@
 #include <iostream>
 
 bool Position::operator==(const Position& p) {
-    return (x == p.getX() && y == p.getY());
+    return (x_ == p.getX() && y_ == p.getY());
 }
 
 bool Position::operator!=(const Position& p) {
-    return (x != p.getX() || y != p.getY());
+    return (x_ != p.getX() || y_ != p.getY());
 }
 
 Position& Position::operator=(const Position& p) {
-    x = p.getX();
-    y = p.getY();
+    x_ = p.getX();
+    y_ = p.getY();
     return *this;
 }
 

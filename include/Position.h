@@ -5,16 +5,16 @@
     
 class Position {
 private:
-    int x;
-    int y;
+    int x_;
+    int y_;
     
 public:
-    Position(int a = 0, int b = 0) : x{a}, y{b} {}
+    Position(int a = 0, int b = 0) : x_{a}, y_{b} {}
     
-    void setX(int a) { x = a; }
-    void setY(int b) { y = b; }
-    int getX() const { return x; }
-    int getY() const { return y; }
+    void setX(int a) { x_ = a; }
+    void setY(int b) { y_ = b; }
+    int getX() const { return x_; }
+    int getY() const { return y_; }
 
     bool operator==(const Position& p);
     bool operator!=(const Position& p);

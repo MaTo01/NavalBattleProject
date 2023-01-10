@@ -10,7 +10,7 @@ class Ship;
 
 class DefenseGrid : public Grid {
 private:
-    std::vector<Ship*> ships;
+    std::vector<Ship*> ships_;
 
     std::vector<Position> getTilesForPlacement(int size, char orientation, Position pos);
     std::vector<Position> getTilesByShip(Ship* ship);

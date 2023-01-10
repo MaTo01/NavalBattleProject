@@ -8,7 +8,7 @@
 
 class Grid {
 protected:
-    std::vector<std::vector<char>> tiles;
+    std::vector<std::vector<char>> tiles_;
 
     bool isPosValid(Position p);
 
