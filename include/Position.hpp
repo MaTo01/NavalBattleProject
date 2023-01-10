@@ -6,11 +6,11 @@
 #include <iostream>
 
 bool Position::operator==(const Position& p) {
-    return (x==p.getX() && y==p.getY());
+    return (x == p.getX() && y == p.getY());
 }
 
 bool Position::operator!=(const Position& p) {
-    return (x!=p.getX() || y!=p.getY());
+    return (x != p.getX() || y != p.getY());
 }
 
 Position& Position::operator=(const Position& p) {
@@ -20,7 +20,7 @@ Position& Position::operator=(const Position& p) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Position& p) {
-    os<<"["<<p.getX()<<", "<<p.getY()<<"]";
+    os << "[" << p.getX() << ", " << p.getY() << "]";
     return os;
 }
 

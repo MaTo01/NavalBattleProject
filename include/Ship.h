@@ -31,23 +31,23 @@ public:
     virtual ~Ship(){}
 
     //Get functions
-    int getSize() const {return size_;}
-    int getArmor() const {return armor_;}
-    Position getCenter() const {return center_;}
-    char getOrientation() const{return orientation_;}
+    int getSize() const { return size_; }
+    int getArmor() const { return armor_; }
+    Position getCenter() const { return center_; }
+    char getOrientation() const{ return orientation_; }
     char getGridCharacter() const { return gridCharacter_; }
 
     //Set functions
-    void setArmor(int armor) {armor_ = armor;}
-    void setCenter(Position center) {center_ = center;}
-    void setOrientation(char orientation) {orientation_ = orientation;}
+    void setArmor(int armor) { armor_ = armor; }
+    void setCenter(Position center) { center_ = center; }
+    void setOrientation(char orientation) { orientation_ = orientation; }
 
     //Pure virtual function that represent the action of a 
     //ship and will be overrided by the subclasses as needed
     virtual void action(Position pos, DefenseGrid *enemyDefenseGrid = nullptr) = 0;
 
     //Member function
-    bool isSunk() const {return armor_ == 0;}
+    bool isSunk() const { return armor_ == 0; }
 };
 
 #include "Ship.hpp"
