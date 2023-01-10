@@ -41,7 +41,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
     Position aux;
 
     if(orientation == 'H') {
-        for(int y = pos.getY() - shiftSize; y < pos.getY() + shiftSize; y++) {
+        for(int y = pos.getY() - shiftSize; y <= pos.getY() + shiftSize; y++) {
             aux = Position(pos.getX(), y);
             if(!isShipAtPosition(aux)){
                 positions.push_back(aux);
@@ -50,7 +50,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
             }
         }
     } else {
-        for(int x = pos.getX() - shiftSize; x < pos.getX() + shiftSize; x++) {
+        for(int x = pos.getX() - shiftSize; x <= pos.getX() + shiftSize; x++) {
             aux = Position(x, pos.getY());
             if(!isShipAtPosition(aux)){
                 positions.push_back(aux);
@@ -72,11 +72,11 @@ std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
     std::vector<Position> positions;
 
     if(ship->getOrientation() == 'H') {
-        for(int y = center.getY() - shiftSize; y < center.getY() + shiftSize; y++) {
+        for(int y = center.getY() - shiftSize; y <= center.getY() + shiftSize; y++) {
             positions.push_back(Position(center.getX(), y));
         }
     } else {
-        for(int x = center.getX() - shiftSize; x < center.getX() + shiftSize; x++) {
+        for(int x = center.getX() - shiftSize; x <= center.getX() + shiftSize; x++) {
             positions.push_back(Position(x, center.getY()));
         }
     }
@@ -139,7 +139,7 @@ void DefenseGrid::markShipAsHit(Position pos) {
     if(!isShipAtPosition(pos)){
         throw std::invalid_argument("No ship in this position.");
     } else {
-        tolower(tiles_[pos.getX()][pos.getY()]);
+        tiles_[pos.getX()][pos.getY()] = tolower(tiles_[pos.getX()][pos.getY()]);
         if(Ship* ship = getShipByPosition(pos)) {
             ship->setArmor(ship->getArmor() - 1);
             if(ship->isSunk()) {
