@@ -8,19 +8,24 @@
 
 class Grid {
 protected:
+    //2D vector representing the content of the grid's tiles
     std::vector<std::vector<char>> tiles_;
 
-    bool isPosValid(Position p);
+    //Tests if a given Position is valid within the grid
+    bool isPosValid(Position pos);
 
 public:
+    //Constructors
     Grid();
     Grid(unsigned int rows, unsigned int cols);
+    //Destructor
     ~Grid() {}
 
+    //Prints the Grid and its contents on the desired output stream (e.g. std::cout, std::ofstream, etc.)
     void printGrid(std::ostream& os);
 };
 
-//Constants indicating extended ASCII characters used to display the grid
+//Constants indicating extended ASCII characters used to display the Grid
 static constexpr char cornerLU = 218;   // ┌
 static constexpr char cornerLD = 192;   // └
 static constexpr char cornerRU = 191;   // ┐

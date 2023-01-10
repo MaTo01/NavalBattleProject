@@ -8,13 +8,19 @@
 
 class AttackGrid : public Grid {
 public:
+    //Constructors
     AttackGrid();
     AttackGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
+    //Destructor
     ~AttackGrid() {}
 
+    //Marks a Position in the grid as a hit
     void markHit(Position p);
+    //Marks a Position in the grid as a miss
     void markMiss(Position p);
+    //Marks a Position in the grid as scanned 
     void markScan(Position p);
+    //Checks if the cell at the given Position has already been marked
     bool isAlreadyMarked(Position p);
 };
 
