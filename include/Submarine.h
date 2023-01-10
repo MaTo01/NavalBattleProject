@@ -13,7 +13,7 @@ public:
     //Constructor 
     Submarine();
     Submarine(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
-        : Ship(1, bow, stern, 'E'), attackGrid_{attackGrid}, defenseGrid_{defenseGrid}{}
+        : Ship(1, bow, stern, 'E'), attackGrid_{attackGrid}, defenseGrid_{defenseGrid} {}
     //Destructor
     ~Submarine() override = default;
 

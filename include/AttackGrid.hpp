@@ -6,25 +6,25 @@
 
 void AttackGrid::markHit(Position p) { 
     if(isPosValid(p)) {
-        tiles[p.getX()][p.getY()] = 'X'; 
+        tiles_[p.getX()][p.getY()] = 'X'; 
     }  
 }
 
 void AttackGrid::markMiss(Position p) { 
     if(isPosValid(p)) {
-        tiles[p.getX()][p.getY()] = 'O'; 
+        tiles_[p.getX()][p.getY()] = 'O'; 
     }  
 }
 
 void AttackGrid::markScan(Position p) { 
     if(isPosValid(p)) {
-        tiles[p.getX()][p.getY()] = 'Y'; 
+        tiles_[p.getX()][p.getY()] = 'Y'; 
     }  
 }
 
 bool AttackGrid::isAlreadyMarked(Position p) {
     if(isPosValid(p)) {
-        return (tiles[p.getX()][p.getY()] != ' '); 
+        return (tiles_[p.getX()][p.getY()] != ' '); 
     }  
 }
 

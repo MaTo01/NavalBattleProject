@@ -8,6 +8,7 @@ bool DefenseGrid::isShipAtPosition(Position pos) {
     if(isPosValid(pos)) {
         return (tiles_[pos.getX()][pos.getY()] != ' '); 
     }
+    return false;
 }
 
 Ship* DefenseGrid::getShipByCenter(Position pos) {

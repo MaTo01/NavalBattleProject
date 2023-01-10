@@ -24,7 +24,7 @@ void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
         for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
             for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
                 if (ship) {
-                    attackGrid_->markScan(Position(i,j));
+                    attackGrid_->markScan(Position(i, j));
                 }
             }
         }
