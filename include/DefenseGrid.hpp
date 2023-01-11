@@ -4,6 +4,13 @@
 
 #include "DefenseGrid.h"
 
+DefenseGrid::~DefenseGrid() {
+    for(auto s : ships_) {
+        delete s;
+    }
+    ships_.clear();
+}
+
 bool DefenseGrid::isShipAtPosition(Position pos) {
     if(isPosValid(pos)) {
         return (tiles_[pos.getX()][pos.getY()] != ' '); 
@@ -129,6 +136,7 @@ void DefenseGrid::removeShip(Ship* ship) {
         int i = 0;
         for(std::vector<Ship*>::iterator it = ships_.begin(); it != ships_.end(); it++, i++) {
             if(ships_[i] == ship) {
+                delete ships_[i];
                 ships_.erase(it);
                 break;
             }
