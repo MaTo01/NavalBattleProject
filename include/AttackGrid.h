@@ -9,7 +9,7 @@
 class AttackGrid : public Grid {
 public:
     //Constructors
-    AttackGrid();
+    AttackGrid() : Grid() {}
     AttackGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
     //Destructor
     ~AttackGrid() {}

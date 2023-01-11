@@ -20,10 +20,10 @@ private:
 
 public:
     //Constructors
-    DefenseGrid();
+    DefenseGrid() : Grid() {}
     DefenseGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
     //Destructor
-    ~DefenseGrid() {}
+    ~DefenseGrid();
 
     //Returns (if it exists) a Ship given its center
     Ship* getShipByCenter(Position pos);

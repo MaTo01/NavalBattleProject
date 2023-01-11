@@ -16,7 +16,7 @@ protected:
 
 public:
     //Constructors
-    Grid();
+    Grid() : tiles_{std::vector<std::vector<char>>()} {}
     Grid(unsigned int rows, unsigned int cols);
     //Destructor
     ~Grid() {}
