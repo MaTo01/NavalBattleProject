@@ -13,15 +13,17 @@
 
 class Computer {
 private:
-    int battleshipCounter, supportShipCounter, submarineCounter;
+    const int maxBattleships_;
+    const int maxSupportShips_;
+    const int maxSubmarines_;
     DefenseGrid *defenseGrid_;
     AttackGrid *attackGrid_;
     std::ofstream logFile;
     
 public:
     //Constructor
-    Computer(DefenseGrid *defenseGrid, AttackGrid *attackGrid):
-        battleshipCounter{0}, supportShipCounter{0}, submarineCounter{0}, defenseGrid_{defenseGrid}, attackGrid_{attackGrid}{
+    Computer(const int bNum, const int ssNum, const int sNum, DefenseGrid *defenseGrid, AttackGrid *attackGrid):
+        maxBattleships_{bNum}, maxSupportShips_{ssNum}, maxSubmarines_{sNum}, defenseGrid_{defenseGrid}, attackGrid_{attackGrid}{
             logFile.open("log.txt");
             srand ( time(NULL) );
         }
