@@ -12,7 +12,7 @@ protected:
     //Two dimensions representing the size of the ship and its remaining armor.
     //At the beginning of the game they will be the same, 
     //the armor will decrease if the ship is hit
-    const int size_; 
+    const int size_;
     int armor_; 
 
     //A position to identify the center of the ship
@@ -25,8 +25,8 @@ protected:
     char gridCharacter_;
 
 public:
-    //Constructor
-    Ship(const int& size, Position bow, Position stern, char gridCharacter);
+    //Constructors
+    Ship(const int size, Position bow, Position stern, char gridCharacter);
     //Virtual destructor
     virtual ~Ship(){}
 
