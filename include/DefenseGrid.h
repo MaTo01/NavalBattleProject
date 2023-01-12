@@ -40,6 +40,8 @@ public:
     void removeShip(Ship* ship);
     //Marks a Ship as hit (and removes it if it is destroyed)
     void markShipAsHit(Position pos);
+    //Fully repairs the ship at the given position
+    void repairShip(Position pos);
 };
 
 #endif

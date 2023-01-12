@@ -147,16 +147,26 @@ void DefenseGrid::removeShip(Ship* ship) {
 }
 
 void DefenseGrid::markShipAsHit(Position pos) {
-    if(!isShipAtPosition(pos)){
-        throw std::invalid_argument("No ship in this position.");
-    } else {
+    if(Ship* ship = getShipByPosition(pos)){
         tiles_[pos.getX()][pos.getY()] = tolower(tiles_[pos.getX()][pos.getY()]);
-        if(Ship* ship = getShipByPosition(pos)) {
-            ship->setArmor(ship->getArmor() - 1);
-            if(ship->isSunk()) {
-                removeShip(ship);
-            }
+        ship->setArmor(ship->getArmor() - 1);
+        if(ship->isSunk()) {
+            removeShip(ship);
         }
+    } else {
+        throw std::invalid_argument("No ship in this position.");
+    }
+}
+
+void DefenseGrid::repairShip(Position pos) {
+    if(Ship* ship = getShipByPosition(pos)){
+        std::vector<Position> positions = getTilesByShip(ship);
+        for(auto p : positions) {
+            tiles_[p.getX()][p.getY()] = toupper(tiles_[p.getX()][p.getY()]);
+        }
+        ship->setArmor(ship->getSize());
+    } else {
+        throw std::invalid_argument("No ship in this position.");
     }
 }
 
