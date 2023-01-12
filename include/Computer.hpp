@@ -2,6 +2,8 @@
 #ifndef COMPUTER_HPP
 #define COMPUTER_HPP
 
+#include "Computer.h"
+
 void Computer::placeShips(){
     while(battleshipCounter < 3 || supportShipCounter < 3 || submarineCounter < 2 ){
         int shipType = rand() % 3;
