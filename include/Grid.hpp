@@ -15,8 +15,18 @@ Grid::Grid(unsigned int rows, unsigned int cols) {
     } 
 }
 
+int Grid::getRows() const {
+    return tiles_.size();
+}
+
+int Grid::getColumns() const {
+    if(tiles_.size() > 0)
+        return tiles_[0].size();
+    return 0;
+}
+
 bool Grid::isPosValid(Position pos) {
-    if(pos.getX() < 0 || pos.getY() < 0)
+    if(pos.getX() < 0 || pos.getY() < 0) 
         return false;
     if(pos.getX() >= tiles_.size() || pos.getY() >= tiles_[0].size())
         return false;

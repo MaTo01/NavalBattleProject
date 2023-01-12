@@ -21,6 +21,9 @@ public:
     //Destructor
     ~Grid() {}
 
+    int getRows() const;
+    int getColumns() const;
+
     //Prints the Grid and its contents on the desired output stream (e.g. std::cout, std::ofstream, etc.)
     void printGrid(std::ostream& os);
 };
