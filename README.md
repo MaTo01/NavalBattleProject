@@ -206,3 +206,6 @@ rilevata era quella colpita in precedenza) o viene visualizzato con una 'Y' (com
 una normale rilevazione del sonar)?</strong></h3>
 <p>A14. In questo caso la nave rilevata dal sonar verrà visualizzata con il segmento colpito. In altre
 parole, il sonar ritorna la posizione e lo stato corrente delle nave.</p>
+<h3><strong>Q15. Che informazioni devono essere presenti nel log della partita?</strong></h3>
+<p>A15. Nel log devono essere presenti tutte le informazioni necessarie a fare il replay della partita,
+incluso quindi il posizionamento iniziale delle navi.</p>
