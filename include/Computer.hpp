@@ -24,13 +24,13 @@ void Computer::placeShips(){
 
         case 1:
             if(supportShipCounter < 3){
-                Position bowPos = Position(rand()%11, rand()%11);
+                Position bowPos = Position(rand()%12, rand()%12);
                 Position sternPos;
                 bool isHorizontal = rand()%2;
                 if(isHorizontal){
-                    sternPos = Position(bowPos.getX(), bowPos.getY()+4);
+                    sternPos = Position(bowPos.getX(), bowPos.getY()+2);
                 }else{
-                    sternPos = Position(bowPos.getX()+4, bowPos.getY());
+                    sternPos = Position(bowPos.getX()+2, bowPos.getY());
                 }
                 defenseGrid_->placeShip(new SupportShip(bowPos,sternPos,defenseGrid_));
                 supportShipCounter++;
@@ -40,7 +40,7 @@ void Computer::placeShips(){
 
         case 2:
             if(submarineCounter < 2){
-                Position bowPos = Position(rand()%11, rand()%11);
+                Position bowPos = Position(rand()%12, rand()%12);
                 defenseGrid_->placeShip(new Submarine(bowPos,bowPos,attackGrid_, defenseGrid_));
                 submarineCounter++;
                 logFile << bowPos.getX() << bowPos.getY() << " " << bowPos.getX() << bowPos.getY() << std::endl;
