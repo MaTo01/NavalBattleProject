@@ -23,6 +23,7 @@ public:
     Computer(DefenseGrid *defenseGrid, AttackGrid *attackGrid):
         battleshipCounter{0}, supportShipCounter{0}, submarineCounter{0}, defenseGrid_{defenseGrid}, attackGrid_{attackGrid}{
             logFile.open("log.txt");
+            srand ( time(NULL) );
         }
     //Destructor
     ~Computer() {
