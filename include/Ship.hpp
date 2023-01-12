@@ -4,7 +4,7 @@
 
 #include "Ship.h"
 
-Ship::Ship(const int& size, Position bow, Position stern, char gridCharacter)
+Ship::Ship(const int size, Position bow, Position stern, char gridCharacter)
     : size_{size}, armor_{size}, gridCharacter_{gridCharacter} {
     if(bow == stern) {
         center_ = bow;
