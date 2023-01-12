@@ -12,7 +12,7 @@ int main()
 
 	//std::unique_ptr<Ship> s = std::make_unique<Battleship>(Position(0,3), Position(0,7), enemyAG);
 
-	SupportShip* ss = new SupportShip(Position(8,8), Position(10,8), enemyDG);
+	/*SupportShip* ss = new SupportShip(Position(8,8), Position(10,8), enemyDG);
 	enemyDG->placeShip(new Battleship(Position(4,3), Position(4,7), enemyAG));
 	enemyDG->placeShip(ss);
 	enemyDG->placeShip(new Submarine(Position(1,1), Position(1,1), enemyAG, enemyDG));
@@ -41,7 +41,11 @@ int main()
 	myDG->placeShip(s);
 	s->action(Position(4,8), enemyDG);
 	std::cout<<"\n\t\t\tMy attack grid:\n";
-	myAG->printGrid(std::cout);
+	myAG->printGrid(std::cout);*/
+
+	Computer gigi{3, 3, 2, enemyDG, enemyAG};
+	gigi.placeShips();
+	//enemyDG->printGrid(std::cout);
 
 	return 0;
 }
