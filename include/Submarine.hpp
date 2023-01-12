@@ -17,9 +17,10 @@ but the player won't know which type of ship it is
 void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
     if(!defenseGrid_->isShipAtPosition(pos)){
         defenseGrid_->moveShip(this,pos);
-        Ship *ship = enemyDefenseGrid->getShipByPosition(pos);
+        Ship* ship = nullptr;
         for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
             for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
+                ship = enemyDefenseGrid->getShipByPosition(Position(i, j));
                 if (ship) {
                     attackGrid_->markScan(Position(i, j));
                 }

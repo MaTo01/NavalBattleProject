@@ -6,14 +6,17 @@
 
 Ship::Ship(const int& size, Position bow, Position stern, char gridCharacter)
     : size_{size}, armor_{size}, gridCharacter_{gridCharacter} {
-    //If the x coordinates of bow and stern are the same, initialize the 
+    if(bow == stern) {
+        center_ = bow;
+        orientation_ = '-';
+    } //If the x coordinates of bow and stern are the same, initialize the 
     //center of the ship and set the orientation to horizontal
-    if(bow.getX() == stern.getX()) {
+    else if(bow.getX() == stern.getX()) {
         center_ = Position(bow.getX(), (bow.getY() + stern.getY()) / 2);
         orientation_ = 'H';
     //If the y coordinates of bow and stern are the same, initialize the 
     //center of the ship and set the orientation to vertical
-    }else if(bow.getY() == stern.getY()){
+    } else if(bow.getY() == stern.getY()){
         center_ = Position((bow.getX() + stern.getX()) / 2, bow.getY());
         orientation_ = 'V';
     }

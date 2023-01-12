@@ -15,9 +15,10 @@ in a matrix of 3*3 around it.
 void SupportShip::action(Position pos, DefenseGrid *enemyDefenseGrid){
     if(!defenseGrid_->isShipAtPosition(pos)){
         defenseGrid_->moveShip(this,pos);
-        Ship *ship = defenseGrid_->getShipByPosition(pos);
+        Ship* ship = nullptr;
         for (int i = pos.getX() - 1; i <= pos.getX() + 1; i++) {
             for (int j = pos.getY() - 1; j <= pos.getY() + 1; j++) {
+                ship = defenseGrid_->getShipByPosition(Position(i,j));
                 if (ship && ship->getArmor() < ship->getSize()) {
                     defenseGrid_->repairShip(Position(i,j));
                 }

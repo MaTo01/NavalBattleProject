@@ -15,7 +15,7 @@ bool DefenseGrid::isShipAtPosition(Position pos) {
     if(isPosValid(pos)) {
         return (tiles_[pos.getX()][pos.getY()] != ' '); 
     }
-    return false;
+    return false; //fix
 }
 
 Ship* DefenseGrid::getShipByCenter(Position pos) {
@@ -47,24 +47,33 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
     std::vector<Position> positions;
     Position aux;
 
-    if(orientation == 'H') {
-        for(int y = pos.getY() - shiftSize; y <= pos.getY() + shiftSize; y++) {
-            aux = Position(pos.getX(), y);
-            if(!isShipAtPosition(aux)){
-                positions.push_back(aux);
+    switch (orientation) {
+        case 'H':
+            for(int y = pos.getY() - shiftSize; y <= pos.getY() + shiftSize; y++) {
+                aux = Position(pos.getX(), y);
+                if(!isShipAtPosition(aux)){
+                    positions.push_back(aux);
+                } else {
+                    return std::vector<Position>();
+                }
+            }
+            break;
+        case 'V': 
+            for(int x = pos.getX() - shiftSize; x <= pos.getX() + shiftSize; x++) {
+                aux = Position(x, pos.getY());
+                if(!isShipAtPosition(aux)){
+                    positions.push_back(aux);
+                } else {
+                    return std::vector<Position>();
+                }
+            }
+            break;
+        default:
+            if(!isShipAtPosition(pos)){
+                positions.push_back(pos);
             } else {
                 return std::vector<Position>();
             }
-        }
-    } else {
-        for(int x = pos.getX() - shiftSize; x <= pos.getX() + shiftSize; x++) {
-            aux = Position(x, pos.getY());
-            if(!isShipAtPosition(aux)){
-                positions.push_back(aux);
-            } else {
-                return std::vector<Position>();
-            }
-        }
     }
 
     return positions;
@@ -78,14 +87,20 @@ std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
     Position center = ship->getCenter();
     std::vector<Position> positions;
 
-    if(ship->getOrientation() == 'H') {
-        for(int y = center.getY() - shiftSize; y <= center.getY() + shiftSize; y++) {
-            positions.push_back(Position(center.getX(), y));
-        }
-    } else {
-        for(int x = center.getX() - shiftSize; x <= center.getX() + shiftSize; x++) {
-            positions.push_back(Position(x, center.getY()));
-        }
+    switch (ship->getOrientation()) {
+        case 'H': 
+            for(int y = center.getY() - shiftSize; y <= center.getY() + shiftSize; y++) {
+                positions.push_back(Position(center.getX(), y));
+            }
+            break;
+        case 'V': 
+            for(int x = center.getX() - shiftSize; x <= center.getX() + shiftSize; x++) {
+                positions.push_back(Position(x, center.getY()));
+            }
+            break;
+        default:
+            positions.push_back(center);
+            break;
     }
 
     return positions;
