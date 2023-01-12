@@ -14,8 +14,9 @@ DefenseGrid::~DefenseGrid() {
 bool DefenseGrid::isShipAtPosition(Position pos) {
     if(isPosValid(pos)) {
         return (tiles_[pos.getX()][pos.getY()] != ' '); 
+    } else {
+        throw std::invalid_argument("Invalid position.");
     }
-    return false; //fix
 }
 
 Ship* DefenseGrid::getShipByCenter(Position pos) {
