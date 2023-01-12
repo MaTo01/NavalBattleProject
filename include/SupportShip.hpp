@@ -13,19 +13,18 @@ After moving, the support ship repairs the damaged ships
 in a matrix of 3*3 around it.
 */
 void SupportShip::action(Position pos, DefenseGrid *enemyDefenseGrid){
-    //TODO: DefenseGrid function to check if there is a ship at that position 
-    if(defenseGrid_->isShipAtPosition(pos)){
-        throw std::invalid_argument("Cell position already occupied!");
-    }else{
+    if(!defenseGrid_->isShipAtPosition(pos)){
+        defenseGrid_->moveShip(this,pos);
         Ship *ship = defenseGrid_->getShipByPosition(pos);
-        defenseGrid_->moveShip(ship, pos); //TODO: grid member function to update ship position
         for (int i = pos.getX() - 1; i <= pos.getX() + 1; i++) {
             for (int j = pos.getY() - 1; j <= pos.getY() + 1; j++) {
                 if (ship && ship->getArmor() < ship->getSize()) {
-                    ship->setArmor(ship->getSize());
+                    defenseGrid_->repairShip(Position(i,j));
                 }
             }
         }
+    }else{
+        throw std::invalid_argument("Cell position already occupied!");
     }
 }
 

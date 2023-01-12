@@ -15,12 +15,9 @@ If so, the enemy's ship will be signed into the grid as Y,
 but the player won't know which type of ship it is
 */
 void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
-    //TODO: DefenseGrid function to check if there is a ship at that position 
-    if(defenseGrid_->isShipAtPosition(pos)){
-        throw std::invalid_argument("Cell position already occupied!");
-    }else{
+    if(!defenseGrid_->isShipAtPosition(pos)){
+        defenseGrid_->moveShip(this,pos);
         Ship *ship = enemyDefenseGrid->getShipByPosition(pos);
-        defenseGrid_->moveShip(ship, pos); //TODO: DefenseGrid member function to update ship position
         for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
             for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
                 if (ship) {
@@ -28,6 +25,8 @@ void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
                 }
             }
         }
+    }else{
+        throw std::invalid_argument("Cell position already occupied!");
     }
 }
 
