@@ -20,7 +20,7 @@ void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){
         } else {
             attackGrid_->markMiss(pos);
         }
-    }else{
+    } else {
         throw std::invalid_argument("Cell already marked as hit!");
     }
 }

@@ -75,6 +75,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
             } else {
                 return std::vector<Position>();
             }
+            break;
     }
 
     return positions;

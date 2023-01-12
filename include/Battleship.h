@@ -14,7 +14,7 @@ public:
         : Ship(5, bow, stern, 'C'), attackGrid_{attackGrid} {}
     //Destructor
     ~Battleship() override = default;
-    
+
     //Override of the virtual function of Ship
     void action(Position pos, DefenseGrid * enemyDefenseGrid = nullptr) override;  
 };

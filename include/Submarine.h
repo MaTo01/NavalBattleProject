@@ -10,8 +10,7 @@ private:
     AttackGrid *attackGrid_;
     DefenseGrid *defenseGrid_;
 public:
-    //Constructor 
-    Submarine();
+    //Constructor
     Submarine(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
         : Ship(1, bow, stern, 'E'), attackGrid_{attackGrid}, defenseGrid_{defenseGrid} {}
     //Destructor
