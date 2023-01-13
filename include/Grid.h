@@ -42,17 +42,17 @@ static constexpr char connectU = 193;       // ┴
 static constexpr char connectD = 194;       // ┬
 static constexpr char connectLR = 197;      // ┼
 #else           //Unicode alternatives for UTF-8 systems (Unix)
-static constexpr char cornerLU = '\u250C';  // ┌
-static constexpr char cornerLD = '\u2514';  // └
-static constexpr char cornerRU = '\u2510';  // ┐
-static constexpr char cornerRD = '\u2518';  // ┘
-static constexpr char lineH = '\u2500';     // ─
-static constexpr char lineV = '\u2502';     // │
-static constexpr char connectL = '\u2524';  // ┤
-static constexpr char connectR = '\u251C';  // ├
-static constexpr char connectU = '\u2534';  // ┴
-static constexpr char connectD = '\u252C';  // ┬
-static constexpr char connectLR = '\u253C'; // ┼
+static constexpr char cornerLU[] = "\u250C";  // ┌
+static constexpr char cornerLD[] = "\u2514";  // └
+static constexpr char cornerRU[] = "\u2510";  // ┐
+static constexpr char cornerRD[] = "\u2518";  // ┘
+static constexpr char lineH[] = "\u2500";     // ─
+static constexpr char lineV[] = "\u2502";     // │
+static constexpr char connectL[] = "\u2524";  // ┤
+static constexpr char connectR[] = "\u251C";  // ├
+static constexpr char connectU[] = "\u2534";  // ┴
+static constexpr char connectD[] = "\u252C";  // ┬
+static constexpr char connectLR[] = "\u253C"; // ┼
 
 #endif
 
