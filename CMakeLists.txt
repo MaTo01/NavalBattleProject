@@ -4,10 +4,10 @@ project(NavalBattle LANGUAGES CXX)
 
 include_directories(include)
 
-add_executable(NavalBattle
+add_executable(battaglia_navale
     src/NavalBattle.cpp
 )
 
-add_executable(NavalBattleReplay
+add_executable(replay
     src/NavalBattleReplay.cpp
 )
