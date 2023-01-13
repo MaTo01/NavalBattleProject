@@ -3,7 +3,7 @@
 #include <memory>
 #include "Game.h"
 
-int main()
+int main(int argc, char* argv[])
 {
 	DefenseGrid* enemyDG = new DefenseGrid(12,12);
 	AttackGrid* enemyAG = new AttackGrid(12,12);
