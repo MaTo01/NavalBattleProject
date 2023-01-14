@@ -52,7 +52,7 @@ void Grid::printGrid(std::ostream& os) {
 
     //table body
     for(int i = 0; i < tiles_.size(); i++) {
-        os << "\t" << ((i <9 ) ? char(65 + i) : char(65 + i + 2)) << " ";
+        os << "\t" << Position::numberToLetter(i) << " ";
 
         for(int j = 0; j < tiles_[i].size(); j++) {
             os << lineV << " " << tiles_[i][j] << " ";
