@@ -16,6 +16,9 @@ public:
     int getX() const { return x_; }
     int getY() const { return y_; }
 
+    static char numberToLetter(int n);
+    static int letterToNumber(char l);
+
     bool operator==(const Position& p);
     bool operator!=(const Position& p);
     Position& operator=(const Position& p);
