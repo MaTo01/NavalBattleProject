@@ -10,7 +10,7 @@ class Ship;
 
 class DefenseGrid : public Grid {
 private:
-    //List of ships present in the DefenseGrid
+    //List of Ships present in the DefenseGrid
     std::vector<Ship*> ships_;
 
     //Returns a list of Positions in which to place a Ship of the given parameters
@@ -34,13 +34,13 @@ public:
 
     //Adds a Ship to the DefenseGrid
     void placeShip(Ship* ship);
-    //Moves an existing Ship to a different position
+    //Moves an existing Ship to a different Position
     void moveShip(Ship* ship, Position pos);
     //Removes a Ship from the DefenseGrid
     void removeShip(Ship* ship);
     //Marks a Ship as hit (and removes it if it is destroyed)
     void markShipAsHit(Position pos);
-    //Fully repairs the ship at the given position
+    //Fully repairs the Ship at the given Position
     void repairShip(Position pos);
 };
 

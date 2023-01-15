@@ -11,14 +11,14 @@ public:
     //Constructors
     AttackGrid() : Grid() {}
     AttackGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
-    //Destructor
+    //Default destructor
     ~AttackGrid() {}
 
-    //Marks a Position in the grid as a hit
+    //Marks a Position in the AttackGrid as a hit
     void markHit(Position p);
-    //Marks a Position in the grid as a miss
+    //Marks a Position in the AttackGrid as a miss
     void markMiss(Position p);
-    //Marks a Position in the grid as scanned 
+    //Marks a Position in the AttackGrid as scanned 
     void markScan(Position p);
     //Checks if the cell at the given Position has already been marked as a hit/miss;
     //Scanned cells are not considered marked for this purpose
