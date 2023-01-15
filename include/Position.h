@@ -1,4 +1,4 @@
-
+//2032460 Van Sang Ho
 #ifndef POSITION_H
 #define POSITION_H
 #include <iostream>
@@ -10,7 +10,8 @@ private:
     
 public:
     //Constructor
-    Position(int a = 0, int b = 0) : x_{a}, y_{b} {}
+    Position(int a = 0, int b = 0) 
+        : x_{a}, y_{b} {}
     //default destructor
     ~Position() {}
 

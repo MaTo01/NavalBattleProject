@@ -1,23 +1,25 @@
-
+//2032460 Van Sang Ho
 #ifndef POSITION_HPP
 #define POSITION_HPP
 
 #include "Position.h"
 
+//This function uses the Italian alphabet (21 letters)
 char Position::numberToLetter(int n) {
     if(n < 0 || n >= 21) {
         return '?';
     }
 
     if(n < 9) {
-        return char('A' + n);
+        return char('A' + n);       //A to I
     } else if (n < 20) {
-        return char('A' + n + 2);
+        return char('A' + n + 2);   //L to V (J, K are skipped)
     } else {
-        return char('A' + n + 5);
+        return char('A' + n + 5);   //Z (J, K, W, X, Y are skipped)
     }
 }
 
+//This function uses the Italian alphabet (21 letters)
 int Position::letterToNumber(char l) {
     l = toupper(l);
     if(l < 'A' || l > 'Z') {
@@ -25,11 +27,11 @@ int Position::letterToNumber(char l) {
     } 
 
     if(l < 'J') {
-        return l - 'A';
+        return l - 'A';         //0 to 8
     } else if (l < 'W') {
-        return l - 2  - 'A';
+        return l - 2  - 'A';    //9 to 19 (J, K are skipped)
     } else {
-        return l - 5  - 'A';
+        return l - 5  - 'A';    //20 (J, K, W, X, Y are skipped)
     }
 }
 
