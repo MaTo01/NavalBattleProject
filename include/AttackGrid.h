@@ -24,6 +24,8 @@ public:
     //Checks if the cell at the given Position has already been marked as a hit/miss;
     //Scanned cells are not considered marked for this purpose
     bool isAlreadyMarked(Position p);
+    //Clears all the preview scans
+    void clearGrid();
 };
 
 #include "AttackGrid.hpp"
