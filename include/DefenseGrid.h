@@ -2,8 +2,6 @@
 #ifndef DEFENSEGRID_H
 #define DEFENSEGRID_H
 
-#include <iostream>
-#include <vector>
 #include <memory>
 #include "Grid.h"
 
@@ -11,7 +9,7 @@ class Ship;
 
 class DefenseGrid : public Grid {
 private:
-    //Vector of unique_ptrs containing the Ships placed in the DefenseGrid
+    //Vector of unique_ptrs to the Ships placed in the DefenseGrid
     std::vector<std::unique_ptr<Ship>> ships_;
 
     //Returns a list of Positions in which to place a Ship of the given parameters

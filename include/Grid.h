@@ -8,15 +8,16 @@
 
 class Grid {
 protected:
-    //2D vector representing the content of the grid's tiles
+    //2D vector representing the content of the Grid's tiles
     std::vector<std::vector<char>> tiles_;
 
-    //Tests if a given Position is valid (as in within the limits of the Grid)
+    //Tests if a given Position is valid (as in, within the limits of the Grid)
     bool isPosValid(Position pos);
 
 public:
     //Constructors
-    Grid() : tiles_{std::vector<std::vector<char>>()} {}
+    Grid() 
+        : tiles_{std::vector<std::vector<char>>()} {}
     Grid(unsigned int rows, unsigned int cols);
     //default Destructor
     ~Grid() {}
