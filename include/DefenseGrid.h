@@ -11,7 +11,7 @@ class Ship;
 class DefenseGrid : public Grid {
 private:
     //List of Ships present in the DefenseGrid
-    std::vector<Ship*> ships_;
+    std::vector<std::unique_ptr<Ship>> ships_;
 
     //Returns a list of Positions in which to place a Ship of the given parameters
     std::vector<Position> getTilesForPlacement(int size, char orientation, Position pos);
@@ -33,7 +33,7 @@ public:
     bool isShipAtPosition(Position pos);
 
     //Adds a Ship to the DefenseGrid
-    void placeShip(Ship* ship);
+    void placeShip(std::unique_ptr<Ship> ship);
     //Moves an existing Ship to a different Position
     void moveShip(Ship* ship, Position pos);
     //Removes a Ship from the DefenseGrid

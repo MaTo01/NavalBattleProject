@@ -5,8 +5,8 @@
 #include "DefenseGrid.h"
 
 DefenseGrid::~DefenseGrid() {
-    for(auto s : ships_) {
-        delete s;
+    for(auto & s : ships_) {
+        s.reset();
     }
     ships_.clear();
 }
@@ -21,9 +21,9 @@ bool DefenseGrid::isShipAtPosition(Position pos) {
 
 Ship* DefenseGrid::getShipByCenter(Position pos) {
     if(isPosValid(pos)) {
-        for(auto s : ships_) {
+        for(auto & s : ships_) {
             if(s->getCenter() == pos)
-                return s;
+                return s.get();
         }
     }
     return nullptr;
@@ -32,11 +32,11 @@ Ship* DefenseGrid::getShipByCenter(Position pos) {
 Ship* DefenseGrid::getShipByPosition(Position pos) {
     if(isShipAtPosition(pos)) {
         std::vector<Position> positions;
-        for(auto s : ships_) {
-            positions = getTilesByShip(s);
+        for(auto & s : ships_) {
+            positions = getTilesByShip(s.get());
             for(auto p : positions) {
                 if(p == pos)
-                    return s;
+                    return s.get();
             }
         }
     }
@@ -108,7 +108,7 @@ std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
     return positions;
 }
 
-void DefenseGrid::placeShip(Ship* ship) {
+void DefenseGrid::placeShip(std::unique_ptr<Ship> ship) {
     std::vector<Position> positions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), ship->getCenter());
     if(positions.size() > 0) {
         for(auto p : positions) {
@@ -151,11 +151,13 @@ void DefenseGrid::removeShip(Ship* ship) {
             tiles_[p.getX()][p.getY()] = ' ';
         }
         int i = 0;
-        for(std::vector<Ship*>::iterator it = ships_.begin(); it != ships_.end(); it++, i++) {
-            if(ships_[i] == ship) {
-                delete ships_[i];
-                ships_.erase(it);
+        for(auto & s : ships_) {
+            if(s.get() == ship) {
+                ships_[i].reset();
+                ships_.erase(ships_.begin() + i);
                 break;
+            } else {
+                i++;
             }
         }
     } else {
