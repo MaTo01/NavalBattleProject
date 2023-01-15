@@ -8,7 +8,7 @@ class SupportShip : public Ship{
 private:
     DefenseGrid *defenseGrid_;
 public:
-    //Constructors
+    //Constructor
     SupportShip(Position bow, Position stern, DefenseGrid *defenseGrid)
         : Ship(3, bow, stern, 'S'), defenseGrid_{defenseGrid} {}
     //Destructor

@@ -25,7 +25,7 @@ protected:
     char gridCharacter_;
 
 public:
-    //Constructors
+    //Constructor
     Ship(const int size, Position bow, Position stern, char gridCharacter);
     //Virtual destructor
     virtual ~Ship(){}
