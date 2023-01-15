@@ -31,6 +31,8 @@ public:
     Ship* getShipByPosition(Position pos);
     //Checks if the given Position is occupied by a Ship
     bool isShipAtPosition(Position pos);
+    //Returns the pointer of a ship at the n-position in the ships_ vector
+    Ship* getShipAt(int n) {return ships_[n].get();}
 
     //Adds a Ship to the DefenseGrid 
     void placeShip(std::unique_ptr<Ship> ship);
