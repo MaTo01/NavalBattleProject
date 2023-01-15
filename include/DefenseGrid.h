@@ -4,13 +4,14 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Grid.h"
 
 class Ship;
 
 class DefenseGrid : public Grid {
 private:
-    //List of Ships present in the DefenseGrid
+    //Vector of unique_ptrs containing the Ships placed in the DefenseGrid
     std::vector<std::unique_ptr<Ship>> ships_;
 
     //Returns a list of Positions in which to place a Ship of the given parameters
@@ -21,7 +22,8 @@ private:
 public:
     //Constructors
     DefenseGrid() : Grid() {}
-    DefenseGrid(unsigned int rows, unsigned int cols) : Grid(rows, cols) {}
+    DefenseGrid(unsigned int rows, unsigned int cols) 
+        : Grid(rows, cols) {}
     //Destructor
     ~DefenseGrid();
 
@@ -32,7 +34,7 @@ public:
     //Checks if the given Position is occupied by a Ship
     bool isShipAtPosition(Position pos);
 
-    //Adds a Ship to the DefenseGrid
+    //Adds a Ship to the DefenseGrid 
     void placeShip(std::unique_ptr<Ship> ship);
     //Moves an existing Ship to a different Position
     void moveShip(Ship* ship, Position pos);
