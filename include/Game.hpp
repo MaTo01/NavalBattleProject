@@ -1,3 +1,4 @@
+//2032496 Veronica Cisotto
 #ifndef GAME_HPP
 #define GAME_HPP
 
@@ -7,8 +8,10 @@
 void Game::setBattlefield(){
     Player p{};
     Computer e{};
-    e.placeShips(p.getDefenseGrid());
-    p.placeShips(e.getDefenseGrid());
+    e.placeShips();
+    p.placeShips();
+    p.setEnemyDefenseGrid(e.getDefenseGrid());
+    e.setEnemyDefenseGrid(p.getDefenseGrid());
 }
 
 void Game::start(){
