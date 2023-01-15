@@ -13,28 +13,30 @@
 
 class Computer {
 private:
-    const int maxBattleships_;
-    const int maxSupportShips_;
-    const int maxSubmarines_;
+    static constexpr int rows = 12;
+    static constexpr int cols = 12;
+    static constexpr int nBattleships = 3;
+    static constexpr int nSupportShips = 3;
+    static constexpr int nSubmarines = 2;
+    static constexpr int BattleshipSize = 5;
+    static constexpr int SupportShipSize = 3;
+    static constexpr int SubmarineSize = 1;
     DefenseGrid *defenseGrid_;
     AttackGrid *attackGrid_;
     std::ofstream logFile;
     
 public:
     //Constructor
-    Computer(const int bNum, const int ssNum, const int sNum, DefenseGrid *defenseGrid, AttackGrid *attackGrid):
-        maxBattleships_{bNum}, maxSupportShips_{ssNum}, maxSubmarines_{sNum}, defenseGrid_{defenseGrid}, attackGrid_{attackGrid}{
-            logFile.open("log.txt");
-            srand ( time(NULL) );
-        }
+    Computer() : attackGrid_{new AttackGrid(rows, cols)}, defenseGrid_{new DefenseGrid(rows, cols)} {}
     //Destructor
     ~Computer() {
         logFile.close();
     }
-
+    
     //Member functions
-    void placeShips();
+    void placeShips(DefenseGrid* enemyDefenseGrid);
     void performAction();
+    DefenseGrid* getDefenseGrid() const {return defenseGrid_;}
 };
 
 #include "Computer.hpp"
