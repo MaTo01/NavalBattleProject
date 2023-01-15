@@ -36,4 +36,12 @@ bool AttackGrid::isAlreadyMarked(Position p) {
     }
 }
 
+void AttackGrid::clearGrid(){
+    for(int i=0; i<tiles_.size(); i++){
+        for(int j=0; j<tiles_[0].size(); j++){
+            if(tiles_[i][j] != ' ') tiles_[i][j] = ' ';
+        }
+    }
+}
+
 #endif
