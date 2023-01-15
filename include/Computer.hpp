@@ -4,9 +4,9 @@
 
 #include "Computer.h"
 
-void Computer::placeShips(DefenseGrid* enemyDefenseGrid){
+void Computer::placeShips(){
     srand (time(NULL));
-    for(int i = 1; i<=nBattleships; i++){
+    for(int i=0; i<nBattleships; i++){
         try{
             Position bowPos, sternPos;
             bool isHorizontal = rand() % 2;
@@ -24,7 +24,7 @@ void Computer::placeShips(DefenseGrid* enemyDefenseGrid){
             std::cerr << e.what() << '\n';
         }
     }
-    for(int i = 1; i<=nSupportShips; i++){
+    for(int i=0; i<nSupportShips; i++){
         try{
             Position bowPos, sternPos;
             bool isHorizontal = rand() % 2;
@@ -42,7 +42,7 @@ void Computer::placeShips(DefenseGrid* enemyDefenseGrid){
             std::cerr << e.what() << '\n';
         }
     }
-    for(int i = 1; i<=nSubmarines; i++){
+    for(int i=0; i<nSubmarines; i++){
         try{
             Position pos = rand() % rows;
             defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(pos, pos, attackGrid_, defenseGrid_)));      
@@ -57,13 +57,28 @@ void Computer::placeShips(DefenseGrid* enemyDefenseGrid){
 
 }
 
-void Computer::performAction(){
-    //int maxShips = battleshipCounter+supportShipCounter+submarineCounter;
-    //int chooseShip = rand()%maxShips;
+void Computer::execute(){
+    Ship* ship = defenseGrid_->getShipAt(rand() % nTotalShips);
+    char centerX = Position::numberToLetter(ship->getCenter().getX());
+    int centerY = ship->getCenter().getY();
+    std::cout << centerX << centerY+1 << " ";
+    try{
+        int targetX = rand() % rows;
+        int targetY = rand() % cols;
+        ship->action(Position(targetX, targetY), enemyDefenseGrid_);
+        std::cout << Position::numberToLetter(targetX) << targetY+1 << std::endl;
+    }
+    catch(const std::invalid_argument& e){
+        std::cerr << e.what() << '\n';
+        execute();
+    }
+}
 
-    //TODO: understand how the fuck should you write a XYOrigin in a log file
-    //      without raping the memory with a do while() loop and a random function 
-
+void Computer::viewGrids(){
+    std::cout << "Attack grid:" << std::endl;
+    attackGrid_->printGrid(std::cout);
+    std::cout << "Defense grid" << std::endl;
+    defenseGrid_->printGrid(std::cout);    
 }
 
 #endif
