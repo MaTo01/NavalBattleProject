@@ -4,6 +4,7 @@
 
 #include "DefenseGrid.h"
 
+//Resets all unique_ptrs and empties the ships vector
 DefenseGrid::~DefenseGrid() {
     for(auto & s : ships_) {
         s.reset();
@@ -21,22 +22,27 @@ bool DefenseGrid::isShipAtPosition(Position pos) {
 
 Ship* DefenseGrid::getShipByCenter(Position pos) {
     if(isPosValid(pos)) {
+        //If pos matches the center of one of the DefenseGrid's Ships,
+        //the function returns a raw pointer to said Ship
         for(auto & s : ships_) {
             if(s->getCenter() == pos)
-                return s.get();
+                return s.get();         
         }
     }
     return nullptr;
 }
 
 Ship* DefenseGrid::getShipByPosition(Position pos) {
+    //If there is a Ship at the Position indicated by pos,
+    //the function checks the Positions occupied by all Ships in the DefenseGrid
+    //until it finds the one needed, and returns a raw pointer to it
     if(isShipAtPosition(pos)) {
         std::vector<Position> positions;
         for(auto & s : ships_) {
             positions = getTilesByShip(s.get());
             for(auto p : positions) {
                 if(p == pos)
-                    return s.get();
+                    return s.get();     
             }
         }
     }
@@ -44,10 +50,13 @@ Ship* DefenseGrid::getShipByPosition(Position pos) {
 }
 
 std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientation, Position pos) {
+    //number of tiles on each side of the center that the Ship occupies
     int shiftSize = size / 2;
+    //vector of Positions that will be "allocated" for a Ship
     std::vector<Position> positions;
     Position aux;
 
+    //if at least one of the required Positions is not free, the function returns an empty vector
     switch (orientation) {
         case 'H':
             for(int y = pos.getY() - shiftSize; y <= pos.getY() + shiftSize; y++) {
@@ -69,7 +78,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
                 }
             }
             break;
-        default:
+        default:        //a Ship of size 1 is considered neither vertical nor horizontal
             if(!isShipAtPosition(pos)){
                 positions.push_back(pos);
             } else {
@@ -81,12 +90,11 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
     return positions;
 }
 
-std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
-    if(!isShipAtPosition(ship->getCenter()))
-        return std::vector<Position>();
-    
+std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {  
+    //number of tiles on each side of the center that the Ship occupies
     int shiftSize = ship->getSize() / 2;
     Position center = ship->getCenter();
+    //vector of Positions occupied by the Ship
     std::vector<Position> positions;
 
     switch (ship->getOrientation()) {
@@ -109,11 +117,16 @@ std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
 }
 
 void DefenseGrid::placeShip(std::unique_ptr<Ship> ship) {
+    //"Allocates" the Positions required to add the Ship to the DefenseGrid
+    //If positions is not empty, the Ship can be added
     std::vector<Position> positions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), ship->getCenter());
     if(positions.size() > 0) {
+        //"Logically" adds the Ship by updating the DefenseGrid's tiles
         for(auto p : positions) {
             tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
         }
+        //"Physically" adds the Ship to the list of the DefenseGrid's Ships
+        //and transfers ownership of the unique_ptr to the DefenseGrid via std::move
         ships_.push_back(std::move(ship));
     } else {
         throw std::invalid_argument("Invalid ship placement.");
@@ -121,8 +134,11 @@ void DefenseGrid::placeShip(std::unique_ptr<Ship> ship) {
 }
 
 void DefenseGrid::moveShip(Ship* ship, Position pos) {
+    //Fetches the Positions occupied by the Ship
+    //If oldPositions is empty, the Ship does not exist within the DefenseGrid
     std::vector<Position> oldPositions = getTilesByShip(ship);
     if(oldPositions.size() > 0) {
+        //"Logically" removes the Ship from the DefenseGrid by clearing its old Positions
         for(auto p : oldPositions) {
             tiles_[p.getX()][p.getY()] = ' ';
         }
@@ -130,13 +146,16 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
         throw std::invalid_argument("No ship in this position.");
     }
 
+    //"Allocates" a new set of Positions to move the Ship in
     std::vector<Position> newPositions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), pos);
     if(newPositions.size() > 0) {
+        //"Logically" adds the Ship back to the DefenseGrid and updates its center
         for(auto p : newPositions) {
             tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
         }
         ship->setCenter(pos);
     } else {
+        //If the Ship cannot be moved, restores its old Positions
         for(auto p : oldPositions) {
             tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
         }
@@ -145,11 +164,15 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
 }
 
 void DefenseGrid::removeShip(Ship* ship) {
+    //Fetches the Positions occupied by the Ship
+    //If positions is empty, the Ship does not exist within the DefenseGrid
     std::vector<Position> positions = getTilesByShip(ship);
     if(positions.size() > 0) {
+        //"Logically" removes the Ship from the DefenseGrid by clearing its old Positions
         for(auto p : positions) {
             tiles_[p.getX()][p.getY()] = ' ';
         }
+        //"Physically" removes the Ship by resetting its unique_ptr and erasing it from the vector
         int i = 0;
         for(auto & s : ships_) {
             if(s.get() == ship) {
@@ -166,6 +189,8 @@ void DefenseGrid::removeShip(Ship* ship) {
 }
 
 void DefenseGrid::markShipAsHit(Position pos) {
+    //If a Ship exists at the given Position, the DefenseGrid is updated to mark a hit,
+    //the Ship's armor value is updated and, if it's sunk, the Ship is removed from the DefenseGrid
     if(Ship* ship = getShipByPosition(pos)){
         tiles_[pos.getX()][pos.getY()] = tolower(tiles_[pos.getX()][pos.getY()]);
         ship->setArmor(ship->getArmor() - 1);
@@ -178,6 +203,8 @@ void DefenseGrid::markShipAsHit(Position pos) {
 }
 
 void DefenseGrid::repairShip(Position pos) {
+    //If a Ship exists at the given Position, all hits it has received are reverted
+    //and its armor value is restored to full
     if(Ship* ship = getShipByPosition(pos)){
         std::vector<Position> positions = getTilesByShip(ship);
         for(auto p : positions) {
