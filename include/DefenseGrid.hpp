@@ -114,7 +114,7 @@ void DefenseGrid::placeShip(std::unique_ptr<Ship> ship) {
         for(auto p : positions) {
             tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
         }
-        ships_.push_back(ship);
+        ships_.push_back(std::move(ship));
     } else {
         throw std::invalid_argument("Invalid ship placement.");
     }
