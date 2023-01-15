@@ -10,7 +10,7 @@ private:
     Computer cpu_;
     static constexpr int maxTurns = 50;
 public:
-    Game() = default;
+    Game() {srand(time(NULL));}
     ~Game() = default;
 
     void setBattlefield();
