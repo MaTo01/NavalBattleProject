@@ -1,3 +1,4 @@
+//2032496 Veronica Cisotto
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -27,12 +28,11 @@ public:
     ~Player() = default;
     
     DefenseGrid* getDefenseGrid() const {return defenseGrid_;}
-    void placeShips(DefenseGrid* enemeyDefenseGrid);
+    void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid){enemyDefenseGrid_=enemyDefenseGrid;}
+    void placeShips();
     void execute();
-    void printGrids(){
-        attackGrid_->printGrid(std::cout);
-        defenseGrid_->printGrid(std::cout);    
-    }
+    void viewGrids();
+    void clearAttackGrid() {attackGrid_->clearGrid();}
 
 };
 
