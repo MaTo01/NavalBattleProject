@@ -25,14 +25,14 @@ public:
     //Destructor
     ~DefenseGrid();
 
-    //Returns (if it exists) a Ship given its center
+    //Returns (if it exists) the pointer to one of the DefenseGrid's Ships given its center
     Ship* getShipByCenter(Position pos);
-    //Returns (if it exists) a Ship given a Position it occupies in the DefenseGrid
+    //Returns (if it exists) the pointer to one of the DefenseGrid's Ships given a Position it occupies in the DefenseGrid
     Ship* getShipByPosition(Position pos);
+    //Returns a pointer to the n-th Ship of the vector
+    Ship* getShipByIndex(int n);
     //Checks if the given Position is occupied by a Ship
     bool isShipAtPosition(Position pos);
-    //Returns the pointer of a ship at the n-position in the ships_ vector
-    Ship* getShipAt(int n) {return ships_[n].get();}
 
     //Adds a Ship to the DefenseGrid 
     void placeShip(std::unique_ptr<Ship> ship);

@@ -58,7 +58,7 @@ void Computer::placeShips(){
 }
 
 void Computer::execute(){
-    Ship* ship = defenseGrid_->getShipAt(rand() % nTotalShips);
+    Ship* ship = defenseGrid_->getShipByIndex(rand() % nTotalShips);
     char centerX = Position::numberToLetter(ship->getCenter().getX());
     int centerY = ship->getCenter().getY();
     std::cout << centerX << centerY+1 << " ";
