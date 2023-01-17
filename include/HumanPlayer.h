@@ -7,11 +7,12 @@
 
 class HumanPlayer : public Player{
 public:
-    HumanPlayer() : Player() {}
+    HumanPlayer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines) 
+        : Player(rows, cols, nBattleships, nSupportShips, nSubmarines) {}
     ~HumanPlayer() override = default;
-    
+
     void placeShips() override;
-    void execute() override;   
+    void execute() override;
 
 };
 
