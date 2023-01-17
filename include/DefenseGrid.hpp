@@ -154,18 +154,22 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
 
     //"Allocates" a new set of Positions to move the Ship in
     std::vector<Position> newPositions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), pos);
-    if(newPositions.size() > 0) {
-        //"Logically" adds the Ship back to the DefenseGrid and updates its center
-        for(auto p : newPositions) {
-            tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
+    try {
+        if(newPositions.size() > 0) {
+            //"Logically" adds the Ship back to the DefenseGrid and updates its center
+            for(auto p : newPositions) {
+                tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
+            }
+            ship->setCenter(pos);
+        } else {
+            throw std::invalid_argument("Invalid ship placement.");
         }
-        ship->setCenter(pos);
-    } else {
-        //If the Ship cannot be moved, restores its old Positions
+    } catch(const std::invalid_argument& e) {
+        //If the Ship cannot be moved (due to any of the newPositions being occupied or invalid),
+        //restores its old Positions
         for(auto p : oldPositions) {
             tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
         }
-        throw std::invalid_argument("Invalid ship placement.");
     }
 }
 
