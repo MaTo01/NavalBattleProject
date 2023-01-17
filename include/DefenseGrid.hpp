@@ -14,7 +14,7 @@ DefenseGrid::~DefenseGrid() {
 
 bool DefenseGrid::isShipAtPosition(Position pos) {
     if(isPosValid(pos)) {
-        return (tiles_[pos.getX()][pos.getY()] != ' '); 
+        return (tiles_[pos.getX()][pos.getY()] != ' ');
     } else {
         throw std::invalid_argument("Invalid position.");
     }
@@ -69,6 +69,8 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
                 aux = Position(pos.getX(), y);
                 if(!isShipAtPosition(aux)){
                     positions.push_back(aux);
+                } else {
+                    throw std::invalid_argument("Invalid ship placement.");
                 }
             }
             break;
@@ -77,12 +79,16 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
                 aux = Position(x, pos.getY());
                 if(!isShipAtPosition(aux)){
                     positions.push_back(aux);
+                } else {
+                    throw std::invalid_argument("Invalid ship placement.");
                 }
             }
             break;
         default:        //a Ship of size 1 is considered neither vertical nor horizontal
             if(!isShipAtPosition(pos)){
                 positions.push_back(pos);
+            } else {
+                throw std::invalid_argument("Invalid ship placement.");
             }
             break;
         }
