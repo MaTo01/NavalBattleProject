@@ -51,8 +51,8 @@ Ship* DefenseGrid::getShipByPosition(Position pos) {
 
 Ship* DefenseGrid::getShipByIndex(int n) {
     if(n < 0 || n > ships_.size())
-        return ships_[n].get(); 
-    return nullptr;
+        return nullptr;
+    return ships_[n].get();
 }
 
 std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientation, Position pos) {
