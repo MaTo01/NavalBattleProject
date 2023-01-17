@@ -34,7 +34,7 @@ public:
        
     void viewGrids();
     void clearAttackGrid() {attackGrid_->clearGrid();}
-    bool isWinner() {return enemyDefenseGrid_->loseMatch();}
+    bool isWinner() {return enemyDefenseGrid_->isGridEmpty();}
     
     //Pure virtual function that represents the action of a 
     //player and will be overridden by the subclasses as needed
