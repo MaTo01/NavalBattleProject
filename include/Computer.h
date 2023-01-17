@@ -10,16 +10,14 @@
 
 class Computer : public Player {
 private:
-    static constexpr int nTotalShips_ = 8;
     static constexpr int BattleshipSize_ = 5;
     static constexpr int SupportShipSize_ = 3;
     static constexpr int SubmarineSize_ = 1;
 
-    std::ofstream logFile;
-    
 public:
     //Constructor
-    Computer() : Player() {srand(time(NULL));}
+    Computer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines) 
+        : Player(rows, cols, nBattleships, nSupportShips, nSubmarines) { srand(time(NULL)); }
     //Destructor
     ~Computer() override = default;
 
