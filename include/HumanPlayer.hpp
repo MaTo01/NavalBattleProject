@@ -1,12 +1,12 @@
 //2032496 Veronica Cisotto
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#ifndef HUMANPLAYER_HPP
+#define HUMANPLAYER_HPP
 
-#include "Player.h"
+#include "HumanPlayer.h"
 #include <iostream>
 
-void Player::placeShips(){
-    for(int i=1; i<=nBattleships; i++){
+void HumanPlayer::placeShips(){
+    for(int i=1; i<=nBattleships_; i++){
         try{
           std::cout << "Insert coordinates for battleship n. " << i << ":" << std::endl;
         char bowX;
@@ -19,13 +19,13 @@ void Player::placeShips(){
         defenseGrid_->placeShip(std::unique_ptr<Ship>(new Battleship(bowPos, sternPos, attackGrid_)));  
         }
         catch(const std::invalid_argument& e){
-            std::cerr << e.what() << "Invalid coordinates. Try again" << '\n';
+            std::cerr << e.what() << "Try again" << '\n';
             i--;
         }
         
         
     }
-    for(int i=1; i<=nSupportShips; i++){
+    for(int i=1; i<=nSupportShips_; i++){
         try{
             std::cout << "Insert coordinates for support ship n. " << i << ":" << std::endl;
             char bowX;
@@ -38,11 +38,11 @@ void Player::placeShips(){
             defenseGrid_->placeShip(std::unique_ptr<Ship>(new SupportShip(bowPos, sternPos, defenseGrid_)));
         }
         catch(const std::invalid_argument& e){
-            std::cerr << e.what() << "Invalid coordinates. Try again" << '\n';
+            std::cerr << e.what() << "Try again" << '\n';
             i--;
         }
     }
-    for(int i=1; i<=nSubmarines; i++){
+    for(int i=1; i<=nSubmarines_; i++){
         try{
         std::cout << "Insert coordinates for submarine n. " << i << ":" << std::endl;
         char bowX;
@@ -55,36 +55,50 @@ void Player::placeShips(){
         defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_, defenseGrid_)));
         }
         catch(const std::invalid_argument& e){
-            std::cerr << e.what() << "Invalid coordinates. Try again" << '\n';
+            std::cerr << e.what() << "Try again" << '\n';
             i--;
         }
     }
     defenseGrid_->printGrid(std::cout);
 }
 
-void Player::execute(){
-    char centerX;
-    int centerY;
-    char targetX;
-    int targetY;
-    std::cout << "Select ship by its center and target:" << std::endl;
-    try{
-        std::cin >> centerX >> centerY >> targetX >> targetY;
-        Position center(Position::letterToNumber(centerX), centerY-1);
-        Position target(Position::letterToNumber(targetX), targetY-1);
-        defenseGrid_->getShipByCenter(center)->action(target, enemyDefenseGrid_);
+void HumanPlayer::execute(){
+    std::string centre;
+    std::string target;
+    std::cout << "Command XX XX to see the grids; command AA AA to delete preview scans from the attack grid." << std::endl;
+    std::cout << "Otherwise select ship by its center and target:" << std::endl;
+    std::cin >> centre;
+    std::cin.get();
+    std::cin >> target;
+    if(centre != target){
+        try{
+            char centerX = centre.at(0);
+            int centerY = std::stoi(centre.substr(1));
+            char targetX = target.at(0);
+            int targetY = std::stoi(target.substr(1));
+            Position center(Position::letterToNumber(centerX), centerY-1);
+            Position target(Position::letterToNumber(targetX), targetY-1);
+            defenseGrid_->getShipByCenter(center)->action(target, enemyDefenseGrid_);
+        }
+        catch(std::invalid_argument& e){
+            std::cerr << e.what() << "Try again" << '\n';
+            execute();
+        }
     }
-    catch(std::invalid_argument& e){
-        std::cerr << e.what() << "Invalid coordinates. Try again" << '\n';
-        execute();
+    else{
+        try{
+            if(centre=="AA"){
+                clearAttackGrid();
+                execute();
+            }
+            if(centre=="XX"){
+                viewGrids();
+                execute();
+            }
+            else {throw std::invalid_argument("Invalid command. Try again");}
+        }
+        catch(std::invalid_argument& e) {execute();}
     }
-}
-
-void Player::viewGrids(){
-        std::cout << "Attack grid:" << std::endl;
-        attackGrid_->printGrid(std::cout);
-        std::cout << "Defense grid:" << std::endl;
-        defenseGrid_->printGrid(std::cout);    
 }
 
 #endif
