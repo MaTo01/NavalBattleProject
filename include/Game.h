@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Player.h"
 #include "HumanPlayer.h"
 #include "Computer.h"
 #include <random>
