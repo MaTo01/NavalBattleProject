@@ -5,17 +5,16 @@
 #include "Computer.h"
 
 void Computer::placeShips(){
-    srand (time(NULL));
-    for(int i=0; i<nBattleships; i++){
+    for(int i=0; i<nBattleships_; i++){
         try{
             Position bowPos, sternPos;
             bool isHorizontal = rand() % 2;
             if(isHorizontal) {
-                bowPos = Position(rand() % rows, rand() % (cols - BattleshipSize - 1));
-                sternPos = Position(bowPos.getX(), bowPos.getY() + BattleshipSize - 1);
+                bowPos = Position(rand() % rows_, rand() % (cols_ - BattleshipSize_ - 1));
+                sternPos = Position(bowPos.getX(), bowPos.getY() + BattleshipSize_ - 1);
             } else {
-                bowPos = Position(rand() % (rows - BattleshipSize - 1), rand() % cols);
-                sternPos = Position(bowPos.getX() + BattleshipSize - 1, bowPos.getY());
+                bowPos = Position(rand() % (rows_ - BattleshipSize_ - 1), rand() % cols_);
+                sternPos = Position(bowPos.getX() + BattleshipSize_ - 1, bowPos.getY());
             }
             defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_)));
         }
@@ -24,16 +23,16 @@ void Computer::placeShips(){
             std::cerr << e.what() << '\n';
         }
     }
-    for(int i=0; i<nSupportShips; i++){
+    for(int i=0; i<nSupportShips_; i++){
         try{
             Position bowPos, sternPos;
             bool isHorizontal = rand() % 2;
             if(isHorizontal) {
-                bowPos = Position(rand() % rows, rand() % (cols - SupportShipSize - 1));
-                sternPos = Position(bowPos.getX(), bowPos.getY() + SupportShipSize - 1);
+                bowPos = Position(rand() % rows_, rand() % (cols_ - SupportShipSize_ - 1));
+                sternPos = Position(bowPos.getX(), bowPos.getY() + SupportShipSize_ - 1);
             } else {
-                bowPos = Position(rand() % (rows - SupportShipSize - 1), rand() % cols);
-                sternPos = Position(bowPos.getX() + SupportShipSize - 1, bowPos.getY());
+                bowPos = Position(rand() % (rows_ - SupportShipSize_ - 1), rand() % cols_);
+                sternPos = Position(bowPos.getX() + SupportShipSize_ - 1, bowPos.getY());
             }
             defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_)));       
         }
@@ -42,9 +41,9 @@ void Computer::placeShips(){
             std::cerr << e.what() << '\n';
         }
     }
-    for(int i=0; i<nSubmarines; i++){
+    for(int i=0; i<nSubmarines_; i++){
         try{
-            Position pos = rand() % rows;
+            Position pos = rand() % rows_;
             defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(pos, pos, attackGrid_, defenseGrid_)));      
         }
         catch(const std::invalid_argument& e){
@@ -58,13 +57,13 @@ void Computer::placeShips(){
 }
 
 void Computer::execute(){
-    Ship* ship = defenseGrid_->getShipByIndex(rand() % nTotalShips);
+    Ship* ship = defenseGrid_->getShipAt(rand() % nTotalShips_);
     char centerX = Position::numberToLetter(ship->getCenter().getX());
     int centerY = ship->getCenter().getY();
     std::cout << centerX << centerY+1 << " ";
     try{
-        int targetX = rand() % rows;
-        int targetY = rand() % cols;
+        int targetX = rand() % rows_;
+        int targetY = rand() % cols_;
         ship->action(Position(targetX, targetY), enemyDefenseGrid_);
         std::cout << Position::numberToLetter(targetX) << targetY+1 << std::endl;
     }
@@ -72,13 +71,6 @@ void Computer::execute(){
         std::cerr << e.what() << '\n';
         execute();
     }
-}
-
-void Computer::viewGrids(){
-    std::cout << "Attack grid:" << std::endl;
-    attackGrid_->printGrid(std::cout);
-    std::cout << "Defense grid" << std::endl;
-    defenseGrid_->printGrid(std::cout);    
 }
 
 #endif
