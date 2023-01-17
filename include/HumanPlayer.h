@@ -7,12 +7,12 @@
 
 class HumanPlayer : public Player{
 public:
-    HumanPlayer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines) 
-        : Player(rows, cols, nBattleships, nSupportShips, nSubmarines) {}
+    HumanPlayer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
+        : Player(rows, cols, nBattleships, nSupportShips, nSubmarines, fileOut) {}
     ~HumanPlayer() override = default;
 
-    void placeShips() override;
-    void execute() override;
+    void placeShips(std::string command = "") override;
+    void execute(std::string command = "") override;
 
 };
 
