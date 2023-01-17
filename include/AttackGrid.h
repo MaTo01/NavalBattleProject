@@ -25,7 +25,7 @@ public:
     //Scanned cells are not considered marked for this purpose
     bool isAlreadyMarked(Position p);
     //Clears all the preview scans
-    void clearGrid();
+    void clearScans();
 };
 
 #include "AttackGrid.hpp"
