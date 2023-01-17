@@ -4,7 +4,7 @@
 
 #include "Computer.h"
 
-void Computer::placeShips(){
+void Computer::placeShips(std::string command){
     for(int i=0; i<nBattleships_; i++){
         try{
             Position bowPos, sternPos;
@@ -56,8 +56,8 @@ void Computer::placeShips(){
 
 }
 
-void Computer::execute(){
-    Ship* ship = defenseGrid_->getShipByIndex(rand() % nTotalShips_);
+void Computer::execute(std::string command){
+    Ship* ship = defenseGrid_->getShipByIndex(rand() % defenseGrid_->getShipsNumber());
     char centerX = Position::numberToLetter(ship->getCenter().getX());
     int centerY = ship->getCenter().getY();
     std::cout << centerX << centerY+1 << " ";

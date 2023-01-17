@@ -16,13 +16,13 @@ private:
 
 public:
     //Constructor
-    Computer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines) 
-        : Player(rows, cols, nBattleships, nSupportShips, nSubmarines) { srand(time(NULL)); }
+    Computer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
+        : Player(rows, cols, nBattleships, nSupportShips, nSubmarines, fileOut) { srand(time(NULL)); }
     //Destructor
     ~Computer() override = default;
 
-    void placeShips() override;
-    void execute() override;
+    void placeShips(std::string command = "") override;
+    void execute(std::string command = "") override;
 
 };
 
