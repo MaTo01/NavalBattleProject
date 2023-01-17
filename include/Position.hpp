@@ -22,16 +22,25 @@ char Position::numberToLetter(int n) {
 //This function uses the Italian alphabet (21 letters)
 int Position::letterToNumber(char l) {
     l = toupper(l);
-    if(l < 'A' || l > 'Z') {
-        return -1;
-    } 
+    switch (l) {
+        case 'J':
+        case 'K':
+        case 'W':
+        case 'X':
+        case 'Y':
+            return -1;
+        default:
+            if(l < 'A' || l > 'Z') {
+                return -1;
+            }
 
-    if(l < 'J') {
-        return l - 'A';         //0 to 8
-    } else if (l < 'W') {
-        return l - 2  - 'A';    //9 to 19 (J, K are skipped)
-    } else {
-        return l - 5  - 'A';    //20 (J, K, W, X, Y are skipped)
+            if(l < 'J') {
+                return l - 'A';         //0 to 8
+            } else if (l < 'W') {
+                return l - 2  - 'A';    //9 to 19 (J, K are skipped)
+            } else {
+                return l - 5  - 'A';    //20 (J, K, W, X, Y are skipped)
+            }
     }
 }
 
