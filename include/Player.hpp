@@ -6,10 +6,10 @@
 #include <iostream>
 
 void Player::viewGrids(){
-        std::cout << "Attack grid:" << std::endl;
-        attackGrid_->printGrid(std::cout);
-        std::cout << "Defense grid:" << std::endl;
-        defenseGrid_->printGrid(std::cout);    
+    std::cout << "\t\t\t\tAttack grid:" << std::endl;
+    attackGrid_->printGrid(std::cout);
+    std::cout << "\t\t\t\tDefense grid:" << std::endl;
+    defenseGrid_->printGrid(std::cout);    
 }
 
 #endif
