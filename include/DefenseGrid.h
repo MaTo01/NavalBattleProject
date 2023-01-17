@@ -33,6 +33,8 @@ public:
     Ship* getShipByIndex(int n);
     //Checks if the given Position is occupied by a Ship
     bool isShipAtPosition(Position pos);
+    
+    bool loseMatch() {return ships_.size()==0;}
 
     //Adds a Ship to the DefenseGrid 
     void placeShip(std::unique_ptr<Ship> ship);
