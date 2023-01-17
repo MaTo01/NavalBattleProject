@@ -33,6 +33,8 @@ public:
     Ship* getShipByIndex(int n);
     //Checks if the given Position is occupied by a Ship
     bool isShipAtPosition(Position pos);
+    //Returns the number of Ships currently in the DefenseGrid
+    int getShipsNumber() { return ships_.size(); }
     //Checks if the DefenseGrid is empty (i.e. has no ships)
     bool isGridEmpty() { return ships_.size() == 0; }
 
