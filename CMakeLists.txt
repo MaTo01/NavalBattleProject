@@ -11,3 +11,10 @@ add_executable(battaglia_navale
 add_executable(replay
     src/NavalBattleReplay.cpp
 )
+
+set_source_files_properties(
+    src/NavalBattle.cpp
+    src/NavalBattleReplay.cpp
+    PROPERTIES
+        COMPILE_OPTIONS "-O2"
+)
