@@ -11,31 +11,33 @@
 #include "SupportShip.h"
 #include "Submarine.h"
 
-class Player{
+class Player {
 protected:
-    static constexpr int rows_ = 12;
-    static constexpr int cols_ = 12;
-    static constexpr int nBattleships_ = 3;
-    static constexpr int nSupportShips_ = 3;
-    static constexpr int nSubmarines_ = 2;
+    const int rows_;
+    const int cols_;
+    const int nBattleships_;
+    const int nSupportShips_;
+    const int nSubmarines_;
     DefenseGrid *defenseGrid_;
-    AttackGrid *attackGrid_;
+    AttackGrid* attackGrid_;
     DefenseGrid* enemyDefenseGrid_;
 
 public:
-    //Constructors
-    Player() : attackGrid_{new AttackGrid(rows_, cols_)}, defenseGrid_{new DefenseGrid(rows_, cols_)} {}
+    //Constructor
+    Player(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines) 
+        : attackGrid_{new AttackGrid(rows, cols)}, defenseGrid_{new DefenseGrid(rows, cols)}, 
+        rows_{rows}, cols_{cols}, nBattleships_{nBattleships}, nSupportShips_{nSupportShips}, nSubmarines_{nSubmarines} {}
     //Virtual destructor
     virtual ~Player(){}
-    
+
     //Member functions
     DefenseGrid* getDefenseGrid() const {return defenseGrid_;}
-    void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid) {enemyDefenseGrid_=enemyDefenseGrid;}
-       
+    void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid) {enemyDefenseGrid=enemyDefenseGrid;}
+
     void viewGrids();
     void clearAttackGrid() {attackGrid_->clearGrid();}
     bool isWinner() {return enemyDefenseGrid_->isGridEmpty();}
-    
+
     //Pure virtual function that represents the action of a 
     //player and will be overridden by the subclasses as needed
     virtual void placeShips() = 0;
