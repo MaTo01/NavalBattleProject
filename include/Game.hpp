@@ -25,14 +25,14 @@ void Game::start(){
     if(secondPlayer_=='p'){
         int starter = rand() % 2;
         if(starter==0){
-            while(counter_<maxTurns_ || !cpu1_.isWinner() || !humanPlayer_.isWinner()){
+            while(counter_<maxTurns_ && !cpu1_.isWinner() && !humanPlayer_.isWinner()){
                 humanPlayer_.execute();
                 cpu1_.execute();
                 counter_++;
             }  
         }
         else if(starter==1){
-            while(counter_<maxTurns_ || !cpu1_.isWinner() || !humanPlayer_.isWinner()){
+            while(counter_<maxTurns_ && !cpu1_.isWinner() && !humanPlayer_.isWinner()){
                 cpu1_.execute();
                 humanPlayer_.execute();
                 counter_++;
@@ -40,7 +40,7 @@ void Game::start(){
         }
     }
     else if(secondPlayer_=='c'){
-        while(counter_<maxTurns_ || !cpu1_.isWinner() || !cpu2_.isWinner()){
+        while(counter_<maxTurns_ && !cpu1_.isWinner() && !cpu2_.isWinner()){
             cpu1_.execute();
             cpu2_.execute();
             counter_++;
