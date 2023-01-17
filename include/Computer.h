@@ -2,46 +2,29 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
 
-#include "Battleship.h"
-#include "SupportShip.h"
-#include "Submarine.h"
-#include "DefenseGrid.h"
-#include "AttackGrid.h"
+#include "Player.h"
 #include <random>
 #include <memory>
+#include <iostream>
 #include <fstream>
 
-class Computer {
+class Computer : public Player {
 private:
-    static constexpr int rows = 12;
-    static constexpr int cols = 12;
-    static constexpr int nBattleships = 3;
-    static constexpr int nSupportShips = 3;
-    static constexpr int nSubmarines = 2;
-    static constexpr int nTotalShips = 8;
-    static constexpr int BattleshipSize = 5;
-    static constexpr int SupportShipSize = 3;
-    static constexpr int SubmarineSize = 1;
-    DefenseGrid *defenseGrid_;
-    AttackGrid *attackGrid_;
-    DefenseGrid* enemyDefenseGrid_;
+    static constexpr int nTotalShips_ = 8;
+    static constexpr int BattleshipSize_ = 5;
+    static constexpr int SupportShipSize_ = 3;
+    static constexpr int SubmarineSize_ = 1;
 
     std::ofstream logFile;
     
 public:
     //Constructor
-    Computer() : attackGrid_{new AttackGrid(rows, cols)}, defenseGrid_{new DefenseGrid(rows, cols)} {srand(time(NULL));}
+    Computer() : Player() {srand(time(NULL));}
     //Destructor
-    ~Computer() {
-        logFile.close();
-    }
-    
-    //Member functions
-    void placeShips();
-    void execute();
-    DefenseGrid* getDefenseGrid() const {return defenseGrid_;}
-    void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid){enemyDefenseGrid_=enemyDefenseGrid;}
-    void viewGrids();
+    ~Computer() override = default;
+
+    void placeShips() override;
+    void execute() override;
 
 };
 
