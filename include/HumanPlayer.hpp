@@ -5,12 +5,13 @@
 #include "HumanPlayer.h"
 #include <iostream>
 
-/*
-At the beginning of every game match HumanPlayer choooses the coordinates of bow
-and stern for every ship (which will be written into a .txt log file), thus creating 
-a new ship and placing it in their defense grid
-*/
+
 void HumanPlayer::placeShips(char playerID, std::string command){
+    /*
+    At the beginning of every game match HumanPlayer choooses the coordinates of bow
+    and stern for every ship (which will be written into a .txt log file), thus creating 
+    a new ship and placing it in their defense grid
+    */
     for(int i=1; i<=nBattleships_; i++){
         try{
             std::cout << "Insert coordinates for battleship n. " << i << ":" << std::endl;
@@ -73,17 +74,14 @@ void HumanPlayer::placeShips(char playerID, std::string command){
     }
 }
 
-/*
-Command to choose a ship by its center and a target to perform its
-action on. Thus battleships will fire the enemy on their attack grid
-and support ships and submarines will move to said target.
-Once the action is executed it will be the opponent's turn.
-HumanPlayer can also perform additional fuctions to see their grids or
-to delete all the scans from their attack grid (these functions do not
-condition player's turn). Every effective action will be written into
-the .txt log file
-*/
+
 void HumanPlayer::execute(std::string command){
+    /*
+    Command to choose a ship by its center and a target to perform its
+    action on. Thus battleships will fire the enemy on their attack grid
+    and support ships and submarines will move to said target.
+    Once the action is executed it will be the opponent's turn.
+    */
     std::string input;
     char centerX = ' ', targetX;
     int centerY, targetY;
@@ -94,7 +92,11 @@ void HumanPlayer::execute(std::string command){
             std::cout << "Command XX XX to see the grids; command AA AA to delete preview scans from the attack grid." << std::endl;
             std::cout << "Otherwise select ship by its center and target:" << std::endl;     
             std::getline(std::cin, input);
-
+            /*
+            HumanPlayer can also perform additional fuctions to see their grids or
+            to delete all the scans from their attack grid (these functions do not
+            condition player's turn)
+            */
             if(input == "AA AA") {
                 clearAttackGridScans();
             } else if(input == "XX XX") {
