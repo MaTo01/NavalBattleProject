@@ -10,14 +10,13 @@
 #include <Windows.h>
 #define sleep_function         Sleep
 #define time_multiplier        1
+#define clear() system("cls");
 #else
 #include <unistd.h>
 #define sleep_function         usleep
 #define time_multiplier        1000
-#endif
-
-//Clears console screen
 #define clear() std::cout<<"\033[H\033[J";
+#endif
 
 class Game{
 private:
