@@ -41,7 +41,7 @@ public:
 
     //Pure virtual function that represents the action of a 
     //player and will be overridden by the subclasses as needed
-    virtual void placeShips(std::string command = "") = 0;
+    virtual void placeShips(char playerID, std::string command = "") = 0;
     virtual void execute(std::string command = "") = 0;
 };
 

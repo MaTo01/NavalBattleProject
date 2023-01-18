@@ -11,7 +11,7 @@ public:
         : Player(rows, cols, nBattleships, nSupportShips, nSubmarines, fileOut) {}
     ~HumanPlayer() override = default;
 
-    void placeShips(std::string command = "") override;
+    void placeShips(char playerID, std::string command = "") override;
     void execute(std::string command = "") override;
 
 };

@@ -23,7 +23,7 @@ public:
     //Destructor
     ~Computer() override = default;
 
-    void placeShips(std::string command = "") override;
+    void placeShips(char playerID, std::string command = "") override;
     void execute(std::string command = "") override;
 
 };
