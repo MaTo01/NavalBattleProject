@@ -82,20 +82,22 @@ void Game::start() {
             do {
                 logFileOut_ << "1 ";
                 player1->execute();
-                logFileOut_ << "\n";
+                logFileOut_ << std::endl;
                 logFileOut_ << "2 ";
                 player2->execute();
                 if(++turnCounter_ < maxTurns_)
-                    logFileOut_ << "\n";
+                    logFileOut_ << std::endl;
             } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
         else if(starter==1) {
             do {
                 logFileOut_ << "2 ";
                 player2->execute();
+                logFileOut_ << std::endl;
                 logFileOut_ << "1 ";
                 player1->execute();
-                turnCounter_++;
+                if(++turnCounter_ < maxTurns_)
+                    logFileOut_ << std::endl;
             } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
     }
@@ -103,9 +105,11 @@ void Game::start() {
         do {
             logFileOut_ << "1 ";
             player1->execute();
+            logFileOut_ << std::endl;
             logFileOut_ << "2 ";
             player2->execute();
-            turnCounter_++;
+            if(++turnCounter_ < maxTurns_)
+                logFileOut_ << std::endl;
         } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
     } else {
         throw std::invalid_argument("Wrong arguments.");
