@@ -64,39 +64,39 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
 
     try {
         switch (orientation) {
-        case 'H':
-            for(int y = pos.getY() - shiftSize; y <= pos.getY() + shiftSize; y++) {
-                aux = Position(pos.getX(), y);
-                if(!isShipAtPosition(aux)){
-                    positions.push_back(aux);
+            case 'H':
+                for(int y = pos.getY() - shiftSize; y <= pos.getY() + shiftSize; y++) {
+                    aux = Position(pos.getX(), y);
+                    if(!isShipAtPosition(aux)){
+                        positions.push_back(aux);
+                    } else {
+                        throw std::invalid_argument("Invalid ship placement.");
+                    }      
+                }
+                break;
+            case 'V': 
+                for(int x = pos.getX() - shiftSize; x <= pos.getX() + shiftSize; x++) {
+                    aux = Position(x, pos.getY());
+                    if(!isShipAtPosition(aux)){
+                        positions.push_back(aux);
+                    } else {
+                        throw std::invalid_argument("Invalid ship placement.");
+                    }
+                }
+                break;
+            default:        //a Ship of size 1 is considered neither vertical nor horizontal
+                if(!isShipAtPosition(pos)){
+                    positions.push_back(pos);
                 } else {
                     throw std::invalid_argument("Invalid ship placement.");
                 }
-            }
-            break;
-        case 'V': 
-            for(int x = pos.getX() - shiftSize; x <= pos.getX() + shiftSize; x++) {
-                aux = Position(x, pos.getY());
-                if(!isShipAtPosition(aux)){
-                    positions.push_back(aux);
-                } else {
-                    throw std::invalid_argument("Invalid ship placement.");
-                }
-            }
-            break;
-        default:        //a Ship of size 1 is considered neither vertical nor horizontal
-            if(!isShipAtPosition(pos)){
-                positions.push_back(pos);
-            } else {
-                throw std::invalid_argument("Invalid ship placement.");
-            }
-            break;
+                break;
         }
     } catch(const std::invalid_argument& e) {
         //If any one of the required Positions is not valid (out of bounds or already occupied),
         //the function returns an empty vector
         return std::vector<Position>();
-    }    
+    }
 
     return positions;
 }
