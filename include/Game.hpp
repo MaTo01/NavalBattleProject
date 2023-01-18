@@ -23,22 +23,15 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
             player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             logFileOut_.open(logNameOut, std::ios::out);
             break;
-        case 'v':
-            player1 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
-            player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));    
-            logFileIn_.open(logNameIn, std::ios::in);
-            if(!logFileIn_.is_open()) {
-                throw std::invalid_argument("Error opening log file.");
-            }
-            break;
         case 'f':
-            player1 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
-            player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));      
+            logFileOut_.open(logNameOut, std::ios::out);
+        case 'v':
+            player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
+            player2 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));    
             logFileIn_.open(logNameIn, std::ios::in);
             if(!logFileIn_.is_open()) {
                 throw std::invalid_argument("Error opening log file.");
             }
-            logFileOut_.open(logNameOut, std::ios::out);
             break;
         default:
             break;
@@ -72,7 +65,6 @@ void Game::setBattlefield() {
                 if(input[0] == '1') {
                     player1->placeShips('1', input.substr(2));
                 } else {
-                    //sistemare placeShips per piazzamento singolo
                     player2->placeShips('2', input.substr(2));
                 }
                 i++;
@@ -85,20 +77,17 @@ void Game::start() {
     if(mode_ == 'p') {
         std::cin.ignore();
         int starter = rand() % 2;
-        if(starter == 0) {  //player2 = giocatore umano 
+        if(starter == 0) {          //player2 = giocatore umano 
             do {
                 logFileOut_ << "1 ";
                 player1->execute();
-                //passare a player2 stringa da console? oppure lasciare execute così
                 logFileOut_ << "2 ";
                 player2->execute();
-                //TODO: scrittura dell'operazione su logFileOut fatta da execute
                 turnCounter_++;
             } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
         else if(starter==1) {
             do {
-                //passare a player2 stringa da console?
                 logFileOut_ << "2 ";
                 player2->execute();
                 logFileOut_ << "1 ";
@@ -116,7 +105,7 @@ void Game::start() {
             turnCounter_++;
         } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
     } else {
-        //errore o qualcosa del genere
+        //errore
     }
 }
 
