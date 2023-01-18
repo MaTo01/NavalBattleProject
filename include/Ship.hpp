@@ -23,7 +23,7 @@ Ship::Ship(const int size, Position bow, Position stern, char gridCharacter)
     } else if(bow.getY() == stern.getY() && abs(bow.getX() - stern.getX()) == size_ - 1){
         center_ = Position((bow.getX() + stern.getX()) / 2, bow.getY());
         orientation_ = 'V';
-    } else throw std::invalid_argument("Invalid arguments for constructor.");
+    } else throw std::invalid_argument("Invalid bow and stern positions.");
 }
 
 #endif
