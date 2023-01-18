@@ -18,21 +18,19 @@ protected:
     const int nBattleships_;
     const int nSupportShips_;
     const int nSubmarines_;
-    DefenseGrid *defenseGrid_;
-    AttackGrid* attackGrid_;
+    std::unique_ptr<DefenseGrid> defenseGrid_;
+    std::unique_ptr<AttackGrid> attackGrid_;
     DefenseGrid* enemyDefenseGrid_;
     std::ofstream& fileOut_;
 
 public:
     //Constructor
-    Player(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
-        : rows_{rows}, cols_{cols}, nBattleships_{nBattleships}, nSupportShips_{nSupportShips}, nSubmarines_{nSubmarines}, 
-        fileOut_{fileOut}, attackGrid_{new AttackGrid(rows_, cols_)}, defenseGrid_{new DefenseGrid(rows_, cols_)} {}
+    Player(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut);
     //Virtual destructor
-    virtual ~Player(){}
+    ~Player();
 
     //Member functions
-    DefenseGrid* getDefenseGrid() const { return defenseGrid_; }
+    DefenseGrid* getDefenseGrid() const { return defenseGrid_.get(); }
     void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid) { enemyDefenseGrid_ = enemyDefenseGrid; }
 
     void viewGrids(std::ostream& os);

@@ -18,7 +18,7 @@ void HumanPlayer::placeShips(char playerID, std::string command){
             Position sternPos(Position::letterToNumber(sternX), sternY-1);
             if(bowPos==sternPos) 
                 throw std::invalid_argument("Invalid coordinates for Battleship. ");
-            defenseGrid_->placeShip(std::unique_ptr<Ship>(new Battleship(bowPos, sternPos, attackGrid_)));
+            defenseGrid_->placeShip(std::unique_ptr<Ship>(new Battleship(bowPos, sternPos, attackGrid_.get())));
             fileOut_ << playerID << " " << bowX << bowY << " " << sternX << sternY << std::endl;
         }
         catch(const std::invalid_argument& e){
@@ -38,7 +38,7 @@ void HumanPlayer::placeShips(char playerID, std::string command){
             Position sternPos(Position::letterToNumber(sternX), sternY-1);
             if(bowPos==sternPos) 
                 throw std::invalid_argument("Invalid coordinates for SupportShip. ");
-            defenseGrid_->placeShip(std::unique_ptr<Ship>(new SupportShip(bowPos, sternPos, defenseGrid_)));
+            defenseGrid_->placeShip(std::unique_ptr<Ship>(new SupportShip(bowPos, sternPos, defenseGrid_.get())));
             fileOut_ << playerID << " " << bowX << bowY << " " << sternX << sternY << std::endl;
         }
         catch(const std::invalid_argument& e){
@@ -58,7 +58,7 @@ void HumanPlayer::placeShips(char playerID, std::string command){
             Position sternPos(Position::letterToNumber(sternX), sternY-1);
             if(bowPos!=sternPos) 
                 throw std::invalid_argument("Invalid coordinates for Submarine. ");
-            defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_, defenseGrid_)));
+            defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_.get(), defenseGrid_.get())));
             fileOut_ << playerID << " " << bowX << bowY << " " << sternX << sternY << std::endl;
         }
         catch(const std::invalid_argument& e){

@@ -19,17 +19,17 @@ void Computer::placeShips(char playerID, std::string command){
 
         if(shipCounter_ < nBattleships_){
             try{
-                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_)));
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_.get())));
                 //fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
             } catch(const std::invalid_argument& e) {}
         } else if (shipCounter_ >= nBattleships_ && shipCounter_ < nBattleships_ + nSupportShips_){
             try{
-                defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_)));
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_.get())));
                 //fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
             } catch(const std::invalid_argument& e) {}
         } else if (shipCounter_ >= nBattleships_ + nSupportShips_ && shipCounter_ < nBattleships_ + nSupportShips_ +nSubmarines_) {
             try{
-                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_, defenseGrid_)));
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_.get(), defenseGrid_.get())));
                 //fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
             } catch(const std::invalid_argument& e) {}
         }
@@ -49,7 +49,7 @@ void Computer::placeShips(char playerID, std::string command){
                     bowPos = Position(rand() % (rows_ - BattleshipSize_ - 1), rand() % cols_);
                     sternPos = Position(bowPos.getX() + BattleshipSize_ - 1, bowPos.getY());
                 }
-                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_)));
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_.get())));
                 fileOut_ << playerID << " " << Position::numberToLetter(bowPos.getX()) << bowPos.getY() + 1 
                         << " " << Position::numberToLetter(sternPos.getX()) << sternPos.getY() + 1 << std::endl;
             }
@@ -68,7 +68,7 @@ void Computer::placeShips(char playerID, std::string command){
                     bowPos = Position(rand() % (rows_ - SupportShipSize_ - 1), rand() % cols_);
                     sternPos = Position(bowPos.getX() + SupportShipSize_ - 1, bowPos.getY());
                 }
-                defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_)));
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_.get())));
                 fileOut_ << playerID << " " << Position::numberToLetter(bowPos.getX()) << bowPos.getY() + 1 
                         << " " << Position::numberToLetter(sternPos.getX()) << sternPos.getY() + 1 << std::endl;
             }
@@ -80,7 +80,7 @@ void Computer::placeShips(char playerID, std::string command){
         for(i = 1; i <= nSubmarines_; i++){
             try {
                 Position pos = rand() % rows_;
-                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(pos, pos, attackGrid_, defenseGrid_)));
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(pos, pos, attackGrid_.get(), defenseGrid_.get())));
                 fileOut_ << playerID << " " << Position::numberToLetter(pos.getX()) << pos.getY() + 1 
                         << " " << Position::numberToLetter(pos.getX()) << pos.getY() + 1 << std::endl;
             }
