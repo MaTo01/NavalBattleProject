@@ -6,13 +6,13 @@
 
 void Computer::placeShips(char playerID, std::string command){
     if(command != ""){
-        std::string XYorigin = command.substr(0, command.find(" "));
-        std::string XYtarget = command.substr(command.find(" ")+1);
+        std::string bowPosStr = command.substr(0, command.find(" "));
+        std::string sternPosStr = command.substr(command.find(" ")+1);
 
-        int bowX = Position::letterToNumber(XYorigin.at(0));
-        int bowY = std::stoi(XYorigin.substr(1));
-        int sternX = Position::letterToNumber(XYtarget.at(0));
-        int sternY = std::stoi(XYtarget.substr(1));
+        int bowX = Position::letterToNumber(bowPosStr.at(0));
+        int bowY = std::stoi(bowPosStr.substr(1));
+        int sternX = Position::letterToNumber(sternPosStr.at(0));
+        int sternY = std::stoi(sternPosStr.substr(1));
 
         Position bowPos(bowX, bowY);
         Position sternPos(sternX, sternY);
@@ -21,23 +21,17 @@ void Computer::placeShips(char playerID, std::string command){
             try{
                 defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_)));
                 fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
-            } catch(const std::invalid_argument& e) {
-                std::cerr << e.what() << std::endl;
-            }
+            } catch(const std::invalid_argument& e) {}
         } else if (shipCounter_ >= nBattleships_ && shipCounter_ < nBattleships_ + nSupportShips_){
             try{
                 defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_)));
                 fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
-            } catch(const std::invalid_argument& e) {
-                std::cerr << e.what() << std::endl;
-            }
+            } catch(const std::invalid_argument& e) {}
         } else if (shipCounter_ >= nBattleships_ + nSupportShips_ && shipCounter_ < nBattleships_ + nSupportShips_ +nSubmarines_) {
             try{
                 defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_, defenseGrid_)));
                 fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
-            } catch(const std::invalid_argument& e) {
-                std::cerr << e.what() << std::endl;
-            }
+            } catch(const std::invalid_argument& e) {}
         }
     } else {
         int i;
@@ -99,7 +93,27 @@ void Computer::placeShips(char playerID, std::string command){
 
 void Computer::execute(std::string command){
     if(command != ""){
-        //TODO: gestire input con LogFileIn
+        std::string XYoriginStr = command.substr(0, command.find(" "));
+        std::string XYtargetStr = command.substr(command.find(" ")+1);
+
+        int originX = Position::numberToLetter(XYoriginStr.at(0));
+        int originY = std::stoi(XYoriginStr.substr(1));
+        int targetX = Position::numberToLetter(XYtargetStr.at(0));
+        int targetY = std::stoi(XYtargetStr.substr(1));
+
+        Position originXY(originX, originY);
+        Position targetXY(targetX, targetY);
+
+        try {
+            Ship* ship = defenseGrid_->getShipByCenter(originXY);
+            if(ship != nullptr) {
+                ship->action(targetXY, enemyDefenseGrid_);
+            }else {
+                throw std::invalid_argument("No ship with that center. ");
+            }
+            
+        } catch(const std::invalid_argument& e){}
+        
     } else {
         bool flag = true;
         do {
@@ -114,13 +128,11 @@ void Computer::execute(std::string command){
 
                 fileOut_ << centerX << centerY+1 << " " << Position::numberToLetter(targetX) << targetY+1 << std::endl;
                 flag = false;
-            }
-            catch(const std::invalid_argument& e){
+            } catch(const std::invalid_argument& e){
                 flag = true;
                 //std::cerr << e.what() << std::endl;
             }
         } while(flag);
-        
     }
 }
 #endif
