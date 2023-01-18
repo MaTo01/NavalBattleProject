@@ -11,7 +11,7 @@ Grid::Grid(unsigned int rows, unsigned int cols) {
         for(int j = 0; j < cols; j++)
             aux.push_back(' ');
         tiles_.push_back(aux);
-    } 
+    }
 }
 
 int Grid::getRows() const {
@@ -25,10 +25,12 @@ int Grid::getColumns() const {
 }
 
 bool Grid::isPosValid(Position pos) {
-    if(pos.getX() < 0 || pos.getY() < 0) 
+    if(pos.getX() < 0 || pos.getY() < 0) {
         return false;
-    if(pos.getX() >= tiles_.size() || pos.getY() >= tiles_[0].size())
+    }
+    if(pos.getX() >= tiles_.size() || pos.getY() >= tiles_[0].size()) {
         return false;
+    }
     return true;
 }
 
