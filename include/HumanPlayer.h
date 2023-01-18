@@ -6,8 +6,8 @@
 #include "Player.h"
 
 /*
-Real life player (someone who writes from the command line every instuction)
-of the game mactch
+Real life player (someone who writes from command line every instruction)
+of the game match
 */
 class HumanPlayer : public Player{
 public:
