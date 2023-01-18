@@ -99,12 +99,16 @@ void Game::start() {
     }
     else if(mode_ == 'c') {
         do {
+            std::cout << "counter : " << counter_ << std::endl;
             logFileOut_ << "1 ";
+            std::cout << "entro in execute di Player 1" << std::endl;
             player1->execute();
             logFileOut_ << "2 ";
+            std::cout << "entro in execute di Player 2" << std::endl;
             player2->execute();
             counter_++;
-        } while(counter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+            std::cout << "Ho finito un ciclo di while" << std::endl;
+        } while(counter_ < maxTurns_ /*&& !player1->isWinner() && !player2->isWinner()*/);
     } else {
         //errore o qualcosa del genere
     }
@@ -112,7 +116,7 @@ void Game::start() {
 
 void Game::playReplay() {
     std::string input;
-    if(mode_ == 'v') {      
+    if(mode_ == 'v') {
         do {
             clear();
             logFileIn_ >> input;
