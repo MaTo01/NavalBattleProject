@@ -21,7 +21,7 @@ public:
     Computer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
         : Player(rows, cols, nBattleships, nSupportShips, nSubmarines, fileOut) { srand(time(NULL)); }
     //Destructor
-    ~Computer() override = default;
+    ~Computer() = default;
 
     void placeShips(char playerID, std::string command = "") override;
     void execute(std::string command = "") override;
