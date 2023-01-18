@@ -19,8 +19,12 @@ void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
     Ship* ship = nullptr;
     for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
         for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
-            if (enemyDefenseGrid->isShipAtPosition(Position(i, j))) {
-                attackGrid_->markScan(Position(i, j));
+            try {
+                if (enemyDefenseGrid->isShipAtPosition(Position(i, j))) {
+                    attackGrid_->markScan(Position(i, j));
+                }
+            } catch(const std::out_of_range& e) { 
+                continue;
             }
         }
     }
