@@ -10,9 +10,9 @@ void Computer::placeShips(char playerID, std::string command){
         std::string sternPosStr = command.substr(command.find(" ")+1);
 
         int bowX = Position::letterToNumber(bowPosStr.at(0));
-        int bowY = std::stoi(bowPosStr.substr(1));
+        int bowY = std::stoi(bowPosStr.substr(1)) - 1;
         int sternX = Position::letterToNumber(sternPosStr.at(0));
-        int sternY = std::stoi(sternPosStr.substr(1));
+        int sternY = std::stoi(sternPosStr.substr(1)) - 1;
 
         Position bowPos(bowX, bowY);
         Position sternPos(sternX, sternY);
@@ -95,12 +95,12 @@ void Computer::placeShips(char playerID, std::string command){
 void Computer::execute(std::string command){
     if(command != ""){
         std::string XYoriginStr = command.substr(0, command.find(" "));
-        std::string XYtargetStr = command.substr(command.find(" ")+1);
+        std::string XYtargetStr = command.substr(command.find(" ") + 1);
 
         int originX = Position::letterToNumber(XYoriginStr.at(0));
-        int originY = std::stoi(XYoriginStr.substr(1));
+        int originY = std::stoi(XYoriginStr.substr(1)) - 1;
         int targetX = Position::letterToNumber(XYtargetStr.at(0));
-        int targetY = std::stoi(XYtargetStr.substr(1));
+        int targetY = std::stoi(XYtargetStr.substr(1)) - 1;
 
         Position originXY(originX, originY);
         Position targetXY(targetX, targetY);
@@ -109,7 +109,7 @@ void Computer::execute(std::string command){
             Ship* ship = defenseGrid_->getShipByCenter(originXY);
             if(ship != nullptr) {
                 ship->action(targetXY, enemyDefenseGrid_);
-            }else {
+            } else {
                 throw std::invalid_argument("No ship with that center. ");
             }
             
@@ -131,7 +131,6 @@ void Computer::execute(std::string command){
                 flag = false;
             } catch(const std::invalid_argument& e){
                 flag = true;
-                //std::cerr << e.what() << std::endl;
             }
         } while(flag);
     }
