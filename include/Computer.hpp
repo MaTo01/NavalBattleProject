@@ -20,19 +20,20 @@ void Computer::placeShips(char playerID, std::string command){
         if(shipCounter_ < nBattleships_){
             try{
                 defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_)));
-                fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
+                //fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
             } catch(const std::invalid_argument& e) {}
         } else if (shipCounter_ >= nBattleships_ && shipCounter_ < nBattleships_ + nSupportShips_){
             try{
                 defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_)));
-                fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
+                //fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
             } catch(const std::invalid_argument& e) {}
         } else if (shipCounter_ >= nBattleships_ + nSupportShips_ && shipCounter_ < nBattleships_ + nSupportShips_ +nSubmarines_) {
             try{
                 defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_, defenseGrid_)));
-                fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
+                //fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
             } catch(const std::invalid_argument& e) {}
         }
+        shipCounter_++;
     } else {
         int i;
         Position bowPos, sternPos;
@@ -96,9 +97,9 @@ void Computer::execute(std::string command){
         std::string XYoriginStr = command.substr(0, command.find(" "));
         std::string XYtargetStr = command.substr(command.find(" ")+1);
 
-        int originX = Position::numberToLetter(XYoriginStr.at(0));
+        int originX = Position::letterToNumber(XYoriginStr.at(0));
         int originY = std::stoi(XYoriginStr.substr(1));
-        int targetX = Position::numberToLetter(XYtargetStr.at(0));
+        int targetX = Position::letterToNumber(XYtargetStr.at(0));
         int targetY = std::stoi(XYtargetStr.substr(1));
 
         Position originXY(originX, originY);
@@ -126,7 +127,7 @@ void Computer::execute(std::string command){
                 int targetY = rand() % cols_;
                 ship->action(Position(targetX, targetY), enemyDefenseGrid_);
 
-                fileOut_ << centerX << centerY+1 << " " << Position::numberToLetter(targetX) << targetY+1 << std::endl;
+                fileOut_ << centerX << centerY+1 << " " << Position::numberToLetter(targetX) << targetY+1;
                 flag = false;
             } catch(const std::invalid_argument& e){
                 flag = true;
