@@ -3,7 +3,7 @@
 #include <memory>
 #include "Game.h"
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
 	if(argc != 2) {
 		std::cout << "Invalid argument list.\n";
 		return -1;
