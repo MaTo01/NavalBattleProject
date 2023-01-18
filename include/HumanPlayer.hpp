@@ -78,7 +78,7 @@ void HumanPlayer::placeShips(char playerID, std::string command){
 void HumanPlayer::execute(std::string command){
     /*
     Command to choose a ship by its center and a target to perform its
-    action on. Thus battleships will fire the enemy on their attack grid
+    action on. Thus battleships will fire the enemy on their defense grid
     and support ships and submarines will move to said target.
     Once the action is executed it will be the opponent's turn.
     */
