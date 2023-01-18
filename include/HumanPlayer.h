@@ -5,10 +5,16 @@
 #include <iostream>
 #include "Player.h"
 
+/*
+Real life player (someone who writes from the command line every instuction)
+of the game mactch
+*/
 class HumanPlayer : public Player{
 public:
+    //Constuctor
     HumanPlayer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
         : Player(rows, cols, nBattleships, nSupportShips, nSubmarines, fileOut) {}
+    //Defalut destructor
     ~HumanPlayer() = default;
 
     void placeShips(char playerID, std::string command = "") override;
