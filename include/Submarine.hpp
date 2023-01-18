@@ -16,7 +16,6 @@ but the player won't know which type of ship it is
 */
 void Submarine::action(Position pos, DefenseGrid* enemyDefenseGrid){
     defenseGrid_->moveShip(this, pos);
-    Ship* ship = nullptr;
     for (int i = pos.getX() - 2; i <= pos.getX() + 2; i++) {
         for (int j = pos.getY() - 2; j <= pos.getY() + 2; j++) { 
             try {
