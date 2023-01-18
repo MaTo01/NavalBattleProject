@@ -5,6 +5,11 @@
 #include "HumanPlayer.h"
 #include <iostream>
 
+/*
+At the beginning of every game match HumanPlayer choooses the coordinates of bow
+and stern for every ship (which will be written into a .txt log file), thus creating 
+a new ship and placing it in their defense grid
+*/
 void HumanPlayer::placeShips(char playerID, std::string command){
     for(int i=1; i<=nBattleships_; i++){
         try{
@@ -68,6 +73,16 @@ void HumanPlayer::placeShips(char playerID, std::string command){
     }
 }
 
+/*
+Command to choose a ship by its center and a target to perform its
+action on. Thus battleships will fire the enemy on their attack grid
+and support ships and submarines will move to said target.
+Once the action is executed it will be the opponent's turn.
+HumanPlayer can also perform additional fuctions to see their grids or
+to delete all the scans from their attack grid (these functions do not
+condition player's turn). Every effective action will be written into
+the .txt log file
+*/
 void HumanPlayer::execute(std::string command){
     std::string input;
     char centerX = ' ', targetX;
