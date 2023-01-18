@@ -1,3 +1,4 @@
+//2032496 Veronica Cisotto
 #ifndef GAME_H
 #define GAME_H
 
@@ -48,7 +49,10 @@ public:
     void setBattlefield();
     //every palyer makes their move until either wins (or game ends in a tie)
     void start();
+    //replay of a recorded game (commands, attack grids and defense grids) will be 
+    //either displayed on screen or written into a .txt file
     void playReplay();
+    //shows the winner of the match game
     void showWinner();
 };
 
