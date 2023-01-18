@@ -6,16 +6,21 @@
 #include <iostream>
 
 Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mode} {
+    if(mode == 'c' || mode == 'p') {
+        logNameOut = "log-";
+        logNameOut += mode;
+        logNameOut += "c.txt";
+    }
     switch (mode_) {
         case 'c':
             player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
-            logFileOut_.open("log.txt", std::ios::out);
+            logFileOut_.open(logNameOut, std::ios::out);
             break;
         case 'p':
             player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
-            logFileOut_.open("log.txt", std::ios::out);
+            logFileOut_.open(logNameOut, std::ios::out);
             break;
         case 'v':
             player1 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
@@ -31,6 +36,8 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
         default:
             break;
     }
+    player1->setEnemyDefenseGrid(player2->getDefenseGrid());
+    player2->setEnemyDefenseGrid(player1->getDefenseGrid());
 }
 
 Game::~Game() {
@@ -45,12 +52,9 @@ Game::~Game() {
 void Game::setBattlefield() {
     switch (mode_) {
         case 'c':
-            player1->placeShips();
-            player2->placeShips();
-            break;
         case 'p':
-            player1->placeShips();
-            //HumanPlayer input (lettura stringa)
+            player1->placeShips('1');
+            player2->placeShips('2');
             break;
         case 'v':
         case 'f':
@@ -59,17 +63,15 @@ void Game::setBattlefield() {
             do {
                 logFileIn_ >> input;
                 if(input[0] == '1') {
-                    player1->placeShips(input.substr(2));
+                    player1->placeShips('1', input.substr(2));
                 } else {
                     //sistemare placeShips per piazzamento singolo
-                    player2->placeShips(input.substr(2));
+                    player2->placeShips('2', input.substr(2));
                 }
                 i++;
             } while(i <= 2 * (nBattleships_ + nSupportShips_ + nSubmarines_));
             break;
     }
-    player1->setEnemyDefenseGrid(player2->getDefenseGrid());
-    player2->setEnemyDefenseGrid(player1->getDefenseGrid());
 }
 
 void Game::start() {
@@ -99,16 +101,12 @@ void Game::start() {
     }
     else if(mode_ == 'c') {
         do {
-            std::cout << "counter : " << counter_ << std::endl;
             logFileOut_ << "1 ";
-            std::cout << "entro in execute di Player 1" << std::endl;
             player1->execute();
             logFileOut_ << "2 ";
-            std::cout << "entro in execute di Player 2" << std::endl;
             player2->execute();
             counter_++;
-            std::cout << "Ho finito un ciclo di while" << std::endl;
-        } while(counter_ < maxTurns_ /*&& !player1->isWinner() && !player2->isWinner()*/);
+        } while(counter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
     } else {
         //errore o qualcosa del genere
     }
@@ -152,7 +150,7 @@ void Game::playReplay() {
 }
 
 void Game::showWinner() {
-    if(counter_> maxTurns_) 
+    if(counter_ >= maxTurns_) 
         std::cout << "MATCH ENDED IN TIE" << std::endl;
     else{
         if(player1->isWinner()) 
