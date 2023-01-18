@@ -5,12 +5,11 @@
 #include "SupportShip.h"
 
 /*
-The support ship can't fire, but it can move towards
-the same direction to which it is oriented, the only 
-limitation is that it can't go in a position that is 
-already occupied (it can't go over any other ship).
+The support ship can't fire, but it can move as long as 
+it's not to a position that is already occupied (it can't 
+go over any other ship, not even partially).
 After moving, the support ship repairs the damaged ships 
-in a matrix of 3*3 around it.
+in a matrix of 3*3 around its center.
 */
 void SupportShip::action(Position pos, DefenseGrid *enemyDefenseGrid){
     defenseGrid_->moveShip(this, pos);
