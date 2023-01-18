@@ -5,6 +5,7 @@
 #include "Player.h"
 #include <random>
 #include <memory>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
@@ -13,6 +14,7 @@ private:
     static constexpr int BattleshipSize_ = 5;
     static constexpr int SupportShipSize_ = 3;
     static constexpr int SubmarineSize_ = 1;
+    int shipCounter_ = 0;
 
 public:
     //Constructor
