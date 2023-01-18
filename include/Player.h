@@ -27,8 +27,8 @@ protected:
     std::unique_ptr<AttackGrid> attackGrid_;
     //pointer to player's enemy's defense grid
     DefenseGrid* enemyDefenseGrid_;
-    //output stream in which commands and the grids are
-    //going to be printed
+    //output stream which commands and the grids are
+    //going to be recorded into
     std::ofstream& fileOut_;
 
 public:
@@ -45,9 +45,11 @@ public:
     //additional command to delete all the previous scans from the attack grid
     //due to enemy moving his ships in their defense grid
     void clearAttackGridScans() { attackGrid_->clearScans(); }
-    /*function to know if player is the winner of the match
+    /*
+    function to know if player is the winner of the match
     (player wins if they destroy every enemy ship, thus empting
-    their defense grid)*/
+    their defense grid)
+    */
     bool isWinner() { return enemyDefenseGrid_->isGridEmpty(); }
 
     //Pure virtual function that represents the action of a 
