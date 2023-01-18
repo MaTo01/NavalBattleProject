@@ -18,8 +18,7 @@
 
 class Game{
 private:
-    static constexpr int maxTurnsPlayer_ = 20;
-    static constexpr int maxTurnsComputer_ = 100;
+    static constexpr int maxTurns_ = 50;
     static constexpr int rows_ = 12;
     static constexpr int cols_ = 12;
     static constexpr int nBattleships_ = 3;
