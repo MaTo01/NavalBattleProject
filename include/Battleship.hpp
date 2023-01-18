@@ -13,7 +13,7 @@ Otherwise, the attack grid will be marked with O at that
 position.
 */
 void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid){ 
-    if(!attackGrid_->isAlreadyMarked(pos)){ 
+    if(!attackGrid_->isAlreadyMarked(pos)){
         if(enemyDefenseGrid->isShipAtPosition(pos)){
             attackGrid_->markHit(pos);
             enemyDefenseGrid->markShipAsHit(pos);
