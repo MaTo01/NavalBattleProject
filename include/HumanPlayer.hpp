@@ -70,6 +70,8 @@ void HumanPlayer::placeShips(char playerID, std::string command){
 
 void HumanPlayer::execute(std::string command){
     std::string input;
+    char centerX, targetX;
+    int centerY, targetY;
     
     bool flag = true;
     do {
@@ -83,8 +85,6 @@ void HumanPlayer::execute(std::string command){
             } else if(input == "XX XX") {
                 viewGrids(std::cout);
             } else {
-                char centerX, targetX;
-                int centerY, targetY;
                 try {
                     centerX = input.at(0);
                     centerY = std::stoi(input.substr(1, input.find(" ")));
@@ -99,7 +99,6 @@ void HumanPlayer::execute(std::string command){
                 Ship* ship = defenseGrid_->getShipByCenter(center);
                 if(ship != nullptr) {
                     ship->action(target, enemyDefenseGrid_);
-                    fileOut_ << centerX << centerY << " " << targetX << targetY;
                     flag = false;
                 } else {
                     throw std::invalid_argument("No ship with that center.");
@@ -111,6 +110,7 @@ void HumanPlayer::execute(std::string command){
             std::cerr << e.what() << " Try again.\n";
         }
     } while (flag);
+    fileOut_ << centerX << centerY << " " << targetX << targetY;
 }
 
 #endif
