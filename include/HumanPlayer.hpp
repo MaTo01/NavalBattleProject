@@ -6,7 +6,7 @@
 #include <iostream>
 
 void HumanPlayer::placeShips(char playerID, std::string command){
-    if(command==""){
+    if(command == ""){
         for(int i=1; i<=nBattleships_; i++){
             try{
                 std::cout << "Insert coordinates for battleship n. " << i << ":" << std::endl;
@@ -68,7 +68,7 @@ void HumanPlayer::placeShips(char playerID, std::string command){
             }
         }
     }
-    else{
+    else {
         std::string XYorigin = command.substr(0, command.find(" "));
         std::string XYtarget = command.substr(command.find(" ")+1);
         int bowX = Position::letterToNumber(XYorigin.at(0));
@@ -82,11 +82,11 @@ void HumanPlayer::placeShips(char playerID, std::string command){
 void HumanPlayer::execute(std::string command){
     std::string centre;
     std::string target;
-    std::cout << "Command XX XX to see the grids; command AA AA to delete preview scans from the attack grid." << std::endl;
-    std::cout << "Otherwise select ship by its center and target:" << std::endl;
     bool flag = true;
     do {
         try {
+            std::cout << "Command XX XX to see the grids; command AA AA to delete preview scans from the attack grid." << std::endl;
+            std::cout << "Otherwise select ship by its center and target:" << std::endl;
             std::cin >> centre;
             std::cin.get();
             std::cin >> target;
