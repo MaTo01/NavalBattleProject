@@ -70,7 +70,7 @@ void HumanPlayer::placeShips(char playerID, std::string command){
 
 void HumanPlayer::execute(std::string command){
     std::string input;
-    char centerX, targetX;
+    char centerX = ' ', targetX;
     int centerY, targetY;
     
     bool flag = true;
@@ -110,7 +110,9 @@ void HumanPlayer::execute(std::string command){
             std::cerr << e.what() << " Try again.\n";
         }
     } while (flag);
-    fileOut_ << centerX << centerY << " " << targetX << targetY;
+    if(centerX != ' ') {
+        fileOut_ << centerX << centerY << " " << targetX << targetY;
+    }    
 }
 
 #endif
