@@ -10,17 +10,16 @@
 #include <Windows.h>
 #define sleep_function         Sleep
 #define time_multiplier        1
-#define clear() system("cls");
 #else
 #include <unistd.h>
 #define sleep_function         usleep
 #define time_multiplier        1000
-#define clear() std::cout<<"\033[H\033[J";
 #endif
 
 class Game{
 private:
-    static constexpr int maxTurns_ = 15;
+    static constexpr int maxTurnsPlayer_ = 20;
+    static constexpr int maxTurnsComputer_ = 100;
     static constexpr int rows_ = 12;
     static constexpr int cols_ = 12;
     static constexpr int nBattleships_ = 3;

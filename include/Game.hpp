@@ -85,9 +85,9 @@ void Game::start() {
                 logFileOut_ << std::endl;
                 logFileOut_ << "2 ";
                 player2->execute();
-                if(++turnCounter_ < maxTurns_)
+                if(++turnCounter_ < maxTurnsPlayer_)
                     logFileOut_ << std::endl;
-            } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+            } while(turnCounter_ < maxTurnsPlayer_ && !player1->isWinner() && !player2->isWinner());
         }
         else if(starter==1) {
             do {
@@ -96,9 +96,9 @@ void Game::start() {
                 logFileOut_ << std::endl;
                 logFileOut_ << "1 ";
                 player1->execute();
-                if(++turnCounter_ < maxTurns_)
+                if(++turnCounter_ < maxTurnsPlayer_)
                     logFileOut_ << std::endl;
-            } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+            } while(turnCounter_ < maxTurnsPlayer_ && !player1->isWinner() && !player2->isWinner());
         }
     }
     else if(mode_ == 'c') {
@@ -108,9 +108,9 @@ void Game::start() {
             logFileOut_ << std::endl;
             logFileOut_ << "2 ";
             player2->execute();
-            if(++turnCounter_ < maxTurns_)
+            if(++turnCounter_ < maxTurnsComputer_)
                 logFileOut_ << std::endl;
-        } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+        } while(turnCounter_ < maxTurnsComputer_ && !player1->isWinner() && !player2->isWinner());
     } else {
         throw std::invalid_argument("Wrong arguments.");
     }
@@ -120,7 +120,6 @@ void Game::playReplay() {
     std::string input;
     if(mode_ == 'v') {
         do {
-            clear();
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
@@ -131,10 +130,10 @@ void Game::playReplay() {
                 player2->viewGrids(std::cout);        
                 std::cout << "\nPlayer 2 command:   ";     
             }
-            std::cout << input.substr(2) << "\n\n";
+            std::cout << input.substr(2) << "\n\n\n";
             sleep_function(time_multiplier * 1000);
         } while(!logFileIn_.eof());
-        turnCounter_ = maxTurns_;
+        turnCounter_ = maxTurnsComputer_;
         showWinner();
     } else if(mode_ == 'f') {
         do {
@@ -156,9 +155,9 @@ void Game::playReplay() {
 }
 
 void Game::showWinner() {
-    if(turnCounter_ >= maxTurns_) 
+    if((mode_ == 'p' && turnCounter_ >= maxTurnsPlayer_) || (mode_ == 'c' && turnCounter_ >= maxTurnsComputer_)) 
         std::cout << "MATCH ENDED IN TIE" << std::endl;
-    else{
+    else {
         if(player1->isWinner()) 
             std::cout << "WINNER: PLAYER 1";
         else  
