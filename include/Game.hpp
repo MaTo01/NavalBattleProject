@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include <iostream>
+#include <string>
 
 Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mode} {
     if(mode == 'c' || mode == 'p') {
@@ -26,11 +27,17 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
             player1 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));    
             logFileIn_.open(logNameIn, std::ios::in);
+            if(!logFileIn_.is_open()) {
+                throw std::invalid_argument("Error opening log file.");
+            }
             break;
         case 'f':
             player1 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));      
             logFileIn_.open(logNameIn, std::ios::in);
+            if(!logFileIn_.is_open()) {
+                throw std::invalid_argument("Error opening log file.");
+            }
             logFileOut_.open(logNameOut, std::ios::out);
             break;
         default:
@@ -61,7 +68,7 @@ void Game::setBattlefield() {
             std::string input;
             int i = 1;
             do {
-                logFileIn_ >> input;
+                getline(logFileIn_, input);
                 if(input[0] == '1') {
                     player1->placeShips('1', input.substr(2));
                 } else {
@@ -85,8 +92,8 @@ void Game::start() {
                 logFileOut_ << "2 ";
                 player2->execute();
                 //TODO: scrittura dell'operazione su logFileOut fatta da execute
-                counter_++;
-            } while(counter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+                turnCounter_++;
+            } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
         else if(starter==1) {
             do {
@@ -95,8 +102,8 @@ void Game::start() {
                 player2->execute();
                 logFileOut_ << "1 ";
                 player1->execute();
-                counter_++;
-            } while(counter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+                turnCounter_++;
+            } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
     }
     else if(mode_ == 'c') {
@@ -105,8 +112,8 @@ void Game::start() {
             player1->execute();
             logFileOut_ << "2 ";
             player2->execute();
-            counter_++;
-        } while(counter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+            turnCounter_++;
+        } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
     } else {
         //errore o qualcosa del genere
     }
@@ -117,7 +124,7 @@ void Game::playReplay() {
     if(mode_ == 'v') {
         do {
             clear();
-            logFileIn_ >> input;
+            getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
                 std::cout << "\t\t\t\tPLAYER 1\n\n";
@@ -131,7 +138,7 @@ void Game::playReplay() {
         } while(!logFileIn_.eof());
     } else if(mode_ == 'f') {
         do {
-            logFileIn_ >> input;
+            getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
                 logFileOut_ << "\t\t\t\tPLAYER 1\n";
@@ -150,7 +157,7 @@ void Game::playReplay() {
 }
 
 void Game::showWinner() {
-    if(counter_ >= maxTurns_) 
+    if(turnCounter_ >= maxTurns_) 
         std::cout << "MATCH ENDED IN TIE" << std::endl;
     else{
         if(player1->isWinner()) 
