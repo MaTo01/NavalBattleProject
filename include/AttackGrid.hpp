@@ -8,7 +8,7 @@ void AttackGrid::markHit(Position p) {
     if(isPosValid(p)) {
         tiles_[p.getX()][p.getY()] = 'X'; 
     } else {
-        throw std::invalid_argument("Invalid position.");
+        throw std::out_of_range("Invalid position.");
     }
 }
 
@@ -16,15 +16,16 @@ void AttackGrid::markMiss(Position p) {
     if(isPosValid(p)) {
         tiles_[p.getX()][p.getY()] = 'O'; 
     } else {
-        throw std::invalid_argument("Invalid position.");
+        throw std::out_of_range("Invalid position.");
     }
 }
 
 void AttackGrid::markScan(Position p) { 
-    if(isPosValid(p) && tiles_[p.getX()][p.getY()] == ' ') {
-        tiles_[p.getX()][p.getY()] = 'Y'; 
+    if(isPosValid(p)) {
+        if(tiles_[p.getX()][p.getY()] == ' ')
+            tiles_[p.getX()][p.getY()] = 'Y'; 
     } else {
-        throw std::invalid_argument("Invalid position.");
+        throw std::out_of_range("Invalid position.");
     }
 }
 
@@ -32,7 +33,7 @@ bool AttackGrid::isAlreadyMarked(Position p) {
     if(isPosValid(p)) {
         return (tiles_[p.getX()][p.getY()] != ' ' && tiles_[p.getX()][p.getY()] != 'Y'); 
     } else {
-        throw std::invalid_argument("Invalid position.");
+        throw std::out_of_range("Invalid position.");
     }
 }
 
