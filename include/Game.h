@@ -33,7 +33,7 @@ private:
     char mode_;
     std::ofstream logFileOut_;
     std::ifstream logFileIn_;
-    int counter_ = 0;  
+    int turnCounter_ = 0;  
 
 public:
     Game(char mode, std::string logNameIn = "", std::string logNameOut = "");
