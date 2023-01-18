@@ -26,14 +26,14 @@ protected:
 public:
     //Constructor
     Player(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
-        : attackGrid_{new AttackGrid(rows, cols)}, defenseGrid_{new DefenseGrid(rows, cols)}, 
-        rows_{rows}, cols_{cols}, nBattleships_{nBattleships}, nSupportShips_{nSupportShips}, nSubmarines_{nSubmarines}, fileOut_{fileOut} {}
+        : rows_{rows}, cols_{cols}, nBattleships_{nBattleships}, nSupportShips_{nSupportShips}, nSubmarines_{nSubmarines}, 
+        fileOut_{fileOut}, attackGrid_{new AttackGrid(rows_, cols_)}, defenseGrid_{new DefenseGrid(rows_, cols_)} {}
     //Virtual destructor
     virtual ~Player(){}
 
     //Member functions
     DefenseGrid* getDefenseGrid() const { return defenseGrid_; }
-    void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid) { enemyDefenseGrid=enemyDefenseGrid; }
+    void setEnemyDefenseGrid(DefenseGrid* enemyDefenseGrid) { enemyDefenseGrid_ = enemyDefenseGrid; }
 
     void viewGrids(std::ostream& os);
     void clearAttackGridScans() { attackGrid_->clearScans(); }
