@@ -21,7 +21,7 @@ void AttackGrid::markMiss(Position p) {
 }
 
 void AttackGrid::markScan(Position p) { 
-    if(isPosValid(p)) {
+    if(isPosValid(p) && tiles_[p.getX()][p.getY()] == ' ') {
         tiles_[p.getX()][p.getY()] = 'Y'; 
     } else {
         throw std::invalid_argument("Invalid position.");
