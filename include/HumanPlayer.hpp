@@ -107,6 +107,8 @@ void HumanPlayer::execute(std::string command){
             }
         } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << " Try again.\n";
+        } catch (const std::out_of_range& e) {
+            std::cerr << e.what() << " Try again.\n";
         }
     } while (flag);
 }
