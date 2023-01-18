@@ -80,48 +80,44 @@ void HumanPlayer::placeShips(char playerID, std::string command){
 }
 
 void HumanPlayer::execute(std::string command){
-    std::string centre;
-    std::string target;
+    std::string input;
+    
     bool flag = true;
     do {
         try {
             std::cout << "Command XX XX to see the grids; command AA AA to delete preview scans from the attack grid." << std::endl;
-            std::cout << "Otherwise select ship by its center and target:" << std::endl;
-            std::cin >> centre;
-            std::cin.get();
-            std::cin >> target;
+            std::cout << "Otherwise select ship by its center and target:" << std::endl;     
+            std::getline(std::cin, input);
 
-            if(centre != target){
-                char centerX = centre.at(0);
-                int centerY = std::stoi(centre.substr(1));
-                char targetX = target.at(0);
-                int targetY = std::stoi(target.substr(1));
+            if(input == "AA AA") {
+                clearAttackGridScans();
+            } else if(input == "XX XX") {
+                viewGrids(std::cout);
+            } else {
+                char centerX, targetX;
+                int centerY, targetY;
+                try {
+                    centerX = input.at(0);
+                    centerY = std::stoi(input.substr(1, input.find(" ")));
+                    targetX = input.at(input.find(" ") + 1);
+                    targetY = std::stoi(input.substr(input.find(" ") + 2));
+                } catch(const std::invalid_argument& e) {
+                    throw std::invalid_argument("Invalid command.");
+                }
+
                 Position center(Position::letterToNumber(centerX), centerY-1);
                 Position target(Position::letterToNumber(targetX), targetY-1);
-                
                 Ship* ship = defenseGrid_->getShipByCenter(center);
                 if(ship != nullptr) {
                     ship->action(target, enemyDefenseGrid_);
                     fileOut_ << centerX << centerY << " " << targetX << targetY << std::endl;
                     flag = false;
                 } else {
-                    throw std::invalid_argument("No ship with that center. ");
-                }          
-            } else {
-                if(centre=="AA"){
-                    clearAttackGridScans();
-                    execute();
+                    throw std::invalid_argument("No ship with that center.");
                 }
-                if(centre=="XX"){
-                    viewGrids(std::cout);
-                    execute();
-                }
-                else {
-                    throw std::invalid_argument("Invalid command. ");
-                }
-            }    
-        } catch(std::invalid_argument& e){
-            std::cerr << e.what() << " Try again." << '\n';
+            }
+        } catch (const std::invalid_argument& e) {
+            std::cerr << e.what() << " Try again.\n";
         }
     } while (flag);
 }

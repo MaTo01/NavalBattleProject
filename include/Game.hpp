@@ -83,6 +83,7 @@ void Game::setBattlefield() {
 
 void Game::start() {
     if(mode_ == 'p') {
+        std::cin.ignore();
         int starter = rand() % 2;
         if(starter == 0) {  //player2 = giocatore umano 
             do {
