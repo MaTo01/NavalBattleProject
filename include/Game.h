@@ -28,12 +28,12 @@ private:
     static constexpr int nSupportShips_ = 3;
     static constexpr int nSubmarines_ = 2;
 
-    //unique pointers to the pkayer, whether they are HumanPlayers o Computers
+    //unique pointers to the player, whether they are HumanPlayers or Computers
     std::unique_ptr<Player> player1;
     std::unique_ptr<Player> player2;
     //char to identify which player is currently performing their action
     char mode_;
-    //output stream into which every command will be written
+    //output stream which every command will be written into
     std::ofstream logFileOut_;
     //input stream which every command will be taken from
     std::ifstream logFileIn_;
