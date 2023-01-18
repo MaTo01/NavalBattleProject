@@ -41,8 +41,9 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
 }
 
 Game::~Game() {
-    if(logFileIn_.is_open())
+    if(logFileIn_.is_open()){
         logFileIn_.close();
+    } 
     if(logFileOut_.is_open())
         logFileOut_.close();
     player1.reset();
@@ -81,9 +82,11 @@ void Game::start() {
             do {
                 logFileOut_ << "1 ";
                 player1->execute();
+                logFileOut_ << "\n";
                 logFileOut_ << "2 ";
                 player2->execute();
-                turnCounter_++;
+                if(++turnCounter_ < maxTurns_)
+                    logFileOut_ << "\n";
             } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
         else if(starter==1) {
@@ -105,7 +108,7 @@ void Game::start() {
             turnCounter_++;
         } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
     } else {
-        //errore
+        throw std::invalid_argument("Wrong arguments.");
     }
 }
 
@@ -117,32 +120,34 @@ void Game::playReplay() {
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
-                std::cout << "\t\t\t\tPLAYER 1\n\n";
                 player1->viewGrids(std::cout);
+                std::cout << "\nPlayer 1 command:   ";  
             } else {
                 player2->execute(input.substr(2));
-                std::cout << "\t\t\t\tPLAYER 2\n\n";
-                player2->viewGrids(std::cout);
+                player2->viewGrids(std::cout);        
+                std::cout << "\nPlayer 2 command:   ";     
             }
-            sleep_function(time_multiplier * 2000);
+            std::cout << input.substr(2) << "\n\n";
+            sleep_function(time_multiplier * 1000);
         } while(!logFileIn_.eof());
+        turnCounter_ = maxTurns_;
+        showWinner();
     } else if(mode_ == 'f') {
         do {
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
-                logFileOut_ << "\t\t\t\tPLAYER 1\n";
+                logFileOut_ << "\t\t\t    PLAYER 1\n";
                 player1->viewGrids(logFileOut_);
-                logFileOut_ << "\n\n";
             } else {
                 player2->execute(input.substr(2));
-                logFileOut_ << "\t\t\t\tPLAYER 2\n";
+                logFileOut_ << "\t\t\t    PLAYER 2\n";
                 player2->viewGrids(logFileOut_);
-                logFileOut_ << "\n\n";
             }
+            logFileOut_ << "\n\n";
         } while(!logFileIn_.eof());
     } else {
-        //errore o qualcosa del genere
+        throw std::invalid_argument("Wrong arguments.");
     }
 }
 
