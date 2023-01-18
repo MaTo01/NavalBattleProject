@@ -14,6 +14,31 @@ void Computer::placeShips(char playerID, std::string command){
         int sternX = Position::letterToNumber(XYtarget.at(0));
         int sternY = std::stoi(XYtarget.substr(1));
 
+        Position bowPos(bowX, bowY);
+        Position sternPos(sternX, sternY);
+
+        if(shipCounter_ < nBattleships_){
+            try{
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Battleship(bowPos, sternPos, attackGrid_)));
+                fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
+            } catch(const std::invalid_argument& e) {
+                std::cerr << e.what() << std::endl;
+            }
+        } else if (shipCounter_ >= nBattleships_ && shipCounter_ < nBattleships_ + nSupportShips_){
+            try{
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new SupportShip(bowPos, sternPos, defenseGrid_)));
+                fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
+            } catch(const std::invalid_argument& e) {
+                std::cerr << e.what() << std::endl;
+            }
+        } else if (shipCounter_ >= nBattleships_ + nSupportShips_ && shipCounter_ < nBattleships_ + nSupportShips_ +nSubmarines_) {
+            try{
+                defenseGrid_->placeShip(std::unique_ptr<Ship> (new Submarine(bowPos, sternPos, attackGrid_, defenseGrid_)));
+                fileOut_ << playerID << " " << bowX << bowY << " " << sternX<< sternY << std::endl;
+            } catch(const std::invalid_argument& e) {
+                std::cerr << e.what() << std::endl;
+            }
+        }
     } else {
         int i;
         Position bowPos, sternPos;
