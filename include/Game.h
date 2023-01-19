@@ -38,6 +38,9 @@ private:
     std::ifstream logFileIn_;
     int turnCounter_ = 0;  
 
+    //shows the winner of the match
+    void showWinner(std::ostream& os);
+
 public:
     //Constructor
     Game(char mode, std::string logNameIn = "", std::string logNameOut = "");
@@ -51,8 +54,6 @@ public:
     //replay of a recorded game (commands, attack grids and defense grids) will be 
     //either displayed on screen or written into a .txt file
     void playReplay();
-    //shows the winner of the match
-    void showWinner();
 };
 
 #include "Game.hpp"

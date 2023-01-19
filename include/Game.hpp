@@ -103,6 +103,7 @@ void Game::start() {
                     logFileOut_ << std::endl;
             } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
+        showWinner(std::cout);
     }
     else if(mode_ == 'c') {
         do {
@@ -114,6 +115,7 @@ void Game::start() {
             if(++turnCounter_ < maxTurns_)
                 logFileOut_ << std::endl;
         } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
+        showWinner(std::cout);
     } else {
         throw std::invalid_argument("Wrong arguments.");
     }
@@ -123,7 +125,7 @@ void Game::playReplay() {
     //commands will be taken line by line from the log file
     std::string input;
     if(mode_ == 'v') {
-       std::cout << "\t\t\t      PLAYER 1\n";
+        std::cout << "\t\t\t      PLAYER 1\n";
         player1->viewGrids(std::cout);
         sleep_function(time_multiplier * 1000);
         std::cout << "\n";
@@ -137,46 +139,58 @@ void Game::playReplay() {
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
-                std::cout << "\nPlayer 1 command:   ";
+                std::cout << "\n\tPlayer 1 command:   ";
                 std::cout << input.substr(2) << "\n\n";
                 player1->viewGrids(std::cout);
             } else {
                 player2->execute(input.substr(2));
-                std::cout << "\nPlayer 2 command:   ";
+                std::cout << "\n\tPlayer 2 command:   ";
                 std::cout << input.substr(2) << "\n\n";
                 player2->viewGrids(std::cout);        
             }
             sleep_function(time_multiplier * 1000);
         } while(!logFileIn_.eof());
         turnCounter_ = maxTurns_;
-        showWinner();
+        showWinner(std::cout);
     } else if(mode_ == 'f') {
+        logFileOut_ << "\t\t\t      PLAYER 1\n";
+        player1->viewGrids(logFileOut_);
+        logFileOut_ << "\n";
+
+        logFileOut_ << "\t\t\t      PLAYER 2\n";
+        player2->viewGrids(logFileOut_);
+        logFileOut_ << "\n";
+
         do {
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
-                logFileOut_ << "\t\t\t    PLAYER 1\n";
+                logFileOut_ << "\n\tPlayer 1 command:   ";
+                logFileOut_ << input.substr(2) << "\n\n";
                 player1->viewGrids(logFileOut_);
             } else {
                 player2->execute(input.substr(2));
-                logFileOut_ << "\t\t\t    PLAYER 2\n";
+                logFileOut_ << "\n\tPlayer 2 command:   ";
+                logFileOut_ << input.substr(2) << "\n\n";
                 player2->viewGrids(logFileOut_);
             }
             logFileOut_ << "\n\n";
         } while(!logFileIn_.eof());
+        turnCounter_ = maxTurns_;
+        showWinner(logFileOut_);
     } else {
         throw std::invalid_argument("Wrong arguments.");
     }
 }
 
-void Game::showWinner() {
+void Game::showWinner(std::ostream& os) {
     if(turnCounter_ >= maxTurns_) 
-        std::cout << "MATCH ENDED IN TIE" << std::endl;
+        os << "\tMATCH ENDED IN TIE" << std::endl;
     else{
         if(player1->isWinner()) 
-            std::cout << "WINNER: PLAYER 1";
+            os << "\tWINNER: PLAYER 1";
         else  
-            std::cout << "WINNER: PLAYER 2";
+            os << "\tWINNER: PLAYER 2";
     }
 }
 

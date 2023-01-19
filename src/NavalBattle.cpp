@@ -19,7 +19,6 @@ int main(int argc, char* argv[]) {
 		Game game(argvToLower[0]);
 		game.setBattlefield();
 		game.start();
-		game.showWinner();
 	}
 	
 	return 0;
