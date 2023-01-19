@@ -2,8 +2,6 @@
 #ifndef ATTACKGRID_H
 #define ATTACKGRID_H
 
-#include <iostream>
-#include <vector>
 #include "Grid.h"
 
 //Class representing a Grid used to mark a Player's actions on the enemy's DefenseGrid
