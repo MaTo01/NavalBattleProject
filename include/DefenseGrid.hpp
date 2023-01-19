@@ -169,10 +169,11 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
         if(oldPositions.size() > 0) {
             //Checks if the Ship has been hit on any of the tiles it occupies before moving
             for(auto p : oldPositions) {
-                if(tiles_[p.getX()][p.getY()] < 'A' || tiles_[p.getX()][p.getY()] > 'Z')
+                if(islower(tiles_[p.getX()][p.getY()])) {
                     arePositionsHit.push_back(true);
-                else 
+                } else {
                     arePositionsHit.push_back(false);
+                }
             }
             //"Logically" removes the Ship from the DefenseGrid by clearing its old Positions
             for(auto p : oldPositions) {

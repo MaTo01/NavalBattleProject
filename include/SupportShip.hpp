@@ -21,7 +21,7 @@ void SupportShip::action(Position pos, DefenseGrid *enemyDefenseGrid) {
         for (int j = pos.getY() - 1; j <= pos.getY() + 1; j++) {
             try {
                 ship = defenseGrid_->getShipByPosition(Position(i,j));
-                if (ship && ship->getArmor() < ship->getSize()) {
+                if (ship && ship != this && ship->getArmor() < ship->getSize()) {
                     defenseGrid_->repairShip(Position(i,j));
                 }
             } catch(const std::out_of_range& e) {
