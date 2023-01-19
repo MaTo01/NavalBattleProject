@@ -2,7 +2,6 @@
 #ifndef HUMANPLAYER_H
 #define HUMANPLAYER_H
 
-#include <iostream>
 #include <regex>
 #include "Player.h"
 
