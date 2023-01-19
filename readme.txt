@@ -38,6 +38,10 @@ Stampe:
 	
 	- Non è stato possibile fare in modo che le due griglie fossero visualizzate una accanto all'altra a causa di come le classi che 
 	  le rappresentano sono state progettate.
+
+	- Dal momento che non vengono memorizzati nei log i comandi speciali, nei replay la griglia di attacco di un giocatore umano
+	  può non corrispondere completamente a quella visualizzata durante la partita stessa se sono stati effettuati comandi "AA AA"
+	  (rimozione degli scan dei sottomarini).
 	
 	- Se viene effettuata la stampa di un replay su file in un sistema operativo Windows esso non verrà visualizzato correttamente: 
 	  dato che vengono utilizzati caratteri unicode per la visualizzazione della griglia durante la partita, tali caratteri non vengono 
