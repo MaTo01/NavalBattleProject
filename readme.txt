@@ -8,9 +8,11 @@ Scelte implementative:
 	- Viene utilizzata anche la programmazione generica per creare container di navi con l'uso di unique_ptr, per garantire 
 	  una corretta gestione della memoria durante il gioco.
 
-	- Vengono anche utilizzate delle forward declarations tra Ship e DefenseGrid in modo tale da evitare circular dependencies, cosa 
-	  che comunque non influenza negativamente il codice, in quanto per come sono state progettate le due classi il funzionamento 
-	  di una dipende dall'utilizzo dell'altra e viceversa.
+	- Vengono anche utilizzate delle forward declarations tra Ship e DefenseGrid in modo tale da evitare circular dependencies, 
+	  in quanto per come sono state progettate le due classi il funzionamento di una dipende dall'utilizzo dell'altra e viceversa.
+
+	- Non è stato scelto di implementare esplicitamente copy constructors/assignments o move constructors/assignments, in quanto
+	  l'implementazione scelta del progetto non ne ha necessitato l'utilizzo.
 
 Design:
 
@@ -21,8 +23,9 @@ Design:
 Gestione delle eccezioni:
 
 	- Vengono utilizzati gli standard di C++ per gestire gli errori, come throw e catch. Ad esempio, vengono lanciate eccezioni 
-	  quando si tenta di posizionare una nave fuori dai limiti della griglia o se si tenta di posizionare una nave che si sovrappone 
-	  ad un'altra, che sono poi gestite opportunamente per restituire un messaggio di errore al giocatore.
+	  quando si tenta di posizionare una nave fuori dai limiti della griglia o se si tenta di posizionare una nave che si 
+	  sovrappone ad un'altra, che sono poi gestite opportunamente per restituire un messaggio di errore al giocatore senza
+	  interrompere l'esecuzione del programma.
 	  Viene anche utilizzata una funzione di regex per garantire che l'utente inserisca sempre e solo comandi validi.
 
 Stampe:
