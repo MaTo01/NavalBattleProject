@@ -9,7 +9,7 @@
 class Submarine : public Ship {
 private:
     //Pointer to the player's attack grid and defense grid, used to mark 
-    //the submarine sonar readings and move the submarine  
+    //the submarine sonar readings and to move the submarine respectively
     AttackGrid *attackGrid_;
     DefenseGrid *defenseGrid_;
 public:

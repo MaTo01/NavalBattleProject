@@ -8,7 +8,7 @@
 //Ship's subclass 
 class Battleship : public Ship {
 private:
-    //Pointer to the player's attack grid, used to mark the action of the battlship
+    //Pointer to the player's attack grid, used to mark the action of the battleship
     AttackGrid *attackGrid_;
 public:
     //Constructor

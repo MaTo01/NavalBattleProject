@@ -18,7 +18,6 @@ char Position::numberToLetter(int n) {
     }
 }
 
-//This function uses the Italian alphabet (21 letters)
 int Position::letterToNumber(char l) {
     l = toupper(l);
     switch (l) {

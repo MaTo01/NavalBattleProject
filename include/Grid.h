@@ -6,6 +6,7 @@
 #include <vector>
 #include "Position.h"
 
+//Class representing a generic Grid 
 class Grid {
 protected:
     //2D vector representing the content of the Grid's tiles
