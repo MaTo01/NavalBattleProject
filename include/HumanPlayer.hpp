@@ -98,15 +98,17 @@ void HumanPlayer::execute(std::string command){
             condition player's turn)
             */
 	    
-	    if(input.size() < 5 || input.size() > 5) {
-                throw std::invalid_argument("Not a valid command.");
+	    std::string inputToUpper(input.size(), ' ');
+            for (int i = 0; i < input.size(); i++) {
+	    	inputToUpper[i] = toupper(input[i]);
+	    }
+
+            std::regex pattern("([A-Z][A-Z] [A-Z][A-Z]|[A-Z]\\d [A-Z]\\d|[A-Z]\\d\\d [A-Z]\\d|[A-Z]\\d [A-Z]\\d\\d)");
+
+            if (!std::regex_match(inputToUpper, pattern)) {
+                throw std::invalid_argument("Invalid command.");
             }
 	    
-            std::string inputToUpper(input.size(), ' ');
-            for (int i = 0; i < input.size(); i++) {
-		        inputToUpper[i] = toupper(input[i]);
-	        }
-
             if(inputToUpper == "AA AA") {
                 clearAttackGridScans();
             } else if(inputToUpper == "XX XX") {
