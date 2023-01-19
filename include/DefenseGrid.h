@@ -7,6 +7,7 @@
 
 class Ship;
 
+//Class representing a Grid used to place and move a Player's Ships
 class DefenseGrid : public Grid {
 private:
     //Vector of unique_ptrs to the Ships placed in the DefenseGrid

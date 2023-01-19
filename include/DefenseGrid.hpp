@@ -4,7 +4,7 @@
 
 #include "DefenseGrid.h"
 
-//Resets all unique_ptrs and empties the ships vector
+//Resets all unique_ptrs and empties the ships_ vector
 DefenseGrid::~DefenseGrid() {
     for(auto & s : ships_) {
         s.reset();
@@ -12,18 +12,23 @@ DefenseGrid::~DefenseGrid() {
     ships_.clear();
 }
 
+
 bool DefenseGrid::isShipAtPosition(Position pos) {
     if(isPosValid(pos)) {
         return (tiles_[pos.getX()][pos.getY()] != ' ');
     } else {
+        //If pos is invalid, an std::out_of_range exception is thrown which must be handled by the caller
         throw std::out_of_range("Position out of bounds.");
     }
 }
 
+/*
+If pos matches the center of one of the DefenseGrid's Ships, the function returns a raw pointer to said Ship.
+Otherwise if pos is invalid or there is no Ship with that center, the functions returns a nullptr.
+*/
 Ship* DefenseGrid::getShipByCenter(Position pos) {
     if(isPosValid(pos)) {
-        //If pos matches the center of one of the DefenseGrid's Ships,
-        //the function returns a raw pointer to said Ship
+        
         for(auto & s : ships_) {
             if(s->getCenter() == pos)
                 return s.get();         
@@ -32,10 +37,12 @@ Ship* DefenseGrid::getShipByCenter(Position pos) {
     return nullptr;
 }
 
+/*  
+If there is a Ship at the Position indicated by pos, the function checks the Positions occupied 
+by all Ships in the DefenseGrid until it finds the one needed, and returns a raw pointer to it.
+If no such Ship exists or at least one of the required Positions is out of bounds, a nullptr is returned.
+*/
 Ship* DefenseGrid::getShipByPosition(Position pos) {
-    //If there is a Ship at the Position indicated by pos,
-    //the function checks the Positions occupied by all Ships in the DefenseGrid
-    //until it finds the one needed, and returns a raw pointer to it
     try {
         if(isShipAtPosition(pos)) {
             std::vector<Position> positions;
@@ -88,7 +95,7 @@ std::vector<Position> DefenseGrid::getTilesForPlacement(int size, char orientati
                     }
                 }
                 break;
-            default:        //a Ship of size 1 is considered neither vertical nor horizontal
+            default:        //a Ship is considered neither vertical nor horizontal if it has size 1
                 if(!isShipAtPosition(pos)){
                     positions.push_back(pos);
                 } else {
@@ -112,6 +119,7 @@ std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
     //vector of Positions occupied by the Ship
     std::vector<Position> positions;
 
+    //The positions vector is filled based on the Ship's orientation
     switch (ship->getOrientation()) {
         case 'H': 
             for(int y = center.getY() - shiftSize; y <= center.getY() + shiftSize; y++) {
@@ -123,7 +131,9 @@ std::vector<Position> DefenseGrid::getTilesByShip(Ship* ship) {
                 positions.push_back(Position(x, center.getY()));
             }
             break;
-        default:
+        default:    
+            //a Ship is considered neither vertical nor horizontal if it has size 1, 
+            //hence the only position it occupies is its own center
             positions.push_back(center);
             break;
     }
