@@ -6,7 +6,8 @@
 
 Grid::Grid(unsigned int rows, unsigned int cols) {
     std::vector<char> aux;
-    for(int i = 0; i < rows; i++) {     //all the tiles are initialized as empty (' ')
+    //all the tiles are initialized as empty (' ')
+    for(int i = 0; i < rows; i++) {
         aux.clear();
         for(int j = 0; j < cols; j++)
             aux.push_back(' ');
