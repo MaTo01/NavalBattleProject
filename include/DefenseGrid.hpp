@@ -241,13 +241,16 @@ void DefenseGrid::removeShip(Ship* ship) {
 }
 
 void DefenseGrid::markShipAsHit(Position pos) {
-    //If a Ship exists at the given Position, the DefenseGrid is updated to mark a hit,
-    //the Ship's armor value is updated and, if it's sunk, the Ship is removed from the DefenseGrid
+    //If a Ship exists at the given Position and it hasn't already received a hit there, 
+    //the DefenseGrid is updated to mark a hit, the Ship's armor value is updated and, if it's sunk, 
+    //the Ship is removed from the DefenseGrid
     if(Ship* ship = getShipByPosition(pos)){
-        tiles_[pos.getX()][pos.getY()] = tolower(tiles_[pos.getX()][pos.getY()]);
-        ship->setArmor(ship->getArmor() - 1);
-        if(ship->isSunk()) {
-            removeShip(ship);
+        if(!islower(tiles_[pos.getX()][pos.getY()])) {
+            tiles_[pos.getX()][pos.getY()] = tolower(tiles_[pos.getX()][pos.getY()]);
+            ship->setArmor(ship->getArmor() - 1);
+            if(ship->isSunk()) {
+                removeShip(ship);
+            }
         }
     } else {
         throw std::invalid_argument("No ship in this position.");
