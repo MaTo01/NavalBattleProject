@@ -109,7 +109,7 @@ void HumanPlayer::execute(std::string command){
             } else {
                 try {
                     centerX = inputToUpper.at(0);
-                    centerY = std::stoi(inputToUpper.substr(1, input.find(" ")));
+                    centerY = std::stoi(inputToUpper.substr(1, inputToUpper.find(" ")));
                     targetX = inputToUpper.at(inputToUpper.find(" ") + 1);
                     targetY = std::stoi(inputToUpper.substr(inputToUpper.find(" ") + 2));
                 } catch(const std::invalid_argument& e) {
