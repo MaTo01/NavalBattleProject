@@ -13,19 +13,19 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
         logNameOut += "c.txt";
     }
     switch (mode_) {
-        case 'c':
+        case 'c': //Computer vs computer
             player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             logFileOut_.open(logNameOut, std::ios::out);
             break;
-        case 'p':
+        case 'p': //Player vs Computer
             player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             logFileOut_.open(logNameOut, std::ios::out);
             break;
-        case 'f':
+        case 'f': //Replay of a match will be written into a .txt file
             logFileOut_.open(logNameOut, std::ios::out);
-        case 'v':
+        case 'v': //Replay of a match will be printed on screen
             player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));    
             logFileIn_.open(logNameIn, std::ios::in);
@@ -59,9 +59,10 @@ void Game::setBattlefield() {
             break;
         case 'v':
         case 'f':
+            //ship placements will be taken line by line from the log file
             std::string input;
             int i = 1;
-            do {
+            do {                
                 getline(logFileIn_, input);
                 if(input[0] == '1') {
                     player1->placeShips('1', input.substr(2));
@@ -78,7 +79,7 @@ void Game::start() {
     if(mode_ == 'p') {
         std::cin.ignore();
         int starter = rand() % 2;
-        if(starter == 0) {          //player2 = giocatore umano 
+        if(starter == 0) {          //player1 (compuer) will start 
             do {
                 logFileOut_ << "1 ";
                 player1->execute();
@@ -89,7 +90,7 @@ void Game::start() {
                     logFileOut_ << std::endl;
             } while(turnCounter_ < maxTurns_ && !player1->isWinner() && !player2->isWinner());
         }
-        else if(starter==1) {
+        else if(starter==1) {     //player2 (human player) will start
             do {
                 logFileOut_ << "2 ";
                 player2->execute();
@@ -117,6 +118,7 @@ void Game::start() {
 }
 
 void Game::playReplay() {
+    //commands will be taken line by line from the log file
     std::string input;
     if(mode_ == 'v') {
         do {
