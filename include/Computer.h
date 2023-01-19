@@ -2,12 +2,8 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
 
-#include "Player.h"
 #include <random>
-#include <memory>
-#include <vector>
-#include <iostream>
-#include <fstream>
+#include "Player.h"
 
 //Player's subclass
 //It's also used to run the replay of a game
