@@ -3,8 +3,6 @@
 #define HUMANPLAYER_HPP
 
 #include "HumanPlayer.h"
-#include <iostream>
-
 
 void HumanPlayer::placeShips(char playerID, std::string command){
     /*
