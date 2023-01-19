@@ -10,8 +10,7 @@ The battleship fires even if a position has already been hit. this must be done 
 could heal a ship that has already been hit, if there was a check I could no longer sink the first hit and then healed ship.
 This is possible thanks to the "isShipAtPosition" function which checks if a ship is present in that position,
 and marks the shot on the attack grid and enemy's defense grid accordingly.
-On the other hand, if the position where the action is requested has already been hit, it throws an exception.
-*/
+
 void Battleship::action(Position pos, DefenseGrid* enemyDefenseGrid) { 
     if(enemyDefenseGrid->isShipAtPosition(pos)) {
         attackGrid_->markHit(pos);
