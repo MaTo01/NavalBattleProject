@@ -7,6 +7,8 @@
 #include <string>
 
 Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mode} {
+    //Compuetr vs computer and Computer vs Human player matches record their ship
+    //placements and commands into a .txt log file
     if(mode == 'c' || mode == 'p') {
         logNameOut = "log-";
         logNameOut += mode;
@@ -23,9 +25,9 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
             player2 = std::unique_ptr<Player>(new HumanPlayer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             logFileOut_.open(logNameOut, std::ios::out);
             break;
-        case 'f': //Replay of a match will be written into a .txt file
+        case 'f': //Replay of a match (taken from a log file) will be written into a .txt file
             logFileOut_.open(logNameOut, std::ios::out);
-        case 'v': //Replay of a match will be printed on screen
+        case 'v': //Replay of a match (taken from a log file) will be printed on screen
             player1 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));
             player2 = std::unique_ptr<Player>(new Computer(rows_, cols_, nBattleships_, nSupportShips_, nSubmarines_, logFileOut_));    
             logFileIn_.open(logNameIn, std::ios::in);
@@ -36,6 +38,7 @@ Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mod
         default:
             break;
     }
+    //Players have now access to their opponent's defense grid
     player1->setEnemyDefenseGrid(player2->getDefenseGrid());
     player2->setEnemyDefenseGrid(player1->getDefenseGrid());
 }
@@ -54,6 +57,7 @@ void Game::setBattlefield() {
     switch (mode_) {
         case 'c':
         case 'p':
+            //Players will place their ships following their specific class function
             player1->placeShips('1');
             player2->placeShips('2');
             break;
