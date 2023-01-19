@@ -12,7 +12,7 @@ Scelte implementative:
 	  in quanto per come sono state progettate le due classi il funzionamento di una dipende dall'utilizzo dell'altra e viceversa.
 
 	- Non è stato scelto di implementare esplicitamente copy constructors/assignments o move constructors/assignments, in quanto
-	  l'implementazione scelta del progetto non ne ha necessitato l'utilizzo.
+	  l'implementazione del codice non ne ha necessitato l'utilizzo.
 
 Design:
 
@@ -34,7 +34,7 @@ Stampe:
  	  azione eseguita, permettendo anche di effetturare un replay efficiente delle partite.
 
 	- Il replay stampa all'inizio le griglie di entrambi i giocatori con i posizionamenti delle navi, e in seguito tutte le azioni
-	  della partita inclusi comando effettuato e da quale giocatore e le rispettive griglie.
+	  della partita (comando, giocatore che lo effettua e le rispettive griglie).
 	
 	- Non è stato possibile fare in modo che le due griglie fossero visualizzate una accanto all'altra a causa di come le classi che 
 	  le rappresentano sono state progettate.
@@ -45,6 +45,6 @@ Stampe:
 	
 	- Se viene effettuata la stampa di un replay su file in un sistema operativo Windows esso non verrà visualizzato correttamente: 
 	  dato che vengono utilizzati caratteri unicode per la visualizzazione della griglia durante la partita, tali caratteri non vengono 
-	  codificati in maniera giustaal momento della scrittura su file; l'indentazione rimane comunque la stessa, perciò il file risulta 
-	  comunque relativamente leggibile. Tale problema non viene riscontrato su sistema operativo Linux.  
+	  codificati in maniera corretta al momento della scrittura su file; l'indentazione rimane comunque la stessa, perciò il file risulta 
+	  relativamente leggibile. Tale problema non viene riscontrato su sistema operativo Linux.  
 	
