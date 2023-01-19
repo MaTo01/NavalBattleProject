@@ -97,16 +97,22 @@ void HumanPlayer::execute(std::string command){
             to delete all the scans from their attack grid (these functions do not
             condition player's turn)
             */
-            if(input == "AA AA") {
+            std::string inputToUpper(input.size(), ' ');
+            for (int i = 0; i < input.size(); i++) {
+		        inputToUpper[i] = toupper(input[i]);
+	        }
+            std::cout << inputToUpper << std::endl;
+
+            if(inputToUpper == "AA AA") {
                 clearAttackGridScans();
-            } else if(input == "XX XX") {
+            } else if(inputToUpper == "XX XX") {
                 viewGrids(std::cout);
             } else {
                 try {
-                    centerX = input.at(0);
-                    centerY = std::stoi(input.substr(1, input.find(" ")));
-                    targetX = input.at(input.find(" ") + 1);
-                    targetY = std::stoi(input.substr(input.find(" ") + 2));
+                    centerX = inputToUpper.at(0);
+                    centerY = std::stoi(inputToUpper.substr(1, input.find(" ")));
+                    targetX = inputToUpper.at(inputToUpper.find(" ") + 1);
+                    targetY = std::stoi(inputToUpper.substr(inputToUpper.find(" ") + 2));
                 } catch(const std::invalid_argument& e) {
                     throw std::invalid_argument("Invalid command.");
                 }
