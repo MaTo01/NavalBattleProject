@@ -4,7 +4,6 @@
 
 #include "Computer.h"
 
-
 //Since this class also manages the replay view of the games, there is the possibility that an argument that identifies the
 //command executed during a game is passed to this function.
 
