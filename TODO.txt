@@ -1,8 +1,0 @@
-- Commentare di più i file sorgente
-- Classe Game 
-- Classe Player
-- Classe Computer:  Capire come gestire la scrittura in file log di XYorigin
-- Gestione delle eccezioni                  
-- Classi eseguibili NavalBattle e NavalBattleReplay
-- Aggiungere su tutte le classi che ne necessitano la scrittura su file log.txt dei comandi   eseguiti
-- Rivedere cmake e compilazione con opzioni di ottimizzazione attivate
