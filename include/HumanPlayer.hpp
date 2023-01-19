@@ -103,7 +103,7 @@ void HumanPlayer::execute(std::string command){
 	    	inputToUpper[i] = toupper(input[i]);
 	    }
 
-            std::regex pattern("([A-Z][A-Z] [A-Z][A-Z]|[A-Z]\\d [A-Z]\\d|[A-Z]\\d\\d [A-Z]\\d|[A-Z]\\d [A-Z]\\d\\d)");
+            std::regex pattern("([A-Z][A-Z] [A-Z][A-Z]|[A-Z]\\d [A-Z]\\d|[A-Z]\\d\\d [A-Z]\\d|[A-Z]\\d [A-Z]\\d\\d|[A-Z]\\d\\d [A-Z]\\d\\d)");
 
             if (!std::regex_match(inputToUpper, pattern)) {
                 throw std::invalid_argument("Invalid command.");
