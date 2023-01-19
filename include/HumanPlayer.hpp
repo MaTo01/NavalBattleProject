@@ -28,6 +28,8 @@ void HumanPlayer::placeShips(char playerID, std::string command){
         catch(const std::invalid_argument& e){
             std::cerr << e.what() << "Try again" << '\n';
             i--;
+			//catch used to prevent invalid ship placements (bow or stern outside grid ranges or
+			//ship over another) and mismatching ship size
         }   
     }
     for(int i=1; i<=nSupportShips_; i++){
