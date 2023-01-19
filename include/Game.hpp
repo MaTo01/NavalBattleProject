@@ -125,16 +125,19 @@ void Game::playReplay() {
     //commands will be taken line by line from the log file
     std::string input;
     if(mode_ == 'v') {
+        std::cout << "\nPlayers grids:\n\n";
+
         std::cout << "\t\t\t      PLAYER 1\n";
         player1->viewGrids(std::cout);
-        sleep_function(time_multiplier * 1000);
         std::cout << "\n";
 
         std::cout << "\t\t\t      PLAYER 2\n";
         player2->viewGrids(std::cout);
-        sleep_function(time_multiplier * 1000);
         std::cout << "\n";
         
+        sleep_function(time_multiplier * 3000);
+
+        std::cout << "Beginning of the players actions:\n";
         do {
             getline(logFileIn_, input);
             if(input[0] == '1') {
@@ -153,6 +156,8 @@ void Game::playReplay() {
         turnCounter_ = maxTurns_;
         showWinner(std::cout);
     } else if(mode_ == 'f') {
+        logFileOut_ << "Players grids:\n\n";
+
         logFileOut_ << "\t\t\t      PLAYER 1\n";
         player1->viewGrids(logFileOut_);
         logFileOut_ << "\n";
@@ -161,17 +166,16 @@ void Game::playReplay() {
         player2->viewGrids(logFileOut_);
         logFileOut_ << "\n";
 
+        logFileOut_ << "Beginning of the players actions:\n";
         do {
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
-                logFileOut_ << "\n\tPlayer 1 command:   ";
-                logFileOut_ << input.substr(2) << "\n\n";
+                logFileOut_ << "\n\tPlayer 1 command:   " << input.substr(2) << "\n\n";
                 player1->viewGrids(logFileOut_);
             } else {
                 player2->execute(input.substr(2));
-                logFileOut_ << "\n\tPlayer 2 command:   ";
-                logFileOut_ << input.substr(2) << "\n\n";
+                logFileOut_ << "\n\tPlayer 2 command:   " << input.substr(2) << "\n\n";
                 player2->viewGrids(logFileOut_);
             }
             logFileOut_ << "\n\n";
@@ -185,12 +189,12 @@ void Game::playReplay() {
 
 void Game::showWinner(std::ostream& os) {
     if(turnCounter_ >= maxTurns_) 
-        os << "\tMATCH ENDED IN TIE" << std::endl;
+        os << "MATCH ENDED IN TIE" << std::endl;
     else{
         if(player1->isWinner()) 
-            os << "\tWINNER: PLAYER 1";
+            os << "WINNER: PLAYER 1";
         else  
-            os << "\tWINNER: PLAYER 2";
+            os << "WINNER: PLAYER 2";
     }
 }
 
