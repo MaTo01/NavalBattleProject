@@ -1,7 +1,5 @@
 //2032496 Veronica Cisotto
 #include <iostream>
-#include <fstream>
-#include <memory>
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
