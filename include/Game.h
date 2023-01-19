@@ -4,8 +4,8 @@
 
 #include "HumanPlayer.h"
 #include "Computer.h"
-#include <random>
 #include <fstream>
+#include <iostream>
 
 #ifdef _WIN32
 #include <Windows.h>
