@@ -3,8 +3,10 @@
 #define POSITION_H
 #include <iostream>
     
+//Class representing a simple (X,Y) Position
 class Position {
 private:
+    //X and Y coordinates
     int x_;
     int y_;
     
@@ -12,7 +14,7 @@ public:
     //Constructor
     Position(int a = 0, int b = 0) 
         : x_{a}, y_{b} {}
-    //default destructor
+    //Default destructor
     ~Position() {}
 
     //Get functions
@@ -22,10 +24,12 @@ public:
     void setX(int a) { x_ = a; }
     void setY(int b) { y_ = b; }
 
-    //Converts a numerical coordinate into a letter of the Italian alphabet
+    
+    //Converts a numerical coordinate into a letter
     static char numberToLetter(int n);
-    //Converts a letter of the Italian alphabet into a numerical coordinate
+    //Converts a letter into a numerical coordinate
     static int letterToNumber(char l);
+    //Both of the above functions use the Italian alphabet (21 letters)
 
     //'==' operator overloading
     bool operator==(const Position& p);

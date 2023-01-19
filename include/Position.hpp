@@ -4,7 +4,6 @@
 
 #include "Position.h"
 
-//This function uses the Italian alphabet (21 letters)
 char Position::numberToLetter(int n) {
     if(n < 0 || n >= 21) {
         return '?';
