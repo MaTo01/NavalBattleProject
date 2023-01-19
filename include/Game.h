@@ -19,8 +19,7 @@
 
 class Game{
 private:
-    //Maximum of rounds allowed: beyond this limit
-    //match will end in a tie
+    //Maximum rounds allowed: beyond this limit the match will end in a tie
     static constexpr int maxTurns_ = 50;
     static constexpr int rows_ = 12;
     static constexpr int cols_ = 12;
@@ -28,12 +27,12 @@ private:
     static constexpr int nSupportShips_ = 3;
     static constexpr int nSubmarines_ = 2;
 
-    //unique pointers to the player, whether they are HumanPlayers or Computers
+    //unique pointers to the two players, whether they are HumanPlayers or Computers
     std::unique_ptr<Player> player1;
     std::unique_ptr<Player> player2;
-    //char to identify which player is currently performing their action
+    //char to identify in which configuration the game is run
     char mode_;
-    //output stream which every command will be written into
+    //output file stream in which every command will be written
     std::ofstream logFileOut_;
     //input stream which every command will be taken from
     std::ifstream logFileIn_;
@@ -42,17 +41,17 @@ private:
 public:
     //Constructor
     Game(char mode, std::string logNameIn = "", std::string logNameOut = "");
-    //Distructor
+    //Destructor
     ~Game();
     
     //both players place their ships in their defense grids
     void setBattlefield();
-    //every palyer makes their move until either wins (or game ends in a tie)
+    //every player makes their move until either wins (or game ends in a tie)
     void start();
     //replay of a recorded game (commands, attack grids and defense grids) will be 
     //either displayed on screen or written into a .txt file
     void playReplay();
-    //shows the winner of the match game
+    //shows the winner of the match
     void showWinner();
 };
 

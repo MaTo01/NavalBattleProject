@@ -18,7 +18,7 @@ protected:
     //number of rows and columns for the attack and defense grid
     const int rows_;
     const int cols_;
-    //numeber of ship types that every player has
+    //number of ship types that every player has
     const int nBattleships_;
     const int nSupportShips_;
     const int nSubmarines_;
@@ -27,8 +27,8 @@ protected:
     std::unique_ptr<AttackGrid> attackGrid_;
     //pointer to player's enemy's defense grid
     DefenseGrid* enemyDefenseGrid_;
-    //output stream which commands and the grids are
-    //going to be recorded into
+    //output file stream where commands and/or grids are
+    //going to be recorded in
     std::ofstream& fileOut_;
 
 public:

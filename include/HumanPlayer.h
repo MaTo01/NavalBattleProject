@@ -7,15 +7,14 @@
 #include "Player.h"
 
 /*
-Real life player (someone who writes from command line every instruction)
-of the game match
+Real life player (someone who writes from the command line every instruction)
 */
 class HumanPlayer : public Player{
 public:
-    //Constuctor
+    //Constructor
     HumanPlayer(const int rows, const int cols, const int nBattleships, const int nSupportShips, const int nSubmarines, std::ofstream& fileOut) 
         : Player(rows, cols, nBattleships, nSupportShips, nSubmarines, fileOut) {}
-    //Defalut destructor
+    //Default destructor
     ~HumanPlayer() = default;
 
     void placeShips(char playerID, std::string command = "") override;

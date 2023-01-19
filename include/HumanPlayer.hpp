@@ -93,9 +93,9 @@ void HumanPlayer::execute(std::string command){
             std::cout << "Otherwise select ship by its center and target:" << std::endl;     
             std::getline(std::cin, input);
             /*
-            HumanPlayer can also perform additional fuctions to see their grids or
+            HumanPlayer can also perform additional commands to see their grids or
             to delete all the scans from their attack grid (these functions do not
-            condition player's turn)
+            condition the player's turn)
             */
 	    
 	    std::string inputToUpper(input.size(), ' ');

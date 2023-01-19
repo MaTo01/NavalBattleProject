@@ -7,7 +7,7 @@
 //Ship's subclass
 class SupportShip : public Ship {
 private:
-    //Pointer to the player's defense grid, used to mmove the support ship
+    //Pointer to the player's defense grid, used to move the support ship
     DefenseGrid *defenseGrid_;
 public:
     //Constructor
