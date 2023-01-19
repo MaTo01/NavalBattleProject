@@ -97,6 +97,11 @@ void HumanPlayer::execute(std::string command){
             to delete all the scans from their attack grid (these functions do not
             condition player's turn)
             */
+	    
+	    if(input.size() < 5 || input.size() > 5) {
+                throw std::invalid_argument("Not a valid command.");
+            }
+	    
             std::string inputToUpper(input.size(), ' ');
             for (int i = 0; i < input.size(); i++) {
 		        inputToUpper[i] = toupper(input[i]);
