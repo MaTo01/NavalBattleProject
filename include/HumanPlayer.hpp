@@ -101,7 +101,6 @@ void HumanPlayer::execute(std::string command){
             for (int i = 0; i < input.size(); i++) {
 		        inputToUpper[i] = toupper(input[i]);
 	        }
-            std::cout << inputToUpper << std::endl;
 
             if(inputToUpper == "AA AA") {
                 clearAttackGridScans();
