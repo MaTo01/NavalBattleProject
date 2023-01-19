@@ -163,7 +163,17 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
         //Fetches the Positions occupied by the Ship
         //If oldPositions is empty, the Ship does not exist within the DefenseGrid
         std::vector<Position> oldPositions = getTilesByShip(ship);
+        //This vector is used to store whether the Ship has been hit on each of its Positions
+        std::vector<bool> arePositionsHit;
+
         if(oldPositions.size() > 0) {
+            //Checks if the Ship has been hit on any of the tiles it occupies before moving
+            for(auto p : oldPositions) {
+                if(tiles_[p.getX()][p.getY()] < 'A' || tiles_[p.getX()][p.getY()] > 'Z')
+                    arePositionsHit.push_back(true);
+                else 
+                    arePositionsHit.push_back(false);
+            }
             //"Logically" removes the Ship from the DefenseGrid by clearing its old Positions
             for(auto p : oldPositions) {
                 tiles_[p.getX()][p.getY()] = ' ';
@@ -174,17 +184,28 @@ void DefenseGrid::moveShip(Ship* ship, Position pos) {
 
         //"Allocates" a new set of Positions to move the Ship in
         std::vector<Position> newPositions = getTilesForPlacement(ship->getSize(), ship->getOrientation(), pos);
-        if(newPositions.size() > 0) {
+        Position p;
+        if(newPositions.size() > 0) {           
             //"Logically" adds the Ship back to the DefenseGrid and updates its center
-            for(auto p : newPositions) {
+            for(int i = 0; i < newPositions.size(); i++) {
+                p = newPositions[i];
                 tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
+                //If the ship was hit on any of its tiles, the hits are marked again on the new Positions
+                if(arePositionsHit[i]) {
+                    tiles_[p.getX()][p.getY()] = tolower(tiles_[p.getX()][p.getY()]);
+                }
             }
             ship->setCenter(pos);
         } else {
             //If the Ship cannot be moved (due to any of the newPositions being occupied or invalid),
-            //restores its old Positions
-            for(auto p : oldPositions) {
+            //it is restored to its old Positions
+            for(int i = 0; i < oldPositions.size(); i++) {
+                p = oldPositions[i];
                 tiles_[p.getX()][p.getY()] = ship->getGridCharacter();
+                //The hits it received are also restored
+                if(arePositionsHit[i]) {
+                    tiles_[p.getX()][p.getY()] = tolower(tiles_[p.getX()][p.getY()]);
+                }
             }
             throw std::invalid_argument("Invalid ship placement.");
         }
