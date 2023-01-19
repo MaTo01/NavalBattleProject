@@ -123,18 +123,29 @@ void Game::playReplay() {
     //commands will be taken line by line from the log file
     std::string input;
     if(mode_ == 'v') {
+       std::cout << "\t\t\t      PLAYER 1\n";
+        player1->viewGrids(std::cout);
+        sleep_function(time_multiplier * 1000);
+        std::cout << "\n";
+
+        std::cout << "\t\t\t      PLAYER 2\n";
+        player2->viewGrids(std::cout);
+        sleep_function(time_multiplier * 1000);
+        std::cout << "\n";
+        
         do {
             getline(logFileIn_, input);
             if(input[0] == '1') {
                 player1->execute(input.substr(2));
+                std::cout << "\nPlayer 1 command:   ";
+                std::cout << input.substr(2) << "\n\n";
                 player1->viewGrids(std::cout);
-                std::cout << "\nPlayer 1 command:   ";  
             } else {
                 player2->execute(input.substr(2));
+                std::cout << "\nPlayer 2 command:   ";
+                std::cout << input.substr(2) << "\n\n";
                 player2->viewGrids(std::cout);        
-                std::cout << "\nPlayer 2 command:   ";     
             }
-            std::cout << input.substr(2) << "\n\n\n";
             sleep_function(time_multiplier * 1000);
         } while(!logFileIn_.eof());
         turnCounter_ = maxTurns_;
