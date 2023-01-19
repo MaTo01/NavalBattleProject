@@ -1,6 +1,5 @@
 //2043414 Marco Toffoletto
 #include <iostream>
-#include <fstream>
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
