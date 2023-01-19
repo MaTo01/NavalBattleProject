@@ -4,6 +4,7 @@
 
 #include "Computer.h"
 
+
 //Since this class also manages the replay view of the games, there is the possibility that an argument that identifies the
 //command executed during a game is passed to this function.
 
@@ -15,12 +16,13 @@ Otherwise, the ship's orientation is randomly generated and, based on that, the 
 and the ship is placed between those positions. Then the function proceeds to print these positions to a file.
 */
 void Computer::placeShips(char playerID, std::string command) {
-    if(command != "") { //It's running in playReplay of Game
+    //It's running in playReplay of Game
+    if(command != "") { 
         //Split the string
         std::string bowPosStr = command.substr(0, command.find(" "));
         std::string sternPosStr = command.substr(command.find(" ")+1);
 
-        //Parse the two strings
+        //Parse the values from the two strings
         int bowX = Position::letterToNumber(bowPosStr.at(0));
         int bowY = std::stoi(bowPosStr.substr(1)) - 1;
         int sternX = Position::letterToNumber(sternPosStr.at(0));
@@ -42,7 +44,7 @@ void Computer::placeShips(char playerID, std::string command) {
 
         shipCounter_++;
 
-    } else { //It's running in setBattlefield of Game
+    } else {    //It's running in setBattlefield of Game
         int i;
         Position bowPos, sternPos;
         bool isHorizontal;
@@ -102,17 +104,18 @@ void Computer::placeShips(char playerID, std::string command) {
 
 /*
 In this function, a check is first performed to see if a command is passed as the second argument. If so, the string is manipulated
-to obtain the command XYorigin and XYtarget and perform the XYorigin's ship action to XYtarget .
-Otherwise, A random ship is chosen among those present in the grid, its center get calculated and the action is performed 
+to obtain the command XYorigin and XYtarget and perform the XYorigin's ship action to XYtarget.
+Otherwise, A random ship is chosen among those present in the grid, its center is calculated and the action is performed 
 at a random position of the grid.
 */
 void Computer::execute(std::string command) {
-    if(command != ""){//It's running into playReplay of Game
+    //It's running in playReplay of Game
+    if(command != ""){  
         //Split the string
         std::string XYoriginStr = command.substr(0, command.find(" "));
         std::string XYtargetStr = command.substr(command.find(" ") + 1);
 
-        //Parse the two strings
+        //Parse the values from the two strings
         int originX = Position::letterToNumber(XYoriginStr.at(0));
         int originY = std::stoi(XYoriginStr.substr(1)) - 1;
         int targetX = Position::letterToNumber(XYtargetStr.at(0));
@@ -132,8 +135,8 @@ void Computer::execute(std::string command) {
             
         } catch(const std::invalid_argument& e) {}
         
-    } else {//It's running in setBattlefield of Game
-        bool flag = true; //Flag used to prevent the function from exiting
+    } else {    //It's running in setBattlefield of Game
+        bool flag = true;   //Flag used to prevent the function from exiting if an invalid command is issued
         do {
             try {
                 Ship* ship = defenseGrid_->getShipByIndex(rand() % defenseGrid_->getShipsNumber());
