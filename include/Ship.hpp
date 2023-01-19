@@ -5,7 +5,7 @@
 #include "Ship.h"
 
 //Constructor definition
-Ship::Ship(const int size, Position bow, Position stern, char gridCharacter)
+Ship::Ship(const int size, Position bow, Position stern, const char gridCharacter)
     : size_{size}, armor_{size}, gridCharacter_{gridCharacter} {
     //The only ship that has equivalent stern and bow positions is the submarine,
     //which has no orientation and whose center is equivalent to any of its stern or bow positions.

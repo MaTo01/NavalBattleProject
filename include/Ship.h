@@ -21,11 +21,11 @@ protected:
     char orientation_;
 
     //Char used to represent the ship in the defense grid
-    char gridCharacter_;
+    const char gridCharacter_;
 
 public:
     //Constructor
-    Ship(const int size, Position bow, Position stern, char gridCharacter);
+    Ship(const int size, Position bow, Position stern, const char gridCharacter);
     //Virtual destructor
     virtual ~Ship(){}
 
