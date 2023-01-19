@@ -5,18 +5,21 @@
 #include "Ship.h"
 #include "AttackGrid.h"
 
-class Submarine : public Ship{
+//Ship's subclass 
+class Submarine : public Ship {
 private:
+    //Pointer to the player's attack grid and defense grid, used to mark 
+    //the submarine sonar readings and move the submarine  
     AttackGrid *attackGrid_;
     DefenseGrid *defenseGrid_;
 public:
     //Constructor
     Submarine(Position bow, Position stern, AttackGrid *attackGrid, DefenseGrid *defenseGrid)
         : Ship(1, bow, stern, 'E'), attackGrid_{attackGrid}, defenseGrid_{defenseGrid} {}
-    //Destructor
+    //Destructor override
     ~Submarine() override = default;
 
-    //Override of the virtual function of Ship
+    //Ship's virtual function override
     void action(Position pos, DefenseGrid * enemyDefenseGrid = nullptr) override; 
 };
 

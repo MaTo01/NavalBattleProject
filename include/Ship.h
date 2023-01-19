@@ -5,13 +5,12 @@
 #include "Position.h"
 #include "DefenseGrid.h"
 
-//Parent class that will be inherited by the other three classes
-//that represent the three types of ship
-class Ship{
+//Base class that will be inherited by the other three classes
+//that represent the three types of ships
+class Ship {
 protected:
     //Two dimensions representing the size of the ship and its remaining armor.
-    //At the beginning of the game they will be the same, 
-    //the armor will decrease if the ship is hit
+    //At the beginning of the game they will be the same, the armor will decrease if the ship is hit
     const int size_;
     int armor_; 
 
@@ -21,7 +20,7 @@ protected:
     //Flag to identify the orientation of the ship
     char orientation_;
 
-    //Character used to represent the ship in the grid
+    //Char used to represent the ship in the defense grid
     char gridCharacter_;
 
 public:
@@ -43,7 +42,15 @@ public:
     void setOrientation(char orientation) { orientation_ = orientation; }
 
     //Pure virtual function that represents the action of a 
-    //ship and will be overridden by the subclasses as needed
+    //ship and will be overridden by the subclasses as needed.
+    /*
+    Two arguments are passed: a position, which is the one on 
+    which the action will be performed, and a pointer to 
+    the enemy's defense grid, necessary for actions that modify or exploit it.
+    The pointer to the enemy's defense grid will not be used by all 
+    the types of ships, so it's initialized to "nullptr" and action
+    can also be called without the second argument
+    */
     virtual void action(Position pos, DefenseGrid *enemyDefenseGrid = nullptr) = 0;
 
     //Member function

@@ -5,17 +5,19 @@
 #include "Ship.h"
 #include "AttackGrid.h"
 
-class Battleship : public Ship{
+//Ship's subclass 
+class Battleship : public Ship {
 private:
+    //Pointer to the player's attack grid, used to mark the action of the battlship
     AttackGrid *attackGrid_;
 public:
     //Constructor
     Battleship(Position bow, Position stern, AttackGrid *attackGrid)
         : Ship(5, bow, stern, 'C'), attackGrid_{attackGrid} {}
-    //Destructor
+    //Destructor override
     ~Battleship() override = default;
 
-    //Override of the virtual function of Ship
+    //Ship's virtual function override
     void action(Position pos, DefenseGrid * enemyDefenseGrid = nullptr) override;  
 };
 

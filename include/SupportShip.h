@@ -4,17 +4,19 @@
 
 #include "Ship.h"
 
-class SupportShip : public Ship{
+//Ship's subclass
+class SupportShip : public Ship {
 private:
+    //Pointer to the player's defense grid, used to mmove the support ship
     DefenseGrid *defenseGrid_;
 public:
     //Constructor
     SupportShip(Position bow, Position stern, DefenseGrid *defenseGrid)
         : Ship(3, bow, stern, 'S'), defenseGrid_{defenseGrid} {}
-    //Destructor
+    //Destructor override
     ~SupportShip() override = default;
 
-    //Override of the virtual function of Ship
+    //Ship's virtual function override
     void action(Position pos, DefenseGrid * enemyDefenseGrid = nullptr) override; 
 };
 
