@@ -3,17 +3,20 @@
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
+	//Check if the command line arguments are enough
 	if(argc < 3 || argc > 4) {
 		std::cout << "Invalid argument list.\n";
 		return -1;
 	}
 
+	//Capitalization errors on the first argument are accepted if the command is correct
 	std::string argvToLower = "";
-	for (int x=0; x < strlen(argv[1]); x++) {
-		argvToLower += tolower(argv[1][x]);
+	for (int i = 0; i < strlen(argv[1]); i++) {
+		argvToLower += tolower(argv[1][i]);
 	}
-        	
-	if(argvToLower != "v" && argvToLower != "f") {
+
+	//Check of the command
+	if((argc == 3 && argvToLower != "v") || (argc == 4 && argvToLower != "f")) {
 		std::cout << "Invalid argument list.\n";
 	} else {
 		std::string fileOut = "";
