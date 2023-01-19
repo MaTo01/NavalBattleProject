@@ -3,8 +3,6 @@
 #define GAME_HPP
 
 #include "Game.h"
-#include <iostream>
-#include <string>
 
 Game::Game(char mode, std::string logNameIn, std::string logNameOut) : mode_{mode} {
     //Compuetr vs computer and Computer vs Human player matches record their ship
